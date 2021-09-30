@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\SupplierController;
@@ -22,7 +23,17 @@ use App\Http\Controllers\Admin\PurchaseOrderController;
 |
 */
 
+/**
+ * Customer
+ */
+Route::get('/', [HomePageController::class, 'index']);
+Route::get('/customer/product', [HomePageController::class, 'readAllProduct']);
+Route::get('/customer/product/search', [HomePageController::class, 'searchProduct']);
 
+
+/**
+ * Admin
+ */
 Route::get('/admin', [LoginController::class, 'index']);
 Route::post('/admin/login', [LoginController::class, 'login'])->name('login');
 Route::get('/admin/logout', [LoginController::class, 'logout']);
