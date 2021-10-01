@@ -179,14 +179,6 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="{{ url('/admin/dashboard') }}" class="nav-link">
-                <i class="nav-icon fas fa-tags"></i>
-                <p>
-                  Pricing
-                </p>
-              </a>
-          </li>
-          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
@@ -198,13 +190,25 @@
               <li class="nav-item">
                 <a href="pages/UI/general.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>User Maintenance</p>
+                  <p>Sales Report</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/UI/icons.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Audit Trail</p>
+                  <p>Inventory Report</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/UI/icons.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Purchased Order Report</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{url('/reports/stock-adjustment')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Stock Adjustment Report</p>
                 </a>
               </li>
             </ul>

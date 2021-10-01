@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DeliveryAreaController;
 use App\Http\Controllers\Admin\StockAdjustmentController;
 use App\Http\Controllers\Admin\PurchaseOrderController;
+use App\Http\Controllers\Admin\StockAdjustmentReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,4 +59,8 @@ Route::middleware('auth')->group(function () {
     Route::post('purchase-order', [PurchaseOrderController::class, 'purchaseOrder']);
     Route::get('purchased-order', [PurchaseOrderController::class, 'readPurchasedOrderBySupplier']);
     Route::get('supplier-markup', [SupplierController::class, 'getMarkupBySupplier']);
+    Route::get('reports/stock-adjustment', [StockAdjustmentReportController::class, 'index']);
+    Route::get('reports/stock-adjustment/pdf/{date_from}/{date_to}', [StockAdjustmentReportController::class, 'pdf']);
+    Route::get('reports/stock-adjustment/download/{date_from}/{date_to}', [StockAdjustmentReportController::class, 'downloadPDF']);
+    
 });
