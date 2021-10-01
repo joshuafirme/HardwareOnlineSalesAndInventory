@@ -12,6 +12,28 @@
 
 }
 
+.bg-login-page {
+  height: 100%;
+  width: 100%;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  background-image: url("/images/bg_hardware.jpg");
+  -webkit-filter: blur(4px);
+  -moz-filter: blur(4px);
+  -o-filter: blur(4px);
+  -ms-filter: blur(4px);
+  filter: blur(4px); 
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 .grid-item {
     margin-top: 0 !important;
     margin-bottom: 0 !important;

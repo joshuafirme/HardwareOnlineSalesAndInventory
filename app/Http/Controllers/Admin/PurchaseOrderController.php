@@ -35,13 +35,32 @@ class PurchaseOrderController extends Controller
                     
         }
     }
+    
+    public function readPurchasedOrderBySupplier(Request $request) {
+        $data = new PurchaseOrder;
+        $data = $data->readPurchasedOrderBySupplier($request->supplier_id, $request->date_from, $request->date_to);
+        if(request()->ajax())
+        {       
+            if($request->supplier_id){
+                return datatables()->of($data)
+                ->addColumn('action', function($data){
+                    $button = '<a class="btn btn-sm btn-add-to-order" data-id='. $data->id .'>
+                    <i class="fa fa-cart-plus"></i></a>';
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->make(true);   
+            }
+                    
+        }
+    }
 
     public function addOrder(){
 
         $product_code = Input::input('product_code');
         $qty_order = Input::input('qty_order');
         $amount = Input::input('amount');
-    
+        
         if($this->isAlreadyOrder($product_code)){
             PurchaseOrder::where('product_code', $product_code)
             ->update(array(
@@ -66,6 +85,34 @@ class PurchaseOrderController extends Controller
         }
         else{
             return false;
+        }
+    }
+
+    public function readRequestOrderBySupplier() {
+        $data = Input::all();
+        $po = new PurchaseOrder;
+        return $po->readRequestOrderBySupplier($data['supplier_id']);
+    }
+
+    public function removeRequest() {
+        $data = Input::all();
+        return PurchaseOrder::find($data['id'])->delete();
+    }
+
+    public function purchaseOrder() 
+    {
+        $data = Input::all();
+        $product_codes = [];
+        $product_codes = $data['product_codes'];
+
+        for ($i = 0; $i < count($product_codes); $i++) 
+        {
+            PurchaseOrder::where('product_code', $product_codes[$i])
+            ->update([ 
+                'status' => 2,
+                'remarks' => 'Pending',
+                'updated_at' => date('Y-m-d h:m:s')
+            ]);
         }
     }
 }

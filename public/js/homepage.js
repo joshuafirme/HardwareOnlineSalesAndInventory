@@ -29,7 +29,7 @@ async function readAllProducts() {
     
                     if (enable_button) {
                         html += '<div class="col-12 load-more-container">';
-                            html +='<button class="btn btn-sm btn-primary btn-load-more">Load more</button>';
+                            html +='<button class="btn btn-sm btn-outline-success btn-load-more">Load more</button>';
                         html += '</div>';
                     }
                 
@@ -49,7 +49,7 @@ function getItems (data) {
             html += '<div class="card-body">';
                 html += '<h5 class="card-title">'+ data.description +'</h5><br>';
                 html += '<p>₱ '+ formatNumber(data.selling_price) +'</p>';
-                html += '<button class="btn btn-sm btn-success"><i class="fas fa-shopping-cart"></i></button>';
+                html += '<button class="btn btn-sm btn-success">Add to cart</button>';
             html +=' </div>';
         html += '</div>';
     html += '</div>'; 
@@ -86,7 +86,7 @@ async function onClick () {
 
                     if (enable_button) {
                         html += '<div class="col-12 load-more-container">';
-                            html +='<button class="btn btn-sm btn-primary btn-load-more">Load more</button>';
+                            html +='<button class="btn btn-sm btn-outline-success btn-load-more">Load more</button>';
                         html += '</div>';
                     }
                     $('#product-container').append(html);
@@ -145,10 +145,9 @@ function searchProduct () {
                         }
 
                         if (enable_button) {
-                            $('#product-container').find('.btn-load-more').show();
-                        }
-                        else {
-                            $('#product-container').find('.btn-load-more').hide();
+                            html += '<div class="col-12 load-more-container">';
+                                html +='<button class="btn btn-sm btn-outline-success btn-load-more">Load more</button>';
+                            html += '</div>';
                         }
                     }
                     else {

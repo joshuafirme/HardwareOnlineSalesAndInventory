@@ -40,21 +40,38 @@ class PurchaseOrder extends Model
             ->get();
     }
 
-    public function readAllOrders($date_from, $date_to, $supplier){
-        return DB::table($this->table_po.' AS PO')
-        ->select("PO.*", DB::raw('CONCAT(PO._prefix, PO.po_num) AS po_num'),
+    public function readRequestOrderBySupplier($supplier_id){
+        return DB::table('purchase_order AS PO')
+        ->select("PO.*",
                 'P.description',
                 'P.orig_price',
                 'U.name as unit', 
                 'S.supplier_name as supplier', 
                 'C.name as category')
-        ->leftJoin('product AS P', DB::raw('CONCAT(P._prefix, P.id)'), '=', 'PO.product_code')
+        ->leftJoin('product as P', DB::raw('CONCAT(P.prefix, P.id)'), '=', 'PO.product_code')
         ->leftJoin('supplier as S', 'S.id', '=', 'P.supplier_id')
         ->leftJoin('category as C', 'C.id', '=', 'P.category_id')
         ->leftJoin('unit as U', 'U.id', '=', 'P.unit_id')
-        ->whereBetween('PO.created_at', [$date_from, $date_to])
         ->where('P.supplier_id', $supplier_id)
-        ->where('PO.remarks', 'Pending')
+        ->where('PO.status', 1)
+        ->get();
+    }
+
+    public function readPurchasedOrderBySupplier($supplier_id, $date_from, $date_to){
+        return DB::table('purchase_order AS PO')
+        ->select('PO.*', 'P.*',
+                'U.name as unit', 
+                'S.supplier_name as supplier', 
+                'C.name as category',
+                DB::raw('CONCAT(PO.prefix, PO.id) as po_num'),
+                DB::raw('PO.created_at as date_order'))
+        ->leftJoin('product as P', DB::raw('CONCAT(P.prefix, P.id)'), '=', 'PO.product_code')
+        ->leftJoin('supplier as S', 'S.id', '=', 'P.supplier_id')
+        ->leftJoin('category as C', 'C.id', '=', 'P.category_id')
+        ->leftJoin('unit as U', 'U.id', '=', 'P.unit_id')
+        ->where('P.supplier_id', $supplier_id)
+        ->where('PO.status', 2)
+        ->whereBetween(DB::raw('DATE(PO.updated_at)'), [$date_from, $date_to])
         ->get();
     }
 }
