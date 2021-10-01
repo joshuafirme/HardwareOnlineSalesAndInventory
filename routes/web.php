@@ -57,4 +57,5 @@ Route::middleware('auth')->group(function () {
     Route::post('request-order/remove', [PurchaseOrderController::class, 'removeRequest']);
     Route::post('purchase-order', [PurchaseOrderController::class, 'purchaseOrder']);
     Route::get('purchased-order', [PurchaseOrderController::class, 'readPurchasedOrderBySupplier']);
+    Route::get('supplier-markup', [SupplierController::class, 'getMarkupBySupplier']);
 });

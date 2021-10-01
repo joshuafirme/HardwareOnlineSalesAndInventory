@@ -45,6 +45,9 @@ function getItems (data) {
     var html = "";
     html += '<div class="grid-item col-sm-6 col-md-4">';
         html += '<div class="card">';
+        if (!data.image) {
+            data.image = "no-image.png";
+        }
             html += '<a href="#"><img class="card-img-top cover" src="../images/'+ data.image +'" alt="product image"></a>';
             html += '<div class="card-body">';
                 html += '<h5 class="card-title">'+ data.description +'</h5><br>';

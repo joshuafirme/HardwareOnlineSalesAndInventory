@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Supplier;
+use Input;
 
 class SupplierController extends Controller
 {
@@ -20,6 +21,7 @@ class SupplierController extends Controller
         return view('admin.maintenance.supplier.index', compact('supplier'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -43,7 +45,8 @@ class SupplierController extends Controller
             'supplier_name' => 'required|unique:supplier',
             'address' => 'required:supplier',
             'person' => 'required:supplier',
-            'contact' => 'required:supplier'
+            'contact' => 'required:supplier',
+            'markup' => 'required:supplier'
         ]);
 
         Supplier::create($request->all());
@@ -87,7 +90,8 @@ class SupplierController extends Controller
             'supplier_name' => 'required:supplier',
             'address' => 'required:supplier',
             'person' => 'required:supplier',
-            'contact' => 'required:supplier'
+            'contact' => 'required:supplier',
+            'markup' => 'required:supplier'
         ]);
 
         Supplier::where('id', $id)->update([
@@ -96,6 +100,7 @@ class SupplierController extends Controller
             'person' => $request->input('person'),
             'contact' => $request->input('contact'),
             'email' => $request->input('email'),
+            'markup' => $request->input('markup'),
             'status' => $request->input('status')
         ]);
 
@@ -112,5 +117,10 @@ class SupplierController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getMarkupBySupplier(Supplier $supplier) 
+    {
+        return Supplier::where('id', Input::input('id'))->first('markup');
     }
 }

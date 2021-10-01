@@ -76,6 +76,11 @@
                                 <input type="email" class="form-control" name="email"  id="email" value="{{ $supplier->email }}">
                             </div>
 
+                            <div class="col-sm-12 col-md-6 mt-2">
+                                <label class="col-form-label">Markup</label>
+                                <input type="number" step=".01" class="form-control" name="markup"  id="markup" value="{{ $supplier->markup }}" required>
+                            </div>
+
                             <div class="col-sm-12 col-md-6 mt-2">    
                               <label class="col-form-label">Status</label>
                               <select class="form-control" name="status" id="status">

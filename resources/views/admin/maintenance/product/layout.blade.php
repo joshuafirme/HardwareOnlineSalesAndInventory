@@ -29,6 +29,7 @@
 @include('admin.scripts')
 
 @include('admin.datatables-scripts')
+<script>var page_title = "<?php echo $page_title ?>";</script>
 <script src="{{asset('js/product.js')}}"></script>
 
 </body>

@@ -1,4 +1,4 @@
-@extends('admin.utilities.user.layout')
+@extends('admin.maintenance.product.layout')
 
 @section('content')
 
@@ -65,44 +65,49 @@
                               <label class="col-form-label">Reorder point</label>
                               <input type="text" class="form-control" name="reorder" value="{{ $product->reorder }}" required>
                             </div>
+                            
+                            <div class="col-sm-12 col-md-6 col-lg-4 mt-2">    
+                              <label class="col-form-label">Unit</label>
+                              <select class="form-control" name="unit_id">
+                                  @foreach ($unit as $item)
+                                  <option {{ $selected = $product->unit_id == $item->id ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->name }}</option>
+                                  @endforeach
+                                  <option value="0">Not applicable</option>
+                              </select>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6 col-lg-4 mt-2">    
+                              <label class="col-form-label">Category</label>
+                              <select class="form-control" name="category_id">
+                                  @foreach ($category as $item)
+                                  <option {{ $selected = $product->category_id == $item->id ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->name }}</option>
+                                  @endforeach
+                              </select>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6 col-lg-4 mt-2">    
+                              <label class="col-form-label">Supplier</label>
+                              <select class="form-control" name="supplier_id" id="supplier_id">
+                                  @foreach ($supplier as $item)
+                                  <option {{ $selected = $product->supplier_id == $item->id ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->supplier_name }}</option>
+                                  @endforeach
+                              </select>
+                            </div>
 
                             <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
                               <label class="col-form-label">Original Price</label>
-                              <input type="number" step=".01" class="form-control" name="orig_price" value="{{ $product->orig_price }}" required>
+                              <input type="number" step=".01" class="form-control" name="orig_price" id="orig_price" value="{{ $product->orig_price }}" required>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
+                              <label class="col-form-label">Markup</label>
+                              <input type="number" step=".01" class="form-control" name="markup" id="markup" readonly>
                             </div>
 
                             <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
                                 <label class="col-form-label">Selling Price</label>
-                                <input type="number" step=".01" class="form-control" name="selling_price" value="{{ $product->selling_price }}" required>
+                                <input type="number" step=".01" class="form-control" name="selling_price" id="selling_price" value="{{ $product->selling_price }}" readonly>
                             </div>
-
-                            <div class="col-sm-12 col-md-6 col-lg-4 mt-2">    
-                                <label class="col-form-label">Unit</label>
-                                <select class="form-control" name="unit_id">
-                                    @foreach ($unit as $item)
-                                    <option {{ $selected = $product->unit_id == $item->id ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
-                                    <option value="0">Not applicable</option>
-                                </select>
-                              </div>
-
-                              <div class="col-sm-12 col-md-6 col-lg-4 mt-2">    
-                                <label class="col-form-label">Category</label>
-                                <select class="form-control" name="category_id">
-                                    @foreach ($category as $item)
-                                    <option {{ $selected = $product->category_id == $item->id ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
-                                </select>
-                              </div>
-
-                              <div class="col-sm-12 col-md-6 col-lg-4 mt-2">    
-                                <label class="col-form-label">Supplier</label>
-                                <select class="form-control" name="supplier_id">
-                                    @foreach ($supplier as $item)
-                                    <option {{ $selected = $product->supplier_id == $item->id ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->supplier_name }}</option>
-                                    @endforeach
-                                </select>
-                              </div>
 
                             <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
                                 <div class="form-group">
@@ -116,8 +121,12 @@
                                   </div>
                             </div>
 
-                            <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
-                                <img src="{{asset('images/'.$product->image)}}" width="300" height="300" class="img-thumbnail" alt="">
+                            <div class="col-sm-12 col-md-6 col-lg-4 mt-4">
+                              @if ($product->image)
+                                <img src="{{asset('images/'.$product->image)}}" width="350" height="350" class="img-thumbnail" alt="">
+                              @else
+                                <img src="{{asset('images/no-image.png')}}" width="350" height="350" class="img-thumbnail" alt="">
+                              @endif
                             </div>
     
                               <div class="col-12 mt-4">

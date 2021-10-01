@@ -21,7 +21,7 @@ class HomePageController extends Controller
     public function readAllProduct()
     {
         $product = new Product;
-        return cache('all_products');
+        return $product->readAllProduct();
 
     }
 

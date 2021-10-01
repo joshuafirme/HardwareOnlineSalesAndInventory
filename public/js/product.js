@@ -44,10 +44,51 @@ async function fetchData(){
  
      
 }
-  
-  
+
+async function getMarkup(id) {
+    await $.ajax({
+        url: '/supplier-markup',
+        type: 'GET',
+        data: {
+            id:id
+        },
+        success:function(data){
+            $('#markup').val(data.markup);
+        }
+    });
+}
+
+
+$(document).on('change', '#supplier_id', async function() {
+    var id = $(this).val();
+    await getMarkup(id); 
+  });
+
+  $(document).on('keyup', '#orig_price', async function() {
+    var price = $(this).val();
+    await computeSellingPrice(price);
+  });
+
+  async function computeSellingPrice(price){
+    var markup_percentage = $('#markup').val();
+    var markup = price * markup_percentage;
+    var selling_price = parseFloat(markup) + parseFloat(price);
+    console.log(markup_percentage)
+    return $('#selling_price').val(selling_price);
+  }
+
   async function renderProducts() {
-      await fetchData();
+    if (page_title.includes("Create") || page_title.includes("Update")) {
+        var price = $('#orig_price').val();
+      
+        var id = $('#supplier_id').val();
+        await getMarkup(id); 
+        await computeSellingPrice(price);
+    }
+    else {
+        await fetchData();
+    }
+      
   }
 
   renderProducts();

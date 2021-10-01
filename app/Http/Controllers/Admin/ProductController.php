@@ -20,7 +20,7 @@ class ProductController extends Controller
     public function index()
     {
         $product = new Product;
-        $product = cache('all_products');
+        $product = $product->readAllProduct();
 
         if(request()->ajax())
         { 
@@ -41,7 +41,7 @@ class ProductController extends Controller
 
     public function cacheProducts() 
     {
-        Cache::rememberForever('all_products', function () {
+        Cache::rememberForever('all_products',  function () {
             $product = new Product;
             return $product->readAllProduct();
         });
@@ -150,7 +150,7 @@ class ProductController extends Controller
     {
         $this->validateInputs($request);
 
-        $data = $request->except(['_token', '_method']);
+        $data = $request->except(['_token', '_method', 'markup']);
         if ($request->hasFile('image')) {
             $data['image'] = $this->imageUpload($request);
         }
