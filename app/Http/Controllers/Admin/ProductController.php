@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Unit;
 use App\Models\Category;
 use App\Models\Supplier;
+use Cache;
 
 class ProductController extends Controller
 {
@@ -20,6 +21,9 @@ class ProductController extends Controller
     {
         $product = new Product;
         $product = $product->readAllProduct();
+        
+        $this->cacheProducts();
+
         if(request()->ajax())
         { 
             return datatables()->of($product)
@@ -35,6 +39,14 @@ class ProductController extends Controller
         }
 
         return view('admin.maintenance.product.index');
+    }
+
+    public function cacheProducts() 
+    {
+        Cache::rememberForever('all_products', function () {
+            $product = new Product;
+            return $product->readAllProduct();
+        });
     }
 
     /**

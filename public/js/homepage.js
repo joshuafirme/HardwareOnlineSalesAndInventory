@@ -12,7 +12,7 @@ async function readAllProducts() {
         url: '/customer/product',
         type: 'GET',
         success:function(data){
-            setTimeout(function() {
+            setTimeout(function() { 
                 data_storage = data;
 
                 var html = "";
