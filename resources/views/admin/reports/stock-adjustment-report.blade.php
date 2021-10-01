@@ -35,26 +35,19 @@
 
   <div class="row mt-4">
 
-      <div class="mt-2 ml-3">
-         Date
-        </div>              
       
-      <div class="col-sm-2 mb-3">
-        <input data-column="9" type="date" class="form-control" name="date_from" id="date_from" value="{{ date('Y-m-d') }}">
+    <div class="col-12">
+        <div class="float-left mt-2">
+            Date
         </div>
-
-        <div class="mt-2">
-          -
-          </div>
-
-        <div class="col-sm-2 mb-3">
-          <input data-column="9" type="date" class="form-control" name="date_to" id="date_to" value="{{ date('Y-m-d') }}">
-          </div> 
-
-        <div class="col-6 pull-right">
-            <a class="btn btn-sm btn-outline-dark btn-preview-pdf">Print Preview</a>
-            <a class="btn btn-sm btn-outline-success btn-download-pdf"><i class="fas fa-download"></i> Download PDF</a>
+        <input type="date" class="form-control w-auto float-left m-1" name="date_from" id="date_from" value="{{ date('Y-m-d') }}">
+        <div class="float-left mt-2">
+            -
         </div>
+        <input data-column="9" type="date" class="form-control w-auto float-left m-1" name="date_to" id="date_to" value="{{ date('Y-m-d') }}">  
+        <a class="btn btn-sm btn-outline-dark btn-preview-pdf float-right m-1">Print Preview</a>
+        <a class="btn btn-sm btn-outline-success btn-download-pdf float-right m-1"><i class="fas fa-download"></i> Download PDF</a>
+    </div>
         
     <div class="col-md-12 col-lg-12 mt-3">
       <div class="card">
