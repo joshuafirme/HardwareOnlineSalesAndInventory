@@ -20,9 +20,7 @@ class ProductController extends Controller
     public function index()
     {
         $product = new Product;
-        $product = $product->readAllProduct();
-        
-        $this->cacheProducts();
+        $product = cache('all_products');
 
         if(request()->ajax())
         { 
@@ -82,6 +80,8 @@ class ProductController extends Controller
             $data['image'] = $this->imageUpload($request);
         }
         Product::create($data);
+
+        $this->cacheProducts();
 
         return redirect()->back()
             ->with('success', 'product was created.');
@@ -156,6 +156,8 @@ class ProductController extends Controller
         }
 
         Product::where('id', $id)->update($data);
+
+        $this->cacheProducts();
 
         return redirect()->back()
             ->with('success', 'Product was updated.');
