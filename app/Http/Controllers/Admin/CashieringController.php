@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Cashiering;
 use DB;
 use Input;
+use Hash;
 
 class CashieringController extends Controller
 {
@@ -69,7 +70,28 @@ class CashieringController extends Controller
         ->leftJoin('product as P', DB::raw('CONCAT(P.prefix, P.id)'), '=', 'C.product_code')->get();
     }
 
-    public function void($id){
-        return DB::table('cashiering_tray')->where('id', $id)->delete();
+    public function void($id)
+    {
+        $input = Input::all();
+        
+        $data = DB::table('users')
+            ->where('username', $input['username'])
+            ->where('access_level', 4)
+            ->first();
+            
+        if ($data) {
+            // if password is correct, void the item. 
+            if (Hash::check($input['password'], $data->password)) {      
+                DB::table('cashiering_tray')->where('id', $id)->delete();
+                return 'success';
+            }
+            else {
+                return 'failed';
+            }
+        }
+        else {
+            return 'failed';
+        }
+       
     }
 }

@@ -12,17 +12,17 @@
                       <input type="hidden" name="product_id" id="product_id">
                       <div class="col-sm-12">
                           <label class="col-form-label">Admin username</label>
-                          <input type="text" class="form-control" name="product_code">
+                          <input type="text" class="form-control" name="username" id="username">
                       </div>
                       <div class="col-sm-12 mt-2">
                         <label class="col-form-label">Password</label>
-                        <input type="password" class="form-control" name="password">
+                        <input type="password" class="form-control" name="password" id="password">
                     </div>
   
                   </div>
           </div>
           <div class="modal-footer">
-              <button class="btn btn-sm btn-danger btn-confirm-adjust" id="btn-confirm-void" type="button">Void</button>
+              <button class="btn btn-sm btn-danger" id="btn-confirm-void">Void</button>
               <button class="btn btn-sm" data-dismiss="modal">Cancel</button>
           </div>
       </div>

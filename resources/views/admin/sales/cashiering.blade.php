@@ -71,12 +71,15 @@
                             </div>
                             <div class="col-sm-2 ml-1 mt-1">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <input type="checkbox" class="form-check-input" id="gcash-payment">
                                     <label class="form-check-label" for="exampleCheck1">GCash Payment</label>
                                   </div>
                             </div>
                             <div class="col-sm-3">
                                 <button class="btn btn-sm btn-success" id="proccess"><u>F2</u> Proccess</button>
+                            </div>
+                            <div class="col-sm-12 mt-3 img-gcash-qr">
+                                <img width="300" height="300" src="{{asset('images/gcash.jpg')}}" alt="">
                             </div>
                         </div>        
                     </div>
