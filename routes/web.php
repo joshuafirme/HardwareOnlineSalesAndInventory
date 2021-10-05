@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\DeliveryAreaController;
 use App\Http\Controllers\Admin\StockAdjustmentController;
 use App\Http\Controllers\Admin\PurchaseOrderController;
 use App\Http\Controllers\Admin\StockAdjustmentReportController;
+use App\Http\Controllers\Admin\CashieringController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,5 +63,9 @@ Route::middleware('auth')->group(function () {
     Route::get('reports/stock-adjustment', [StockAdjustmentReportController::class, 'index']);
     Route::get('reports/stock-adjustment/pdf/{date_from}/{date_to}', [StockAdjustmentReportController::class, 'pdf']);
     Route::get('reports/stock-adjustment/download/{date_from}/{date_to}', [StockAdjustmentReportController::class, 'downloadPDF']);
+    Route::get('cashiering', [CashieringController::class, 'index']);
+    Route::post('add-to-tray', [CashieringController::class, 'addToTray']);
+    Route::get('read-tray', [CashieringController::class, 'readTray']);
+    Route::post('void/{id}', [CashieringController::class, 'void']);
     
 });

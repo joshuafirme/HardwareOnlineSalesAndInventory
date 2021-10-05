@@ -29,6 +29,43 @@
     <link rel="stylesheet" href="{{asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
     <style>
+      #product-container::-webkit-scrollbar {
+    width: 5px;
+}
+
+#product-container::-webkit-scrollbar-track {
+    border-radius: 10px !important;
+    -webkit-box-shadow: inset 0 0 5px rgb(128,128,128);
+}
+
+#product-container::-webkit-scrollbar-thumb {
+    border-radius: 10px !important;
+    -webkit-box-shadow: inset 0 0 5px rgb(128,128,128);
+}
+      .description{
+        font-size: 14px;
+        height: 33px;
+      }
+       .cover {
+      height: 180px;
+      width: 100%;
+      -o-background-size: cover;
+      -moz-background-size: cover;
+      -webkit-background-size: cover;
+      background-size: cover;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      object-fit: cover;
+    }
+    .load-more-container {
+    display: flex;
+    justify-content: center;
+}
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+}
       .loader-container {
     display: flex;
     justify-content: center;

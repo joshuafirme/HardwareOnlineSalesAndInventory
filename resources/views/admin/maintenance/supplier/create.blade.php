@@ -78,7 +78,7 @@
                             <div class="col-sm-12 col-md-6 mt-2">
                               <label class="col-form-label">Markup</label>
                               <input type="number" step=".01" class="form-control" name="markup"  id="markup" required>
-                          </div>
+                            </div>
 
                             <div class="col-sm-12 col-md-6 mb-2">    
                               <label class="col-form-label">Status</label>
