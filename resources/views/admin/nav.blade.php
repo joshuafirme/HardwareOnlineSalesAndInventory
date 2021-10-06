@@ -44,7 +44,7 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{ \Auth::user()->name }}</a>
+        <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{ Auth::user()->name }}</a>
         <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
           <li><a href="{{url('/admin/logout')}}" class="dropdown-item">Logout </a></li>
       </li>
@@ -72,11 +72,21 @@
         </div>
       </div>-->
 
-      <!-- Sidebar Menu -->
+      <!-- 
+      **ACCESS LEVELS**
+        Sales Clerk = 1
+        Inventory Clerk = 2
+        Owner = 3
+        Administrator = 4
+      -->
+      @php
+          $access_level = Auth::user()->access_level;
+      @endphp
+      
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+
+          @if(in_array($access_level, array( 3, 4)))
           <li class="nav-item">
             <a href="{{ url('/admin/dashboard') }}" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -85,6 +95,9 @@
                 </p>
               </a>
           </li>
+          @endif
+
+          @if(in_array($access_level, array( 1, 3, 4 )))
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-dollar-sign"></i>
@@ -114,6 +127,9 @@
               </li>
             </ul>
           </li>
+          @endif
+
+          @if(in_array($access_level, array( 3, 4 )))
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
@@ -143,6 +159,9 @@
               </li>
             </ul>
           </li>
+          @endif
+        
+          @if(in_array($access_level, array( 2, 3, 4 )))
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cube"></i>
@@ -178,6 +197,8 @@
               </li>
             </ul>
           </li>
+          @endif
+          
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
@@ -187,12 +208,17 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+
+              @if(in_array($access_level, array( 1, 3, 4 )))
               <li class="nav-item">
                 <a href="pages/UI/general.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Sales Report</p>
                 </a>
               </li>
+              @endif
+
+              @if(in_array($access_level, array( 2, 3, 4 )))
               <li class="nav-item">
                 <a href="pages/UI/icons.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -211,8 +237,12 @@
                   <p>Stock Adjustment Report</p>
                 </a>
               </li>
+              @endif
+
             </ul>
           </li>
+
+          @if(in_array($access_level, array( 2, 3, 4 )))
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tools"></i>
@@ -254,6 +284,9 @@
               </li>
             </ul>
           </li>
+          @endif
+          
+          @if(in_array($access_level, array( 3, 4 )))
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
@@ -289,7 +322,8 @@
               </li>
             </ul>
           </li>
-        
+          @endif
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

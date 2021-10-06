@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Val Construction Supply | Login</title>
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/customer.css') }}" rel="stylesheet">

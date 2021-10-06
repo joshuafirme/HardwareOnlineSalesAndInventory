@@ -64,8 +64,13 @@ Route::middleware('auth')->group(function () {
     Route::get('reports/stock-adjustment/pdf/{date_from}/{date_to}', [StockAdjustmentReportController::class, 'pdf']);
     Route::get('reports/stock-adjustment/download/{date_from}/{date_to}', [StockAdjustmentReportController::class, 'downloadPDF']);
     Route::get('cashiering', [CashieringController::class, 'index']);
+    Route::get('record-sale', [CashieringController::class, 'recordSale']);
     Route::post('add-to-tray', [CashieringController::class, 'addToTray']);
     Route::get('read-tray', [CashieringController::class, 'readTray']);
     Route::post('void/{id}', [CashieringController::class, 'void']);
+
+  //  Route::middleware('access_level:2')->group(function () {
+  //      Route::resource('users', UserController::class);
+  //  });
     
 });
