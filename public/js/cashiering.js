@@ -337,7 +337,7 @@ function on_Keyup() {
 }
 
 async function render() {
-    $('.img-gcash-qr').css('display', 'none');
+    $('.img-gcash-qr').css('display', 'none');  
     await readTray();
     await readAllProducts();
     on_Click();
