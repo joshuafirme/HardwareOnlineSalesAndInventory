@@ -37,7 +37,7 @@
         position: sticky;
         top: 0;
         background-color: #FFF;
-        border-color: #FFF;
+        border-color: #C4BFC2;
         z-index: 999;
     }
 </style>
@@ -66,15 +66,32 @@
                                 </div>
                             </div>
                             <div class="col-md-12 mt-2">
-                                <table class="table responsive table-bordered table-hover" style=" margin-bottom:20px;">
+                                <table class="table responsive table-bordered" style=" margin-bottom:20px;">
                                     <tr>
                                         <th>Tendered</th>
-                                        <th><input type="number" id="tendered" step=".01" class="form-control"></th>
+                                        <th>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                  <span class="input-group-text">&#8369</span>
+                                                </div>
+                                                <input  type="number" id="tendered" step=".01" class="form-control">
+                                            </div>
+                                        </th>
                                     </tr> 
                                     <tr>
                                         <th>Change</th>
-                                        <th><input type="number" id="change" step=".01" class="form-control" readonly></th>
-                                    </tr>     
+                                        <th>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                  <span class="input-group-text">&#8369</span>
+                                                </div>
+                                                <input  type="number" id="change" step=".01" class="form-control" readonly>
+                                            </div></th>
+                                    </tr>  
+                                    <tr>
+                                        <th>Invoice #</th>
+                                        <th><input type="number" id="invoice-no" class="form-control"></th>
+                                    </tr>    
                                 </table>
                             </div>
                             <div class="col-sm-2 ml-1 mt-1">

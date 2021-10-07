@@ -21,9 +21,7 @@ async function readAllProducts() {
                     
                     for (var i = 0; i < last_key; i++) {
                         if (typeof data_storage[i] != 'undefined') 
-                            if (data_storage[i].qty > 0) {
-                                html += getItems(data_storage[i]);
-                            }
+                            html += getItems(data_storage[i]);
                     }
                     if(data_storage.length >= last_key){
                         enable_button = true;
@@ -58,7 +56,11 @@ function getItems (data) {
                 html += '<div title=\"'+data.description+'"\ class="description">'+ description  +'</div>';
                 html += '<div class="d-flex">';
                 html += '<div class="card-text mr-2 mb-2 price-'+data.id+'">₱'+ formatNumber(data.selling_price) +'</div>';
-                html += '<div class="card-text"> Stock: <span class="stock-'+data.id+'">'+data.qty+'</span></div>';
+                var style = "";
+                if (data.qty == 0) {
+                    style = 'style="color:red"';    
+                }
+                html += '<div class="card-text"> Stock: <span class="stock-'+data.id+'" '+style+'>'+data.qty+'</span></div>';
                 html += '</div>';
                 html += '<div class="d-flex">';
                 html += '<span>Qty</span><input class="qty-'+data.id+'" type="number" min="1" value="1" style="width:50px; margin-left:5px;">';
@@ -181,21 +183,39 @@ function formatNumber(total)
   return money_format = parseFloat(decimal).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+async function getQtyInTray(product_code) {
+    await $.ajax({
+        url: 'cashiering/read-one-qty/'+product_code,
+        type: 'GET',
+        
+        success:async function(data){
+            var qty = isNaN(data.qty) ? 0 : data.qty;
+            localStorage.setItem("qty_in_tray", qty);
+        }
+    });
+}
+
 function on_Click () {
     
-    $(document).on('click', '#btn-add-to-tray', function(){
+    $(document).on('click', '#btn-add-to-tray', async function(){
+
         var product_code = $(this).attr('data-product-code');
-        var id = $(this).attr('data-id');
-        var qty = $('.qty-'+id).val();
-        var price = $('.price-'+id).text().slice(1).replace(",", ""); 
-        var amount  = parseInt(qty) * parseFloat(price);
-        var stock = $('.stock-'+id).text(); 
-        
-        if (stock < qty) {
+        var id           = $(this).attr('data-id');
+        var qty          = $('.qty-'+id).val();
+        var price        = $('.price-'+id).text().slice(1).replace(",", ""); 
+        var amount       = parseInt(qty) * parseFloat(price);
+        var stock        = $('.stock-'+id).text();
+
+        await getQtyInTray(product_code);
+
+        var qty_in_tray = localStorage.getItem("qty_in_tray");
+        var total_qty = parseInt(qty) + parseInt(qty_in_tray);
+        console.log(qty_in_tray)
+        if (stock < total_qty) {
             alert("Not enough stock.")
         }
         else {
-            $.ajax({
+           await $.ajax({
                 url: '/add-to-tray',
                 type: 'POST',
                 data: {
@@ -204,8 +224,9 @@ function on_Click () {
                     amount : amount
                 },
                 
-                success:async function(data){
+                success:async function(){
                     await readTray();
+                    localStorage.removeItem("qty_in_tray");
                 }
             });
         }
@@ -257,9 +278,9 @@ function on_Click () {
 
     $(document).on('click', '#proccess', function(){
 
-        $(this).html("Plase wait...");
         var total = $('#total').text().slice(1).replace(",", ""); 
         var tendered = $('#tendered').val();
+        var invoice_no = $('#invoice-no').val();
 
         total = parseFloat(total);
         tendered = parseFloat(tendered);
@@ -270,42 +291,54 @@ function on_Click () {
                 alert('Tendered amount is less than total amount.');
             }
             else {
-                var payment_method = "Cash";
-                if ($('#gcash-payment').is(":checked")) {
-                    payment_method = "GCash"
-                }
-                $.ajax({
-                    url: '/record-sale/',
-                    type: 'POST',
-                    data: {
-                        payment_method : payment_method
-                    },
-                    success:async function(res){
-                        console.log(res)
-                        if (res == 'success') {
-                            $('#change').val('');
-                            $('#tendered').val('');
-                            setTimeout(async function(){
+                if (invoice_no) {      
+                    $(this).html("Plase wait...");
+                    var payment_method = "Cash";
+                    if ($('#gcash-payment').is(":checked")) {
+                        payment_method = "GCash"
+                    }
+                    $.ajax({
+                        url: '/record-sale/',
+                        type: 'POST',
+                        data: {
+                            payment_method : payment_method,
+                            invoice_no     : invoice_no
+                        },
+                        success:async function(res){
+                            console.log(res)
+                            if (res == 'success') {
+                                $('#change').val('');
+                                $('#tendered').val('');
+                                $('#invoice-no').val('');
+                                setTimeout(async function(){
+                                    $('#proccess').html("Proccess")
+                                    $.toast({
+                                        heading:'Transaction was successfully recorded.',
+                                        showHideTransition: 'plain',
+                                        hideAfter: 4000, 
+                                    });
+                                    await readTray();
+                                },300);
+                            }
+                            else if (res == 'invoice_exists') {
                                 $('#proccess').html("Proccess")
+                                alert('Invoice # is already exists.')
+                            }
+                            else {
                                 $.toast({
-                                    heading:'Transaction was successfully recorded.',
-                                    showHideTransition: 'plain',
+                                    heading: 'Something went wrong',
+                                    text:'Please contact the development team',
+                                    showHideTransition: 'fade',
+                                    icon: 'error',
                                     hideAfter: 4000, 
                                 });
-                                await readTray();
-                            },300);
+                            }
                         }
-                        else {
-                            $.toast({
-                                heading: 'Something went wrong',
-                                text:'Please contact the development team',
-                                showHideTransition: 'fade',
-                                icon: 'error',
-                                hideAfter: 4000, 
-                            });
-                        }
-                    }
-                });
+                    });
+                }
+                else {
+                    alert('Please enter the Invoice #');
+                }
             }
         }
         else {

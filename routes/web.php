@@ -67,6 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::post('record-sale', [CashieringController::class, 'recordSale']);
     Route::post('add-to-tray', [CashieringController::class, 'addToTray']);
     Route::get('read-tray', [CashieringController::class, 'readTray']);
+    Route::get('cashiering/read-one-qty/{product_code}', [CashieringController::class, 'readOneQty']);
     Route::post('void/{id}', [CashieringController::class, 'void']);
 
   //  Route::middleware('access_level:2')->group(function () {

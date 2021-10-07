@@ -98,25 +98,56 @@ class CashieringController extends Controller
 
     public function recordSale()
     {
+        $input = Input::all();
         $cashiering = new Cashiering;
         $data = $cashiering->readCashieringTray();
+        $invoice_no = $input['invoice_no'];
 
-        foreach ($data as $items) {
-            $sales = new Sales;
-            $sales->prefix = date('Ymd');
-            $sales->invoice_no = '2094';
-            $sales->product_code = $items->product_code;
-            $sales->qty = $items->qty;
-            $sales->amount = $items->amount;
-            $sales->payment_method = Input::input('payment_method');
-            $sales->order_from = 'walk-in';
-            $sales->status = 1;
-            $sales->save();
+        if (!$this->isInvoiceExists($invoice_no)) {
+            foreach ($data as $items) {
+                $sales = new Sales;
+                $sales->prefix = date('Ymd');
+                $sales->invoice_no = $invoice_no;
+                $sales->product_code = $items->product_code;
+                $sales->qty = $items->qty;
+                $sales->amount = $items->amount;
+                $sales->payment_method = $input['payment_method'];
+                $sales->order_from = 'walk-in';
+                $sales->status = 1;
+                $sales->save();
+    
+                $this->updateInventory($items->product_code, $items->qty);
+            }
+    
+            $cashiering->truncate();
+   
+            return 'success';
         }
+        else {
+            return 'invoice_exists';
+        }
+       
 
-        $cashiering->truncate();
-
-        return 'success';
         
+    }
+
+    public function isInvoiceExists($invoice_no){
+        $row = DB::table('sales')->where('invoice_no', $invoice_no)->get();
+        return count($row) > 0 ? true : false;
+    }
+
+    public function updateInventory($product_code, $qty){
+        
+        DB::table('product')
+            ->where(DB::raw('CONCAT(prefix, id)'), $product_code)
+            ->update([
+                'qty' => DB::raw('qty - '. $qty .'')
+            ]);
+    }
+
+    public function readOneQty($product_code){
+        return DB::table('cashiering_tray')
+            ->where('product_code', $product_code)
+            ->first('qty');
     }
 }
