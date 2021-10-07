@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\StockAdjustmentController;
 use App\Http\Controllers\Admin\PurchaseOrderController;
 use App\Http\Controllers\Admin\StockAdjustmentReportController;
 use App\Http\Controllers\Admin\CashieringController;
+use App\Http\Controllers\Admin\SalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +70,8 @@ Route::middleware('auth')->group(function () {
     Route::get('read-tray', [CashieringController::class, 'readTray']);
     Route::get('cashiering/read-one-qty/{product_code}', [CashieringController::class, 'readOneQty']);
     Route::post('void/{id}', [CashieringController::class, 'void']);
+    Route::resource('reports/sales', SalesController::class);
+    Route::get('read-sales', [SalesController::class, 'readSales']);
 
   //  Route::middleware('access_level:2')->group(function () {
   //      Route::resource('users', UserController::class);

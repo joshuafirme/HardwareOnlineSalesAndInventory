@@ -28,7 +28,12 @@
 
 @include('admin.scripts')
 @include('admin.datatables-scripts')
-<script src="{{asset('js/stock_adjustment_report.js')}}"></script>
+@if(strpos($page_title,"Sales") != "")
+  <script src="{{asset('js/sales_report.js')}}"></script>
+
+@else
+  <script src="{{asset('js/stock_adjustment_report.js')}}"></script>
+@endif
 
 </body>
 </html>

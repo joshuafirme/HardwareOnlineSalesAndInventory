@@ -211,7 +211,7 @@
 
               @if(in_array($access_level, array( 1, 3, 4 )))
               <li class="nav-item">
-                <a href="pages/UI/general.html" class="nav-link">
+                <a href="{{url('/reports/sales')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Sales Report</p>
                 </a>
