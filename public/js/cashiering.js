@@ -238,11 +238,17 @@ function on_Click () {
     });
 
     $(document).on('click', '#proccess', function(){
+
+        $(this).html("Plase wait...");
         var total = $('#total').text().slice(1).replace(",", ""); 
         var tendered = $('#tendered').val();
-   
+
+        total = parseFloat(total);
+        tendered = parseFloat(tendered);
+
         if (tendered){
             if (total > tendered) {
+                $(this).html("Proccess");
                 alert('Tendered amount is less than total amount.');
             }
             else {
@@ -250,9 +256,37 @@ function on_Click () {
                 if ($('#gcash-payment').is(":checked")) {
                     payment_method = "GCash"
                 }
-                else {
-
-                }
+                $.ajax({
+                    url: '/record-sale/',
+                    type: 'POST',
+                    data: {
+                        payment_method : payment_method
+                    },
+                    success:async function(res){
+                        console.log(res)
+                        if (res == 'success') {
+                            $('#change').val('');
+                            $('#tendered').val('');
+                            setTimeout(async function(){
+                                $('#proccess').html("Proccess")
+                                $.toast({
+                                    heading:'Transaction was successfully recorded.',
+                                    showHideTransition: 'plain',
+                                    hideAfter: 4000, 
+                                });
+                                await readTray();
+                            },300);
+                        }
+                        else {
+                            $.toast({
+                                heading: 'Something went wrong',
+                                text:'Please contact the development team',
+                                showHideTransition: 'fade',
+                                icon: 'error'
+                            });
+                        }
+                    }
+                });
             }
         }
         else {

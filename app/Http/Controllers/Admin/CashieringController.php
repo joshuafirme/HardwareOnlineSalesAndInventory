@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cashiering;
+use App\Models\Sales;
 use DB;
 use Input;
 use Hash;
@@ -93,5 +94,29 @@ class CashieringController extends Controller
             return 'failed';
         }
        
+    }
+
+    public function recordSale()
+    {
+        $cashiering = new Cashiering;
+        $data = $cashiering->readCashieringTray();
+
+        foreach ($data as $items) {
+            $sales = new Sales;
+            $sales->prefix = date('Ymd');
+            $sales->invoice_no = '2094';
+            $sales->product_code = $items->product_code;
+            $sales->qty = $items->qty;
+            $sales->amount = $items->amount;
+            $sales->payment_method = Input::input('payment_method');
+            $sales->order_from = 'walk-in';
+            $sales->status = 1;
+            $sales->save();
+        }
+
+        $cashiering->truncate();
+
+        return 'success';
+        
     }
 }

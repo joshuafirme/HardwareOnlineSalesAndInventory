@@ -29,16 +29,30 @@
     <link rel="stylesheet" href="{{asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
     <style>
-      #product-container::-webkit-scrollbar {
-    width: 5px;
+#product-container::-webkit-scrollbar {
+    width: 7px;
 }
 
 #product-container::-webkit-scrollbar-track {
-    border-radius: 10px !important;
+    border-radius: 50px !important;
     -webkit-box-shadow: inset 0 0 5px rgb(128,128,128);
 }
 
 #product-container::-webkit-scrollbar-thumb {
+    border-radius: 10px !important;
+    -webkit-box-shadow: inset 0 0 5px rgb(128,128,128);
+}
+
+.tray-container::-webkit-scrollbar {
+    width: 7px;
+}
+
+.tray-container::-webkit-scrollbar-track {
+    border-radius: 50px !important;
+    -webkit-box-shadow: inset 0 0 5px rgb(128,128,128);
+}
+
+.tray-container::-webkit-scrollbar-thumb {
     border-radius: 10px !important;
     -webkit-box-shadow: inset 0 0 5px rgb(128,128,128);
 }

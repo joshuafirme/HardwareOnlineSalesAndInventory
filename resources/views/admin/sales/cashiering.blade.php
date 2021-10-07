@@ -40,8 +40,8 @@
           <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12 col-md-7">
-                        <div class="row">
-                            <div class="col-12">
+                        <div class="row mr-2">
+                            <div class="col-12 tray-container" style="overflow-y: auto; height:350px;">
                                 <table class="table responsive table-bordered table-hover tbl-tray" style=" margin-bottom:20px;">
                                     <thead>
                                         <th width="150px">Product Code</th>
