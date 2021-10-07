@@ -32,8 +32,16 @@
     {{ \Session::get('success') }}
   </div>
   @endif
-
-  <div class="row mt-4">
+<style>
+    thead{
+        position: sticky;
+        top: 0;
+        background-color: #FFF;
+        border-color: #FFF;
+        z-index: 999;
+    }
+</style>
+  <div class="row mt-1">
         
     <div class="col-md-12 col-lg-12 mt-3">
       <div class="card">
@@ -76,7 +84,7 @@
                                   </div>
                             </div>
                             <div class="col-sm-3">
-                                <button class="btn btn-sm btn-success" id="proccess"><u>F2</u> Proccess</button>
+                                <button class="btn btn-sm btn-success" id="proccess">Proccess</button>
                             </div>
                             <div class="col-sm-12 mt-3 img-gcash-qr">
                                 <img width="300" height="300" src="{{asset('images/gcash.jpg')}}" alt="">

@@ -46,7 +46,7 @@ $(document).on('click', '.btn-confirm-order', function(){
                 $.toast({
                     text: $('#description').val()+' was successfully added to orders.',
                     showHideTransition: 'plain',
-                    timeOut: 6500
+                    hideAfter: 5000, 
                 });
             }, 1000);
         }
@@ -213,7 +213,7 @@ async function onClick() {
                 $.toast({
                     text: 'Product was successfully removed.',
                     showHideTransition: 'plain',
-                    timeOut: 6500
+                    hideAfter: 5000, 
                 });
             }
         });
@@ -243,7 +243,7 @@ async function onClick() {
                 $.toast({
                     text: 'Products was successfully recorded to Purchased Orders.',
                     showHideTransition: 'plain',
-                    timeOut: 6500
+                    hideAfter: 5000, 
                 });
             }
         });

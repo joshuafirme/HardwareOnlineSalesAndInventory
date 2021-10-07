@@ -52,7 +52,7 @@ $(document).on('click', '.btn-confirm-adjust', function(){
                 $.toast({
                     text: $('#description').val()+' was successfully adjusted.',
                     showHideTransition: 'plain',
-                    timeOut: 6500
+                    hideAfter: 4500, 
                 })
             }, 1000);
         }

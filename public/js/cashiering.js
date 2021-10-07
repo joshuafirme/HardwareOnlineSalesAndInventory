@@ -56,7 +56,7 @@ function getItems (data) {
                 html += '<div title=\"'+data.description+'"\ class="description">'+ description  +'</div>';
                 html += '<div class="d-flex">';
                 html += '<div class="card-text mr-2 mb-2 price-'+data.id+'">₱'+ formatNumber(data.selling_price) +'</div>';
-                html += '<div class="card-text stock-'+data.id+'"> Stock: '+data.qty+'</div>';
+                html += '<div class="card-text stock-'+data.id+'"> Stock: <span class="stock">'+data.qty+'</span></div>';
                 html += '</div>';
                 html += '<div class="d-flex">';
                 html += '<span>Qty</span><input class="qty-'+data.id+'" type="number" min="1" value="1" style="width:50px; margin-left:5px;">';
@@ -101,6 +101,10 @@ async function readTray() {
             html += '<td></td>'
             html += '</tr>';
             $('.tbl-tray tbody').append(html);
+
+            if (data.length > 4) { console.log('scroll')
+            $(".tray-container").scrollTop($(".tray-container")[0].scrollHeight);
+            }
         }
     });
 }
@@ -287,7 +291,8 @@ function on_Click () {
                                 heading: 'Something went wrong',
                                 text:'Please contact the development team',
                                 showHideTransition: 'fade',
-                                icon: 'error'
+                                icon: 'error',
+                                hideAfter: 4000, 
                             });
                         }
                     }
@@ -340,7 +345,7 @@ function on_Click () {
                             $.toast({
                                 text:'Item was successfully void.',
                                 showHideTransition: 'plain',
-                                timeOut: 6500
+                                hideAfter: 4000, 
                             });
                             await readTray();
                         },300);
