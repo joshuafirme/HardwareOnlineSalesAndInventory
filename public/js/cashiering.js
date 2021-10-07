@@ -52,12 +52,17 @@ function getItems (data) {
         }
             html += '<div style="background-color:#C4BFC2;"><img class="card-img-top cover" src="../images/'+ data.image +'" alt="product image"></div>';
             html += '<div class="card-body">';
-                var description = data.description.length > 60 ? data.description.substr(0, 60) + "..." : data.description;
-                html += '<h5 title=\"'+data.description+'"\ class="card-title description">'+ description  +'</h5><br>';
-                html += '<p class="card-text price-'+data.id+'">₱'+ formatNumber(data.selling_price) +'</p>';
-                html += '<span>Qty </span><input class="qty-'+data.id+'" type="number" min="1" value="1" style="width:50px; margin-right:5px;">';
-                html += '<button class="btn btn-sm btn-outline-success" data-id="'+data.id+'" data-product-code="'+data.product_code+'" id="btn-add-to-tray">';
+                var description = data.description.length > 60 ? data.description.substr(0, 50) + "..." : data.description;
+                html += '<div title=\"'+data.description+'"\ class="description">'+ description  +'</div>';
+                html += '<div class="d-flex">';
+                html += '<div class="card-text mr-2 mb-2 price-'+data.id+'">₱'+ formatNumber(data.selling_price) +'</div>';
+                html += '<div class="card-text stock-'+data.id+'"> Stock: '+data.qty+'</div>';
+                html += '</div>';
+                html += '<div class="d-flex">';
+                html += '<span>Qty</span><input class="qty-'+data.id+'" type="number" min="1" value="1" style="width:50px; margin-left:5px;">';
+                html += '<button class="btn btn-sm btn-outline-success ml-2" data-id="'+data.id+'" data-product-code="'+data.product_code+'" id="btn-add-to-tray">';
                 html += 'Add to tray</button>';
+                html += '</div>';
             html +=' </div>';
         html += '</div>';
     html += '</div>'; 

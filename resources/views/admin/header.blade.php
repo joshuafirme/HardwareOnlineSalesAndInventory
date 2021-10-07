@@ -58,7 +58,6 @@
 }
       .description{
         font-size: 14px;
-        height: 33px;
       }
        .cover {
       height: 180px;
