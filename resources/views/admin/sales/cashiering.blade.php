@@ -50,7 +50,7 @@
                     <div class="col-sm-12 col-md-7">
                         <div class="row mr-2">
                             <div class="col-12 tray-container" style="overflow-y: auto; height:350px;">
-                                <table class="table responsive table-bordered table-hover tbl-tray" style=" margin-bottom:20px;">
+                                <table class="table responsive table-bordered table-hover tbl-tray" style="margin-bottom:20px;">
                                     <thead>
                                         <th width="150px">Product Code</th>
                                         <th>Description</th>
@@ -65,7 +65,7 @@
                                     <div class="lds-default" id="tray-loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12 mt-2">
                                 <table class="table responsive table-bordered table-hover" style=" margin-bottom:20px;">
                                     <tr>
                                         <th>Tendered</th>

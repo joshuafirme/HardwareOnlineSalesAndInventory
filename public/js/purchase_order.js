@@ -243,7 +243,7 @@ async function onClick() {
                 $.toast({
                     text: 'Products was successfully recorded to Purchased Orders.',
                     showHideTransition: 'plain',
-                    hideAfter: 5000, 
+                    hideAfter: 7000, 
                 });
             }
         });

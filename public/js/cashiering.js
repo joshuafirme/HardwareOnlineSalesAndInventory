@@ -21,7 +21,9 @@ async function readAllProducts() {
                     
                     for (var i = 0; i < last_key; i++) {
                         if (typeof data_storage[i] != 'undefined') 
-                        html += getItems(data_storage[i]);
+                            if (data_storage[i].qty > 0) {
+                                html += getItems(data_storage[i]);
+                            }
                     }
                     if(data_storage.length >= last_key){
                         enable_button = true;
@@ -56,7 +58,7 @@ function getItems (data) {
                 html += '<div title=\"'+data.description+'"\ class="description">'+ description  +'</div>';
                 html += '<div class="d-flex">';
                 html += '<div class="card-text mr-2 mb-2 price-'+data.id+'">₱'+ formatNumber(data.selling_price) +'</div>';
-                html += '<div class="card-text stock-'+data.id+'"> Stock: <span class="stock">'+data.qty+'</span></div>';
+                html += '<div class="card-text"> Stock: <span class="stock-'+data.id+'">'+data.qty+'</span></div>';
                 html += '</div>';
                 html += '<div class="d-flex">';
                 html += '<span>Qty</span><input class="qty-'+data.id+'" type="number" min="1" value="1" style="width:50px; margin-left:5px;">';
@@ -102,8 +104,8 @@ async function readTray() {
             html += '</tr>';
             $('.tbl-tray tbody').append(html);
 
-            if (data.length > 4) { console.log('scroll')
-            $(".tray-container").scrollTop($(".tray-container")[0].scrollHeight);
+            if (data.length > 4) { 
+                $(".tray-container").scrollTop($(".tray-container")[0].scrollHeight);
             }
         }
     });
@@ -187,19 +189,26 @@ function on_Click () {
         var qty = $('.qty-'+id).val();
         var price = $('.price-'+id).text().slice(1).replace(",", ""); 
         var amount  = parseInt(qty) * parseFloat(price);
-        $.ajax({
-            url: '/add-to-tray',
-            type: 'POST',
-            data: {
-                product_code : product_code,
-                qty : qty,
-                amount : amount
-            },
-            
-            success:async function(data){
-                await readTray();
-            }
-        });
+        var stock = $('.stock-'+id).text(); 
+        
+        if (stock < qty) {
+            alert("Not enough stock.")
+        }
+        else {
+            $.ajax({
+                url: '/add-to-tray',
+                type: 'POST',
+                data: {
+                    product_code : product_code,
+                    qty : qty,
+                    amount : amount
+                },
+                
+                success:async function(data){
+                    await readTray();
+                }
+            });
+        }
     });
 
     $(document).on('click', '.btn-load-more', function(){
@@ -338,7 +347,7 @@ function on_Click () {
                     password : password
                 },
                 success:async function(res){
-                    console.log(res)
+                    $('#void-modal').modal('hide');
                     $('#btn-confirm-void').html('Void');
                     if (res == 'success') {
                         setTimeout(async function(){
