@@ -8,6 +8,8 @@ var data_storage;
 var last_key = 0;
 
 async function readAllProducts() {
+    $('#product-container').html('');
+    $('#product-loader').css('display', 'block');
     $.ajax({
         url: '/customer/product',
         type: 'GET',
@@ -308,13 +310,19 @@ function on_Click () {
                             invoice_no     : invoice_no
                         },
                         success:async function(res){
-                            console.log(res)
+
                             if (res == 'success') {
+
+                                await readTray();
+                                
+                                await readAllProducts();
+                                
                                 $('#change').val('');
                                 $('#tendered').val('');
                                 $('#invoice-no').val('');
-                                setTimeout(async function(){
-                                    $('#proccess').html("Proccess")
+                                setTimeout(async function()
+                                {
+                                    $('#proccess').html("Proccess");
                                     $.toast({
                                         heading:'Transaction was successfully recorded.',
                                         text:'Generating Invoice...',
@@ -324,11 +332,9 @@ function on_Click () {
 
                                     setTimeout(async function(){
                                         window.open("/preview-invoice");
-                                        setTimeout(async function(){
-                                            await readTray();
-                                        },1500);
-                                    },2500);
+                                    },3000);
                                 },100);
+
                             }
                             else if (res == 'invoice_exists') {
                                 $('#proccess').html("Proccess")
