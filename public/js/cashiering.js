@@ -100,6 +100,7 @@ async function readTray() {
             html += '<tr>';
             html += '<td></td>';
             html += '<td></td>';
+            html += '<td></td>';
             html += '<td><b>Total</b></td>';
             html += '<td><b id="total">₱'+ formatNumber(total) +'</b></td>';
             html += '<td></td>'
@@ -118,6 +119,8 @@ async function getTrayItems (data) {
     html += '<tr>';
     html += '<td>'+ data.product_code +'</td>';
     html += '<td>'+ data.description +'</td>';
+    html += '<td>'+ data.unit +'</td>';
+    html += '<td>'+ data.selling_price +'</td>';
     html += '<td>'+ data.qty_order +'</td>';
     html += '<td>₱'+ formatNumber(data.amount) +'</td>';
     html += '<td><a style="color:#1970F1;" class="btn btn-sm btn-void" data-id='+ data.id +'> Void</a></td>'
@@ -314,11 +317,18 @@ function on_Click () {
                                     $('#proccess').html("Proccess")
                                     $.toast({
                                         heading:'Transaction was successfully recorded.',
+                                        text:'Generating Invoice...',
                                         showHideTransition: 'plain',
                                         hideAfter: 4000, 
                                     });
-                                    await readTray();
-                                },300);
+
+                                    setTimeout(async function(){
+                                        window.open("/preview-invoice");
+                                        setTimeout(async function(){
+                                            await readTray();
+                                        },1500);
+                                    },2500);
+                                },100);
                             }
                             else if (res == 'invoice_exists') {
                                 $('#proccess').html("Proccess")

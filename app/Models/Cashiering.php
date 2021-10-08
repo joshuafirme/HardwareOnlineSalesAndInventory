@@ -21,8 +21,9 @@ class Cashiering extends Model
 
     public function readCashieringTray(){
         return DB::table('cashiering_tray as C')
-            ->select("C.*", 'P.description')
-            ->leftJoin('product as P', DB::raw('CONCAT(P.prefix, P.id)'), '=', 'C.product_code')
+            ->select("C.*", 'P.*', 'U.name as unit', 'C.qty as qty_order', 'C.id as id')
+            ->leftJoin('product as P', DB::raw('CONCAT(P.prefix, P.id)'), '=', 'C.product_code') 
+            ->leftJoin('unit as U', 'U.id', '=', 'P.unit_id')
             ->get();
     }
 

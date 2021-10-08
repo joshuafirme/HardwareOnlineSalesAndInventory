@@ -70,6 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::get('read-tray', [CashieringController::class, 'readTray']);
     Route::get('cashiering/read-one-qty/{product_code}', [CashieringController::class, 'readOneQty']);
     Route::post('void/{id}', [CashieringController::class, 'void']);
+    Route::get('preview-invoice', [CashieringController::class, 'previewInvoice']);
     Route::resource('reports/sales', SalesController::class);
     Route::get('read-sales', [SalesController::class, 'readSales']);
 

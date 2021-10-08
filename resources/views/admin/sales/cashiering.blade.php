@@ -54,6 +54,8 @@
                                     <thead>
                                         <th width="150px">Product Code</th>
                                         <th>Description</th>
+                                        <th>Unit</th>
+                                        <th>Price</th>
                                         <th>Qty</th>
                                         <th>Amount</th>
                                         <th width="50px">Action</th>
