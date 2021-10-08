@@ -32,6 +32,7 @@ class Sales extends Model
         ->leftJoin('unit as U', 'U.id', '=', 'P.unit_id')
         ->where('S.status', 1)
         ->whereBetween(DB::raw('DATE(S.created_at)'), [$date_from, $date_to])
+        ->orderBy   ('S.invoice_no', 'desc')
         ->get();
     }
 }
