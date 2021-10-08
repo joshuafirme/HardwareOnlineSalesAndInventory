@@ -117,15 +117,12 @@ class CashieringController extends Controller
     
                 $this->updateInventory($items->product_code, $items->qty_order);
             }
-   
+
             return 'success';
         }
         else {
             return 'invoice_exists';
         }
-       
-
-        
     }
 
     public function isInvoiceExists($invoice_no){
@@ -155,7 +152,9 @@ class CashieringController extends Controller
         $cashiering = new Cashiering;
         $data = $cashiering->readCashieringTray();
         $output = $this->generateSalesInvoice($data);
-    
+        
+        $this->removeAllTrayProducts();
+
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($output);
         $pdf->setPaper('A5', 'portrait');
@@ -244,98 +243,96 @@ class CashieringController extends Controller
      
     
         <table width="100%" style="border-collapse:collapse; border: 1px solid;">                
-        <thead>
-          <tr>
-              <th>Qty</th>  
-              <th>Unit</th>    
-              <th>Articles</th>   
-              <th>Unit price</th>   
-              <th>Amount</th>   
-      </thead>
-      <tbody>
-        ';
-        $total_amount = 0;
-        $sub_total = 0;
-        if($product){
-            foreach ($product as $data) {
+            <thead>
+                <tr>
+                    <th>Qty</th>  
+                    <th>Unit</th>    
+                    <th>Articles</th>   
+                    <th>Unit price</th>   
+                    <th>Amount</th>   
+            </thead>
+        <tbody>
+            ';
+            $total_amount = 0;
+            $sub_total = 0;
+            if($product){
+                foreach ($product as $data) {
+                
+                    $total_amount += $data->amount;
+                
+                    $output .='
+                <tr class="align-text">                             
+                    <td class="f-courier">'. $data->qty_order .'</td>  
+                    <td class="f-courier">'. $data->unit .'</td>  
+                    <td class="f-courier">'. $data->description .'</td>
+                    <td class="f-courier">'. number_format($data->selling_price,2,'.',',') .'</td>   
+                    <td class="f-courier" style="width:110px;">'. number_format($data->amount,2,'.',',') .'</td>    
+                </tr>
+
             
-                $total_amount += $data->amount;
+
+                ';
+                
+                } 
+            }
+            else{
+                echo "No data found";
+            }
             
-                $output .='
-            <tr class="align-text">                             
-                <td class="f-courier">'. $data->qty_order .'</td>  
-                <td class="f-courier">'. $data->unit .'</td>  
-                <td class="f-courier">'. $data->description .'</td>
-                <td class="f-courier">'. number_format($data->selling_price,2,'.',',') .'</td>   
-                <td class="f-courier" style="width:110px;">'. number_format($data->amount,2,'.',',') .'</td>    
+            
+        $output .='
+            <tr>
+                <td style="text-align:right;" colspan="4">Total Sales (VAT Inclusive) </td>
+                <td class="align-text f-courier">PhP '. number_format($total_amount,2,'.',',') .'</td>
             </tr>
 
-          
+            <tr>
+                <td class="ar" colspan="4">Less: VAT </td>
+                <td class="align-text f-courier">PhP '. number_format($this->getVAT($total_amount),2,'.',',') .'</td>
+            </tr>
 
-              ';
-            
-            } 
-        }
-        else{
-            echo "No data found";
-        }
-        
-          
-     $output .='
-        <tr>
-            <td style="text-align:right;" colspan="4">Total Sales (VAT Inclusive) </td>
-            <td class="align-text f-courier">PhP '. number_format($total_amount,2,'.',',') .'</td>
-        </tr>
+            <tr >
+                <td class="ar" colspan="2">VATable Sales </td>
+                <td ></td>
+                <td class="ar">Amount: Net of VAT</td>
+                <td class="align-text f-courier">PhP '. number_format($this->getNetOfVAT($total_amount),2,'.',',') .'</td>
+            </tr>
 
-        <tr>
-            <td class="ar" colspan="4">Less: VAT </td>
-            <td class="align-text f-courier">PhP '. number_format($this->getVAT($total_amount),2,'.',',') .'</td>
-        </tr>
+            <tr>
+                <td class="ar" colspan="2">VAT-Exempt Sales</td>
+                <td ></td>
+                <td class="ar">Less:SC/PWD Discount</td>
+                <td class="align-text f-courier"></td>
+            </tr>
 
-        <tr >
-            <td class="ar" colspan="2">VATable Sales </td>
-            <td ></td>
-            <td class="ar">Amount: Net of VAT</td>
-            <td class="align-text f-courier">PhP '. number_format($this->getNetOfVAT($total_amount),2,'.',',') .'</td>
-        </tr>
+            <tr>
+                <td class="ar" colspan="2">Zero Rated Sales</td>
+                <td ></td>
+                <td class="ar">Amount Due</td>
+                <td class="align-text f-courier">PhP '. number_format($this->getAmountDue($total_amount),2,'.',',') .'</td>
+            </tr>
 
-        <tr>
-            <td class="ar" colspan="2">VAT-Exempt Sales</td>
-            <td ></td>
-            <td class="ar">Less:SC/PWD Discount</td>
-            <td class="align-text f-courier"></td>
-        </tr>
+            <tr>
+                <td class="ar" colspan="2">VAT Amount</td>
+                <td ></td>
+                <td class="ar">Add: VAT</td>
+                <td class="align-text f-courier">PhP '. number_format($this->getVAT($total_amount),2,'.',',') .'</td>
+            </tr>
 
-        <tr>
-            <td class="ar" colspan="2">Zero Rated Sales</td>
-            <td ></td>
-            <td class="ar">Amount Due</td>
-            <td class="align-text f-courier">PhP '. number_format($this->getAmountDue($total_amount),2,'.',',') .'</td>
-        </tr>
+            <tr>
+                <td style="text-align:right;" colspan="4">Total Amount Due </td>
+                <td class="align-text f-courier">PhP '. number_format(($total_amount),2,'.',',')  .'</td>
+            </tr>
 
-        <tr>
-            <td class="ar" colspan="2">VAT Amount</td>
-            <td ></td>
-            <td class="ar">Add: VAT</td>
-            <td class="align-text f-courier">PhP '. number_format($this->getVAT($total_amount),2,'.',',') .'</td>
-        </tr>
-
-        <tr>
-            <td style="text-align:right;" colspan="4">Total Amount Due </td>
-            <td class="align-text f-courier">PhP '. number_format(($total_amount),2,'.',',')  .'</td>
-        </tr>
-
-        </tbody>
-    </table>
+            </tbody>
+        </table>
     
-    <div class="b-text">
-        <p class="ar line">----------------------------------------</p>
-        <p class="ar b-label">Cashier/Authorized Representative</p>
-    </div>
-</div>';
-        
-        $cashiering = new Cashiering;
-        $cashiering->truncate();
+        <div class="b-text">
+            <p class="ar line">----------------------------------------</p>
+            <p class="ar b-label">Cashier/Authorized Representative</p>
+        </div>
+    </div>';
+
         return $output;
     }
 
@@ -349,5 +346,10 @@ class CashieringController extends Controller
 
     public function getAmountDue($total_due){
         return $total_due - $this->getVAT($total_due);
+    }
+
+    public function removeAllTrayProducts() {
+        $cashiering = new Cashiering;
+        $cashiering->truncate();
     }
 }

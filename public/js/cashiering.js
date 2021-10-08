@@ -313,27 +313,26 @@ function on_Click () {
 
                             if (res == 'success') {
 
-                                await readTray();
-                                
                                 await readAllProducts();
                                 
                                 $('#change').val('');
                                 $('#tendered').val('');
                                 $('#invoice-no').val('');
+                                $('#proccess').html("Proccess");
+                                $.toast({
+                                    heading:'Transaction was successfully recorded.',
+                                    text:'Generating Invoice...',
+                                    showHideTransition: 'plain',
+                                    hideAfter: 4000, 
+                                });
                                 setTimeout(async function()
                                 {
-                                    $('#proccess').html("Proccess");
-                                    $.toast({
-                                        heading:'Transaction was successfully recorded.',
-                                        text:'Generating Invoice...',
-                                        showHideTransition: 'plain',
-                                        hideAfter: 4000, 
-                                    });
-
-                                    setTimeout(async function(){
-                                        window.open("/preview-invoice");
-                                    },3000);
-                                },100);
+                                    window.open("/preview-invoice");
+                                    setTimeout(async function()
+                                    {
+                                        await readTray();
+                                    },300);
+                                },3000);
 
                             }
                             else if (res == 'invoice_exists') {
