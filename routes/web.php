@@ -73,6 +73,9 @@ Route::middleware('auth')->group(function () {
     Route::get('preview-invoice', [CashieringController::class, 'previewInvoice']);
     Route::resource('reports/sales', SalesController::class);
     Route::get('read-sales', [SalesController::class, 'readSales']);
+    Route::get('compute-total-sales', [SalesController::class, 'computeTotalSales']);
+    Route::get('reports/preview-sales/{date_from}/{date_to}/{order_from}/{payment_method}', [SalesController::class, 'previewSalesReport']);
+    Route::get('reports/download-sales/{date_from}/{date_to}/{order_from}/{payment_method}', [SalesController::class, 'downloadSalesReport']);
 
   //  Route::middleware('access_level:2')->group(function () {
   //      Route::resource('users', UserController::class);
