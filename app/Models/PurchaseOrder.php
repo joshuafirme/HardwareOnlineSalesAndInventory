@@ -57,7 +57,7 @@ class PurchaseOrder extends Model
         ->get();
     }
 
-    public function readPurchasedOrderBySupplier($supplier_id, $date_from, $date_to){
+    public function readPurchasedOrder($supplier_id, $date_from, $date_to){
         return DB::table('purchase_order AS PO')
         ->select('PO.*', 'P.*',
                 'U.name as unit', 
