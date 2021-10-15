@@ -247,6 +247,7 @@ async function onClick() {
                 });
             }
         });
+      
     });
 
     $(document).on('click','#orders-tab', function(){
@@ -255,7 +256,14 @@ async function onClick() {
     $(document).on('click','#reorder-tab', function(){
         $('.tbl-reorder').DataTable().ajax.reload();
     });
-    
+
+    $(document).on('click','.btn-preview', function(){ console.log('sdsa')
+        window.open("/preview-request-order");
+    });
+
+    $(document).on('click','.btn-download', function(){
+        window.open("/download-request-order");
+    });
    
 }
 

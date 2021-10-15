@@ -56,10 +56,15 @@
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
           <div class="modal-header">
-              <h5 class="modal-title">Request Orders</h5>
+              <h5 class="modal-title">Purchase Order</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
+          </div>
+          
+          <div class="col-12 mt-3">
+            <a class="btn btn-sm btn-outline-dark btn-preview float-right m-1">Print Preview</a>
+            <a class="btn btn-sm btn-outline-success btn-download float-right m-1"><i class="fas fa-download"></i> Download PDF</a>
           </div>
 
             <div class="modal-body">

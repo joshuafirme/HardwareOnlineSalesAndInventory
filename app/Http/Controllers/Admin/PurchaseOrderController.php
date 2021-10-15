@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Supplier;
 use Input;
 use DB;
+use Session;
 
 class PurchaseOrderController extends Controller
 {
@@ -95,10 +96,10 @@ class PurchaseOrderController extends Controller
         return $po_no;
     }
 
-    public function readRequestOrderBySupplier() {
-        $data = Input::all();
+    public function readRequestOrderBySupplier(Request $request) {
         $po = new PurchaseOrder;
-        return $po->readRequestOrderBySupplier($data['supplier_id']);
+        Session::put('supplier_id', $request->supplier_id);
+        return $po->readRequestOrderBySupplier($request->supplier_id);
     }
 
     public function removeRequest() {
@@ -123,5 +124,193 @@ class PurchaseOrderController extends Controller
                 'updated_at' => date('Y-m-d h:m:s')
             ]);
         }
+    }
+
+    public function previewRequestPurchaseOrder(){
+
+        $supplier_id = Session::get('supplier_id');
+
+        $po = new PurchaseOrder;
+        $supplier = new Supplier;
+
+        $data = $po->readRequestOrderBySupplier($supplier_id);
+        $supplier = $supplier->getSupplierNameByID($supplier_id);
+
+        $output = $this->generateHTML($data, $supplier->supplier_name);
+        
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($output);
+        $pdf->setPaper('A4', 'landscape');
+    
+        return $pdf->stream('Purchase-Order'.date('Y-m-d h:m'));
+    }
+
+    public function downloadRequestPurchaseOrder(){
+        $supplier_id = Session::get('supplier_id');
+
+        $po = new PurchaseOrder;
+        $supplier = new Supplier;
+
+        $data = $po->readRequestOrderBySupplier($supplier_id);
+        $supplier = $supplier->getSupplierNameByID($supplier_id);
+
+        $output = $this->generateHTML($data, $supplier->supplier_name);
+        
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($output);
+        $pdf->setPaper('A4', 'landscape');
+    
+        return $pdf->download();
+    }
+
+    public function generateHTML($items, $supplier_name){
+
+        $output = '
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <style type="text/css">';
+
+        $output .= $this->style();
+
+        $output .='
+        </style>
+        </head>
+
+        <body>
+
+        <div style="width:100%">
+        
+        <h1 class="p-name">VAL CONSTRUCTION SUPPLY</h1>
+        <h2 style="text-align:center;">Purchase Order</h2>
+        <p style="text-align:left;">Supplier: '.$supplier_name.'</p>
+        <p style="text-align:left;">Date: '. date("F j, Y") .'</p>
+        <table width="100%" style="border-collapse:collapse; border: 1px solid;">                
+            <thead>
+                <tr>
+                    <th>Product Code</th>    
+                    <th>Description</th>   
+                    <th>Unit</th>   
+                    <th>Category</th>  
+                    <th>Supplier</th>  
+                    <th>Qty</th>   
+                    <th>Price</th>  
+               
+            <tbody>';
+
+                if($items){
+                    $total = 0;
+                    foreach ($items as $data) {
+                    
+                        $output .='
+                    <tr class="align-text">              
+                        <td>'. $data->product_code .'</td>  
+                        <td>'. $data->description .'</td>
+                        <td>'. $data->unit .'</td>
+                        <td>'. $data->category .'</td>
+                        <td>'. $data->supplier .'</td>
+                        <td>'. $data->qty_order .'</td>
+                        <td><span>&#8369;</span>'. number_format($data->amount,2,'.',',') .'</td>   
+                    </tr>';
+
+                    $total = $total + $data->amount;
+                } 
+                $output.='<tr class="align-text"><td></td><td></td><td></td><td></td><td></td><td></td>  
+                        <td><span>&#8369;</span>'. number_format($total,2,'.',',') .'</td>   
+                    </tr>';
+            }
+            else{
+                echo "No data found";
+            }
+            
+            
+        $output .='
+ 
+        </tbody>
+        </table>
+    </div>
+
+
+        </body>
+
+        </html>
+        
+       ';
+
+        return $output;
+    }
+
+    public function style() {
+       return '
+        @page { margin: 20px; }
+        body{ font-family: sans-serif; }
+        th{
+            border: 1px solid;
+        }
+        td{
+            font-size: 14px;
+            border: 1px solid;
+            padding-right: 2px;
+            padding-left: 2px;
+        }
+
+        .p-name{
+            text-align:center;
+            margin-bottom:5px;
+        }
+
+        .address{
+            text-align:center;
+            margin-top:0px;
+        }
+
+        .p-details{
+            margin:0px;
+        }
+
+        .ar{
+            text-align:right;
+        }
+
+        .al{
+            text-left:right;
+        }
+
+        .align-text{
+            text-align:center;
+        }
+
+        .align-text td{
+            text-align:center;
+        }
+
+        .w td{
+            width:20px;
+        }
+
+   
+
+        .b-text .line{
+            margin-bottom:0px;
+        }
+
+        .b-text .b-label{
+            font-size:12px;
+            margin-top:-7px;
+            margin-right:12px;
+            font-style:italic;
+        }
+
+        .f-courier{
+            font-family: monospace, sans-serif;
+            font-size:14px;
+        }
+
+        span {
+            font-family: DejaVu Sans; sans-serif;
+        }
+        
+        ';
     }
 }

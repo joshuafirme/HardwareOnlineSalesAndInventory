@@ -59,6 +59,8 @@ Route::middleware('auth')->group(function () {
     Route::get('request-order', [PurchaseOrderController::class, 'readRequestOrderBySupplier']);
     Route::post('request-order/remove', [PurchaseOrderController::class, 'removeRequest']);
     Route::post('purchase-order', [PurchaseOrderController::class, 'purchaseOrder']);
+    Route::get('preview-request-order', [PurchaseOrderController::class, 'previewRequestPurchaseOrder']);
+    Route::get('download-request-order', [PurchaseOrderController::class, 'downloadRequestPurchaseOrder']);
     Route::get('purchased-order', [PurchaseOrderController::class, 'readPurchasedOrder']);
     Route::get('supplier-markup', [SupplierController::class, 'getMarkupBySupplier']);
     Route::get('reports/stock-adjustment', [StockAdjustmentReportController::class, 'index']);
