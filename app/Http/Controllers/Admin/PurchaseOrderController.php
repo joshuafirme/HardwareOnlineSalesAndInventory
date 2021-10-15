@@ -70,6 +70,7 @@ class PurchaseOrderController extends Controller
         }
         else{
             PurchaseOrder::create([
+                    'po_no' => 00000,
                     'product_code' => $product_code,
                     'qty_order' => $qty_order,
                     'amount' => $amount,
@@ -88,6 +89,12 @@ class PurchaseOrderController extends Controller
         }
     }
 
+    public function getPONumber(){
+        $po_no = PurchaseOrder::max('po_no');
+        $po_no++;
+        return $po_no;
+    }
+
     public function readRequestOrderBySupplier() {
         $data = Input::all();
         $po = new PurchaseOrder;
@@ -104,11 +111,13 @@ class PurchaseOrderController extends Controller
         $data = Input::all();
         $product_codes = [];
         $product_codes = $data['product_codes'];
-
+        $po_no = $this->getPONumber();
         for ($i = 0; $i < count($product_codes); $i++) 
         {
             PurchaseOrder::where('product_code', $product_codes[$i])
+            ->where('status', 1)
             ->update([ 
+                'po_no' => $po_no,
                 'status' => 2,
                 'remarks' => 'Pending',
                 'updated_at' => date('Y-m-d h:m:s')

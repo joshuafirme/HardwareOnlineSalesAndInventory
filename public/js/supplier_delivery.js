@@ -48,7 +48,6 @@ async function on_Click() {
 
     $(document).on('click', '.btn-show-order', function(){
 
-        product_id          = $(this).attr('data-id');
         var row             = $(this).closest("tr");
 
         var po_no           = row.find("td:eq(0)").text();
@@ -57,13 +56,48 @@ async function on_Click() {
         var supplier        = row.find("td:eq(3)").text();
         var unit            = row.find("td:eq(4)").text();
         var qty_order       = row.find("td:eq(5)").text();
-        console.log(product_code)
+
         $('#po_no').text(po_no);
         $('#po_product_code').text(product_code);
         $('#po_description').text(description);
         $('#supplier').text(supplier);
         $('#unit').text(unit);
         $('#qty_ordered').text(qty_order);
+    });
+
+    $(document).on('click', '#btn-add', function(){
+        var btn = $(this);
+        var po_no           = $('#po_no').text();
+        var product_code    = $('#po_product_code').text();
+        var qty_delivered   = $('#qty_delivered').val();
+        var date_recieved   = $('#date_recieved').val();
+        $.ajax({
+            url: '/create-delivery',
+            type: 'POST',
+            data:{
+                po_no           :po_no,
+                product_code    :product_code,
+                qty_delivered   :qty_delivered,
+                date_recieved   :date_recieved
+            },
+            beforeSend:function(){
+                btn.text('Please wait...');
+            },
+            
+            success:function(data){
+                console.log(data)
+                setTimeout(function(){
+                    btn.text('Adjust');
+                    $('#purchased-order-table').DataTable().ajax.reload();
+                    $('#delivery-modal').modal('hide');
+                    $.toast({
+                        text:'Delivery was successfully added.',
+                        showHideTransition: 'plain',
+                        hideAfter: 5000, 
+                    })
+                }, 500);
+            }
+        });
     });
 
 }
@@ -105,13 +139,22 @@ async function render() {
     var date_from = $('#po_date_from').val()
     var date_to = $('#po_date_to').val();
 
-  //  await fetchReorderProducts(supplier_id);
+
+    await CSRF_TOKEN();
 
     await on_Change();
 
     await on_Click();
 
     await fetchPurchasedOrders(po_supplier_id, date_from, date_to);
+}
+
+async function CSRF_TOKEN() {
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
 }
 
 render();

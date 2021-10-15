@@ -16,13 +16,13 @@ class CreateSupplierDeliveryTable extends Migration
         Schema::create('supplier_delivery', function (Blueprint $table) {
             $table->id();
             $table->string('prefix')->default('D-');
-            $table->integer('po_no');
+            $table->string('po_no');
             $table->string('product_code');
             $table->integer('qty_delivered');
             $table->string('remarks');
+            $table->string('date_delivered');
             $table->timestamps();
         });
-        DB::statement('ALTER TABLE supplier_delivery CHANGE id id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT');
     }
 
     /**

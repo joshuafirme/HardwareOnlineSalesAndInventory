@@ -14,6 +14,7 @@ class PurchaseOrder extends Model
 
     protected $fillable = [
         'prefix',
+        'po_no',
         'product_code',
         'qty_order',
         'amount',
@@ -63,8 +64,8 @@ class PurchaseOrder extends Model
                 'U.name as unit', 
                 'S.supplier_name as supplier', 
                 'C.name as category',
-                DB::raw('CONCAT(PO.prefix, PO.id) as po_num'),
-                DB::raw('PO.created_at as date_order'))
+                DB::raw('CONCAT(PO.prefix, PO.po_no) as po_num'),
+                DB::raw('PO.updated_at as date_order'))
         ->leftJoin('product as P', DB::raw('CONCAT(P.prefix, P.id)'), '=', 'PO.product_code')
         ->leftJoin('supplier as S', 'S.id', '=', 'P.supplier_id')
         ->leftJoin('category as C', 'C.id', '=', 'P.category_id')

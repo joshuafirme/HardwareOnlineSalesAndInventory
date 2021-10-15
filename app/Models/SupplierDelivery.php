@@ -16,6 +16,7 @@ class SupplierDelivery extends Model
         'po_no',
         'product_code',
         'qty_delivered',
-        'remarks'
+        'remarks',
+        'date_delivered'
     ];
 }

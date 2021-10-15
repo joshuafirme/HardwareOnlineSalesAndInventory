@@ -78,6 +78,7 @@ Route::middleware('auth')->group(function () {
     Route::get('reports/download-sales/{date_from}/{date_to}/{order_from}/{payment_method}', [SalesController::class, 'downloadSalesReport']);
 
     Route::resource('supplier-delivery', SupplierDeliveryController::class);
+    Route::post('/create-delivery', [SupplierDeliveryController::class, 'createDelivery']);
   //  Route::middleware('access_level:2')->group(function () {
   //      Route::resource('users', UserController::class);
   //  });

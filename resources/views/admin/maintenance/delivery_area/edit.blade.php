@@ -11,7 +11,7 @@
 <div class="content-header"></div>
 
     <div class="page-header mb-3">
-        <h3 class="mt-2" id="page-title">Create Delivery Area</h3>
+        <h3 class="mt-2" id="page-title">Update Delivery Area</h3>
         <hr>
         <a href="{{ route('delivery_area.index') }}" class="btn btn-secondary btn-sm"><span class='fas fa-arrow-left'></span></a>
     </div>

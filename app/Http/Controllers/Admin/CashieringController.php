@@ -152,7 +152,7 @@ class CashieringController extends Controller
         $cashiering = new Cashiering;
         $data = $cashiering->readCashieringTray();
         $output = $this->generateSalesInvoice($data);
-        
+
         $this->removeAllTrayProducts();
 
         $pdf = \App::make('dompdf.wrapper');
