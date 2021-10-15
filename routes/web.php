@@ -79,6 +79,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('supplier-delivery', SupplierDeliveryController::class);
     Route::post('/create-delivery', [SupplierDeliveryController::class, 'createDelivery']);
+    Route::get('/read-supplier-delivery', [SupplierDeliveryController::class, 'readSupplierDelivery']);
   //  Route::middleware('access_level:2')->group(function () {
   //      Route::resource('users', UserController::class);
   //  });

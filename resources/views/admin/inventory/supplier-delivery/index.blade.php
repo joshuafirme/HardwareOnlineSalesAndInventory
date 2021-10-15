@@ -91,7 +91,7 @@
                       </div>
 
     
-                      <table class="table responsive  table-hover mt-2" id="purchased-order-table" width="100%">       
+                      <table class="table responsive  table-hover mt-2" id="po-table" width="100%">       
                         <thead>
                           <tr>
                               <th>PO #</th>
@@ -112,11 +112,42 @@
     
                       <div class="tab-pane fade" id="deliveredtab" role="tabpanel" aria-labelledby="delivered-tab">
     
+                        <div class="row mt-4 ml-2">
+                          <div class="mt-2">
+                            Supplier
+                          </div>  
+                          
+                          <div class="col-sm-2 mb-3">
+                            
+                            <select class=" form-control col-sm-12 ml-2" id="sd_supplier">
+                              @foreach ($supplier as $item)
+                                 <option value="{{ $item->id }}">{{ $item->supplier_name }}</option>
+                              @endforeach
+                            </select>
+                            </div> 
+                
+                          <div class="mt-2 ml-3">
+                            Date
+                            </div>              
+                          
+                          <div class="col-sm-2 mb-3">
+                            <input data-column="9" type="date" class="form-control" id="sd_date_from" value="{{ date('Y-m-d') }}">
+                            </div>
+                
+                            <div class="mt-2">
+                              -
+                              </div>
+                
+                            <div class="col-sm-2 mb-3">
+                              <input data-column="9" type="date" class="form-control" id="sd_date_to" value="{{ date('Y-m-d') }}">
+                              </div>  
+                
+                        </div>
+  
     
-                            <table class="table responsive  table-hover" id="supplier-delivery-table" width="100%">       
+                            <table class="table responsive  table-hover" id="sd-table" width="100%">       
                               <thead>
                                 <tr>
-                                    <th><input type="checkbox" name="select_all" value="1" id="select-all"></th>
                                     <th>Delivery #</th>
                                     <th>PO #</th>
                                     <th>Product Code</th>     

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Supplier;
 use App\Models\SupplierDelivery;
 use App\Models\Product;
+use App\Models\PurchaseOrder;
 use DB;
 use Input;
 
@@ -18,6 +19,17 @@ class SupplierDeliveryController extends Controller
         return view('admin.inventory.supplier-delivery.index',['supplier' => $supplier]);
     }
 
+    public function readSupplierDelivery(Request $request)
+    {
+        $product = new SupplierDelivery;
+        $product = $product->readSupplierDelivery($request->supplier_id, $request->date_from, $request->date_to);
+        if(request()->ajax())
+        { 
+            return datatables()->of($product)->make(true);
+        }
+
+    }
+
     public function createDelivery(){
 
         $data = Input::all();
@@ -26,6 +38,7 @@ class SupplierDeliveryController extends Controller
         $this->updateInventory($data['product_code'], $data['qty_delivered']); 
 
         $s = new SupplierDelivery;
+        $s->po_id = $data['data_id'];
         $s->po_no = $data['po_no'];
         $s->product_code = $data['product_code'];
         $s->qty_delivered = $data['qty_delivered'];
@@ -68,5 +81,6 @@ class SupplierDeliveryController extends Controller
                 'P.qty' => DB::raw('P.qty + '. $qty_delivered .'')));
         
     }
+
 
 }
