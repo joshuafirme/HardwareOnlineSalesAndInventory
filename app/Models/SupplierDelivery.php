@@ -13,6 +13,7 @@ class SupplierDelivery extends Model
     protected $table = 'supplier_delivery';
 
     protected $fillable = [
+        'po_id',
         'prefix',
         'po_no',
         'product_code',
