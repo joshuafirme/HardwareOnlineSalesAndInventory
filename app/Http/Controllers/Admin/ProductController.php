@@ -101,7 +101,6 @@ class ProductController extends Controller
             'qty' => 'required:product',
             'reorder' => 'required:product',
             'orig_price' => 'required:product',
-            'selling_price' => 'required:product',
             'category_id' => 'required:product',
             'unit_id' => 'required:product',
             'supplier_id' => 'required:product',

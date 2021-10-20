@@ -24,7 +24,8 @@ class Product extends Model
         'image',
         'unit_id',
         'category_id',
-        'supplier_id'
+        'supplier_id',
+        'markup'
     ];
 
     public function readAllProduct()

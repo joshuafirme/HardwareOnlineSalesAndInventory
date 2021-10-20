@@ -198,6 +198,15 @@
             </ul>
           </li>
           @endif
+
+          <li class="nav-item">
+            <a href="{{ url('/pricing') }}" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Pricing
+                </p>
+              </a>
+          </li>
           
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -220,7 +229,7 @@
 
               @if(in_array($access_level, array( 2, 3, 4 )))
               <li class="nav-item">
-                <a href="pages/UI/icons.html" class="nav-link">
+                <a href="{{url('/reports/inventory')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Inventory Report</p>
                 </a>

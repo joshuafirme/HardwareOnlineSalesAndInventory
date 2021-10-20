@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\StockAdjustmentReportController;
 use App\Http\Controllers\Admin\CashieringController;
 use App\Http\Controllers\Admin\SalesController;
 use App\Http\Controllers\Admin\SupplierDeliveryController;
+use App\Http\Controllers\Admin\InventoryReportController;
+use App\Http\Controllers\Admin\PricingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,7 +64,6 @@ Route::middleware('auth')->group(function () {
     Route::get('preview-request-order', [PurchaseOrderController::class, 'previewRequestPurchaseOrder']);
     Route::get('download-request-order', [PurchaseOrderController::class, 'downloadRequestPurchaseOrder']);
     Route::get('purchased-order', [PurchaseOrderController::class, 'readPurchasedOrder']);
-    Route::get('supplier-markup', [SupplierController::class, 'getMarkupBySupplier']);
     Route::get('reports/stock-adjustment', [StockAdjustmentReportController::class, 'index']);
     Route::get('reports/stock-adjustment/pdf/{date_from}/{date_to}', [StockAdjustmentReportController::class, 'pdf']);
     Route::get('reports/stock-adjustment/download/{date_from}/{date_to}', [StockAdjustmentReportController::class, 'downloadPDF']);
@@ -78,7 +79,9 @@ Route::middleware('auth')->group(function () {
     Route::get('compute-total-sales', [SalesController::class, 'computeTotalSales']);
     Route::get('reports/preview-sales/{date_from}/{date_to}/{order_from}/{payment_method}', [SalesController::class, 'previewSalesReport']);
     Route::get('reports/download-sales/{date_from}/{date_to}/{order_from}/{payment_method}', [SalesController::class, 'downloadSalesReport']);
-
+    Route::get('reports/inventory', [InventoryReportController::class, 'index']);
+    Route::get('/pricing', [PricingController::class, 'index']);
+    Route::post('/pricing/update', [PricingController::class, 'updatePricing']);
     Route::resource('supplier-delivery', SupplierDeliveryController::class);
     Route::post('/create-delivery', [SupplierDeliveryController::class, 'createDelivery']);
     Route::get('/read-supplier-delivery', [SupplierDeliveryController::class, 'readSupplierDelivery']);

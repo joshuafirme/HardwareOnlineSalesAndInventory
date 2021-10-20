@@ -45,8 +45,7 @@ class SupplierController extends Controller
             'supplier_name' => 'required|unique:supplier',
             'address' => 'required:supplier',
             'person' => 'required:supplier',
-            'contact' => 'required:supplier',
-            'markup' => 'required:supplier'
+            'contact' => 'required:supplier'
         ]);
 
         Supplier::create($request->all());
@@ -90,8 +89,7 @@ class SupplierController extends Controller
             'supplier_name' => 'required:supplier',
             'address' => 'required:supplier',
             'person' => 'required:supplier',
-            'contact' => 'required:supplier',
-            'markup' => 'required:supplier'
+            'contact' => 'required:supplier'
         ]);
 
         Supplier::where('id', $id)->update([
@@ -100,7 +98,6 @@ class SupplierController extends Controller
             'person' => $request->input('person'),
             'contact' => $request->input('contact'),
             'email' => $request->input('email'),
-            'markup' => $request->input('markup'),
             'status' => $request->input('status')
         ]);
 

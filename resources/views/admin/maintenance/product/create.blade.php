@@ -95,18 +95,9 @@
 
                             <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
                               <label class="col-form-label">Original Price</label>
-                              <input type="number" step=".01" class="form-control" name="orig_price" id="orig_price" required>
+                              <input type="number" step=".01" class="form-control" name="orig_price" id="orig_price">
                             </div>
 
-                            <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
-                              <label class="col-form-label">Markup</label>
-                              <input type="number" step=".01" class="form-control" name="markup" id="markup" readonly>
-                            </div>
-
-                            <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
-                                <label class="col-form-label">Selling Price</label>
-                                <input type="number" step=".01" class="form-control" name="selling_price" id="selling_price" readonly>
-                            </div>
 
                             <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
                                 <div class="form-group">

@@ -51,7 +51,6 @@
                             <th class="py-2 text-left">Person</th>
                             <th class="py-2 text-left">Contact</th>
                             <th class="py-2 text-left">Email</th>
-                            <th class="py-2 text-left">Markup</th>
                             <th class="py-2 text-left">Status</th>
                             <th class="py-2 text-left">Action</th>
                         </tr>
@@ -62,7 +61,6 @@
                             <td>{{ $data->person }}</td>
                             <td>{{ $data->contact }}</td>
                             <td>{{ $data->email }}</td>
-                            <td>{{ $data->markup }}</td>
                             <td>
                                 @if($data->status == 1)
                                     <span class='badge badge-success'>Active</span> 

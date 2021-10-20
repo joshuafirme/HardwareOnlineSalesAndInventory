@@ -96,17 +96,7 @@
 
                             <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
                               <label class="col-form-label">Original Price</label>
-                              <input type="number" step=".01" class="form-control" name="orig_price" id="orig_price" value="{{ $product->orig_price }}" required>
-                            </div>
-
-                            <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
-                              <label class="col-form-label">Markup</label>
-                              <input type="number" step=".01" class="form-control" name="markup" id="markup" readonly>
-                            </div>
-
-                            <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
-                                <label class="col-form-label">Selling Price</label>
-                                <input type="number" step=".01" class="form-control" name="selling_price" id="selling_price" value="{{ $product->selling_price }}" readonly>
+                              <input type="number" step=".01" class="form-control" name="orig_price" id="orig_price" value="{{ $product->orig_price }}">
                             </div>
 
                             <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
