@@ -89,6 +89,7 @@ class Product extends Model
         ->leftJoin('unit as U', 'U.id', '=', 'P.unit_id')
         ->where('P.status', 1)
         ->where('P.description', 'LIKE', '%'.$key.'%')
+        ->orWhere(DB::raw('CONCAT(P.prefix, P.id)'), 'LIKE', '%'.$key.'%')
         ->get();
     }
 }

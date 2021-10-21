@@ -103,9 +103,9 @@ async function readTray() {
             html += '<td></td>';
             html += '<td></td>';
             html += '<td></td>';
+            html += '<td></td>';
             html += '<td><b>Total</b></td>';
-            html += '<td><b id="total">₱'+ formatNumber(total) +'</b></td>';
-            html += '<td></td>'
+            html += '<td><b id="total">₱'+ formatNumber(total) +'</b></td>'
             html += '</tr>';
             $('.tbl-tray tbody').append(html);
 
