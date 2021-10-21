@@ -21,6 +21,8 @@ class Supplier extends Model
     ];
 
     public function getSupplierNameByID($id) {
-        return $this::where('id', $id)->first('supplier_name');
+        if ($id) {
+            return $this::where('id', $id)->pluck('supplier_name')[0];
+        }
     }
 }

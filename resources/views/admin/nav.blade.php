@@ -114,12 +114,6 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Online Payment</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="pages/layout/boxed.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product Search</p>
@@ -180,7 +174,7 @@
               <li class="nav-item">
                 <a href="{{ url('/purchase-order') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Purchased Order</p>
+                  <p>Purchase Order</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -235,7 +229,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/icons.html" class="nav-link">
+                <a href="{{url('/reports/purchased-order')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Purchased Order Report</p>
                 </a>

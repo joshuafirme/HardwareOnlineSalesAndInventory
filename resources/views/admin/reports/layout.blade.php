@@ -28,13 +28,23 @@
 
 @include('admin.scripts')
 @include('admin.datatables-scripts')
+
 @if(strpos($page_title,"Sales") != "")
+
   <script src="{{asset('js/sales_report.js')}}"></script>
 
 @elseif(strpos($page_title,"Adjustment") != "")
+
   <script src="{{asset('js/stock_adjustment_report.js')}}"></script>
+
 @elseif(strpos($page_title,"Inventory") != "")
+
   <script src="{{asset('js/inventory_report.js')}}"></script>
+
+@elseif(strpos($page_title,"Purchased") != "")
+
+  <script src="{{asset('js/purchased_order_report.js')}}"></script>
+  
 @endif
 
 </body>
