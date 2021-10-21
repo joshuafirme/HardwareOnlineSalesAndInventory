@@ -80,6 +80,9 @@ Route::middleware('auth')->group(function () {
     Route::get('reports/preview-sales/{date_from}/{date_to}/{order_from}/{payment_method}', [SalesController::class, 'previewSalesReport']);
     Route::get('reports/download-sales/{date_from}/{date_to}/{order_from}/{payment_method}', [SalesController::class, 'downloadSalesReport']);
     Route::get('reports/inventory', [InventoryReportController::class, 'index']);
+    Route::get('reports/inventory/{category_id}', [InventoryReportController::class, 'readProductByCategory']);
+    Route::get('/reports/inventory/preview/{category_id}', [InventoryReportController::class, 'previewReport']);
+    Route::get('/reports/inventory/download/{category_id}', [InventoryReportController::class, 'downloadReport']);
     Route::get('/pricing', [PricingController::class, 'index']);
     Route::post('/pricing/update', [PricingController::class, 'updatePricing']);
     Route::resource('supplier-delivery', SupplierDeliveryController::class);

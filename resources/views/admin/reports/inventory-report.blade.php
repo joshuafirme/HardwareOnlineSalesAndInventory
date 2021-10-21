@@ -37,31 +37,32 @@
 
       
     <div class="col-12"> <div class="float-left mt-2 ml-3">
-        Supplier
+        Category
     </div>
-    <select class="form-control w-auto m-1 float-left" id="payment_method">
-        <option value="Cash">Cash</option>
-        <option value="GCash">GCash</option>
+    <select class="form-control w-auto m-1 float-left" id="inv_category">
+        <option value="0">All category</option>
+        @foreach ($category as $item)
+        <option value="{{ $item->id }}">{{ $item->name }}</option>
+    @endforeach
     </select>
-        <a class="btn btn-sm btn-outline-dark btn-preview-pdf float-right m-1">Print Preview</a>
-        <a class="btn btn-sm btn-outline-success btn-download-pdf float-right m-1"><i class="fas fa-download"></i> Download PDF</a>
+        <a class="btn btn-sm btn-outline-dark float-right m-1 btn-preview-inventory-report">Print Preview</a>
+        <a class="btn btn-sm btn-outline-success float-right m-1 btn-download-inventory-report"><i class="fas fa-download"></i> Download PDF</a>
     </div>
         
     <div class="col-md-12 col-lg-12 mt-3">
       <div class="card">
           <div class="card-body">
-              <table class="table table-hover tbl-inventory-report" >
+              <table class="table table-hover tbl-inventory" >
                   <thead>
                       <tr>
-                          <th>Product Code</th>
-                          <th>Description</th>
-                          <th>Unit</th>
-                          <th>Category</th>
-                          <th>Supplier</th>
-                          <th>Qty adjusted</th>
-                          <th>Action</th>
-                          <th>Remarks</th>
-                          <th>Date adjusted</th>
+                        <th>Product Code</th>
+                        <th>Description</th>
+                        <th>Qty</th>
+                        <th>Unit</th>
+                        <th>Category</th>
+                        <th>Supplier</th>
+                        <th>Original Price</th>
+                        <th>Selling Price</th>
                       </tr>
                   </thead>
               </table>

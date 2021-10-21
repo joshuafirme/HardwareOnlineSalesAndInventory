@@ -15,4 +15,13 @@ class Category extends Model
         'name',
         'status'
     ];
+
+    public function getCategoryName($category_id) {
+        if ($category_id != 0) {
+            return $this::where('id', $category_id)->pluck('name')[0];
+        }
+        else {
+            return "";
+        }
+    }
 }

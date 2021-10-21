@@ -48,6 +48,27 @@ class Product extends Model
             ->get();
     }
 
+    public function readProductByCategory($category_id)
+    {
+        return DB::table('product as P')
+            ->select("P.*", DB::raw('CONCAT(prefix, P.id) as product_code'),
+                    'description',
+                    'reorder', 
+                    'orig_price', 
+                    'selling_price', 
+                    'qty', 
+                    'U.name as unit', 
+                    'S.supplier_name as supplier', 
+                    'C.name as category'
+                    )
+            ->leftJoin('supplier as S', 'S.id', '=', 'P.supplier_id')
+            ->leftJoin('category as C', 'C.id', '=', 'P.category_id')
+            ->leftJoin('unit as U', 'U.id', '=', 'P.unit_id')
+            ->where('P.status', 1)
+            ->where('P.category_id', $category_id)
+            ->get();
+    }
+
     public function seachProduct() 
     {
         $data = Input::all();
