@@ -15,7 +15,7 @@ class DeliveryAreaController extends Controller
      */
     public function index()
     {
-        $delivery_area = DeliveryArea::paginate(5);
+        $delivery_area = DeliveryArea::paginate(10);
  
         return view('admin.maintenance.delivery_area.index', compact('delivery_area'))
             ->with('i', (request()->input('page', 1) - 1) * 5);

@@ -15,7 +15,7 @@ class UnitController extends Controller
      */
     public function index()
     {
-        $unit = Unit::paginate(5);
+        $unit = Unit::paginate(10);
 
         return view('admin.maintenance.unit.index', compact('unit'))
             ->with('i', (request()->input('page', 1) - 1) * 5);

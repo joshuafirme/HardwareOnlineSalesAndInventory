@@ -16,7 +16,7 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $supplier = Supplier::paginate(5);
+        $supplier = Supplier::paginate(10);
 
         return view('admin.maintenance.supplier.index', compact('supplier'))
             ->with('i', (request()->input('page', 1) - 1) * 5);

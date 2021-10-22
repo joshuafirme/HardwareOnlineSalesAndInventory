@@ -66,6 +66,7 @@
                         </tr>
                         @endforeach
                     </table>
+                    {!! $category->links("pagination::bootstrap-4") !!}
                 </div>
             </div>
         </div>

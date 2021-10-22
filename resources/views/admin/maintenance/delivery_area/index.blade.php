@@ -70,6 +70,7 @@
                         </tr>
                         @endforeach
                     </table>
+                    {!! $delivery_area->links("pagination::bootstrap-4") !!}
                 </div>
             </div>
         </div>
