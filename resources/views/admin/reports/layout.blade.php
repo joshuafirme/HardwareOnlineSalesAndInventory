@@ -44,6 +44,10 @@
 @elseif(strpos($page_title,"Purchased") != "")
 
   <script src="{{asset('js/purchased_order_report.js')}}"></script>
+
+@elseif(strpos($page_title,"Delivery") != "")
+
+  <script src="{{asset('js/supplier_delivery_report.js')}}"></script>
   
 @endif
 

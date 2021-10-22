@@ -229,15 +229,39 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{url('/reports/stock-adjustment')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Stock Adjustment Report</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{url('/reports/purchased-order')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Purchased Order Report</p>
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{url('/reports/supplier-delivery')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Supplier Delivery Report</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{url('/reports/stock-adjustment')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Stock Adjustment Report</p>
+                  <p>Reorder List Report</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{url('/reports/stock-adjustment')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Product Return Report</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{url('/reports/stock-adjustment')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Fast and Slow Moving Report</p>
                 </a>
               </li>
               @endif

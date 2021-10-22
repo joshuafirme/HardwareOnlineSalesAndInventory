@@ -41,17 +41,18 @@ class SupplierDeliveryController extends Controller
         $s->product_code = $data['product_code'];
         $s->qty_delivered = $data['qty_delivered'];
         $s->date_delivered = $data['date_recieved'];
-        $s->remarks = $this->validateDeliveredQty($s->po_no, $s->product_code, $s->qty_delivered);
+        $remarks = $this->validateDeliveredQty($s->po_no, $s->product_code, $s->qty_delivered);
+        $s->remarks = $remarks;
         $s->save();
 
-        $this->updatePurchaseOrder($data['po_no'], $data['product_code'], $s->remarks);
+        $this->updatePurchaseOrder($data['po_no'], $data['product_code'], $remarks);
         $this->updateInventory($data['product_code'], $data['qty_delivered']); 
     }
 
     public function updatePurchaseOrder($po_no, $product_code, $remarks){
-        $status = 2;
-        $remarks = "Pending";
-        if($remarks == 'Partially Completed'){
+        $status = 3;
+    //    $remarks = "Pending";
+    /*    if($remarks == 'Partially Completed'){
             $status = 3;
             $remarks = "Partially Completed";
         }
@@ -59,12 +60,13 @@ class SupplierDeliveryController extends Controller
             $status = 4;
             $remarks = "Completed";
         }
+    */
         DB::table('purchase_order as PO')
             ->where('PO.product_code', '=', $product_code)
             ->where(DB::raw('CONCAT(PO.prefix, PO.po_no)'), '=', $po_no)
             ->update([
                 'PO.status' => $status,
-                'PO.remarks' => $remarks
+              //  'PO.remarks' => $remarks
             ]);
     }
 

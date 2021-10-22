@@ -41,8 +41,8 @@ class DeliveryAreaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'municipality' => 'required|unique:delivery_area',
-            'brgy' => 'required|unique:delivery_area',
+            'municipality' => 'required:delivery_area',
+            'brgy' => 'required:delivery_area',
             'shipping_fee' => 'required:delivery_area',
         ]);
 

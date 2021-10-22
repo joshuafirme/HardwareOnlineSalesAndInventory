@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\SupplierDeliveryController;
 use App\Http\Controllers\Admin\InventoryReportController;
 use App\Http\Controllers\Admin\PricingController;
 use App\Http\Controllers\Admin\PurchaseOrderReportController;
+use App\Http\Controllers\Admin\SupplierDeliveryReportController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -94,6 +96,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/reports/purchased-order', [PurchaseOrderReportController::class, 'index']);
     Route::get('/purchased-order/preview/{supplier_id}/{date_from}/{date_to}', [PurchaseOrderReportController::class, 'previewReport']);
     Route::get('/purchased-order/download/{supplier_id}/{date_from}/{date_to}', [PurchaseOrderReportController::class, 'downloadReport']);
+
+    Route::get('/reports/supplier-delivery', [SupplierDeliveryReportController::class, 'index']);
+    Route::get('/supplier-delivery/preview/{supplier_id}/{date_from}/{date_to}', [SupplierDeliveryReportController::class, 'previewReport']);
+    Route::get('/supplier-delivery/download/{supplier_id}/{date_from}/{date_to}', [SupplierDeliveryReportController::class, 'downloadReport']);
+
   //  Route::middleware('access_level:2')->group(function () {
   //      Route::resource('users', UserController::class);
   //  });
