@@ -134,9 +134,9 @@ class PurchaseOrderController extends Controller
         $supplier = new Supplier;
 
         $data = $po->readRequestOrderBySupplier($supplier_id);
-        $supplier = $supplier->getSupplierNameByID($supplier_id);
+        $supplier_name = $supplier->getSupplierNameByID($supplier_id);
 
-        $output = $this->generateHTML($data, $supplier->supplier_name);
+        $output = $this->generateHTML($data, $supplier_name);
         
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($output);
@@ -152,9 +152,9 @@ class PurchaseOrderController extends Controller
         $supplier = new Supplier;
 
         $data = $po->readRequestOrderBySupplier($supplier_id);
-        $supplier = $supplier->getSupplierNameByID($supplier_id);
+        $supplier_name = $supplier->getSupplierNameByID($supplier_id);
 
-        $output = $this->generateHTML($data, $supplier->supplier_name);
+        $output = $this->generateHTML($data, $supplier_name);
         
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($output);
