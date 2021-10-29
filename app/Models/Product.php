@@ -30,7 +30,7 @@ class Product extends Model
 
     public function readAllProduct()
     {
-        return DB::table('product as P')
+        return DB::table($this->table . ' as P')
             ->select("P.*", DB::raw('CONCAT(prefix, P.id) as product_code'),
                     'description',
                     'reorder', 
@@ -50,7 +50,7 @@ class Product extends Model
 
     public function readProductByCategory($category_id)
     {
-        return DB::table('product as P')
+        return DB::table($this->table . ' as P')
             ->select("P.*", DB::raw('CONCAT(prefix, P.id) as product_code'),
                     'description',
                     'reorder', 
@@ -73,7 +73,7 @@ class Product extends Model
     {
         $data = Input::all();
         $key = $data['search_key'];
-        return DB::table('product as P')
+        return DB::table($this->table . ' as P')
         ->select("P.*", DB::raw('CONCAT(prefix, P.id) as product_code'),
                 'description',
                 'reorder', 
@@ -91,5 +91,24 @@ class Product extends Model
         ->where('P.description', 'LIKE', '%'.$key.'%')
         ->orWhere(DB::raw('CONCAT(P.prefix, P.id)'), 'LIKE', '%'.$key.'%')
         ->get();
+    }
+
+    public function readReorderBySupplier($supplier_id){
+        return DB::table($this->table . ' as P')
+            ->select("P.*", DB::raw('CONCAT(prefix, P.id) as product_code'),
+                    'description',
+                    'reorder', 
+                    'qty', 
+                    'U.name as unit', 
+                    'S.supplier_name as supplier', 
+                    'C.name as category'
+                    )
+            ->leftJoin('supplier as S', 'S.id', '=', 'P.supplier_id')
+            ->leftJoin('category as C', 'C.id', '=', 'P.category_id')
+            ->leftJoin('unit as U', 'U.id', '=', 'P.unit_id')
+            ->where('P.status', 1)
+            ->where('P.supplier_id', $supplier_id)
+            ->whereColumn('P.reorder','>=', 'P.qty')
+            ->get();
     }
 }

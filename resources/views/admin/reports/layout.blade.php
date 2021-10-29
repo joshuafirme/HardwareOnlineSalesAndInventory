@@ -52,6 +52,10 @@
 @elseif(strpos($page_title,"Return") != "")
 
   <script src="{{asset('js/product_return_report.js')}}"></script>
+
+@elseif(strpos($page_title,"Reorder") != "")
+
+  <script src="{{asset('js/reorder_report.js')}}"></script>
     
 @endif
 
