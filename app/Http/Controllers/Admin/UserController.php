@@ -105,6 +105,13 @@ class UserController extends Controller
             'access_level' => $request->input('access_level')
         ]);
 
+        if ($request->input('password')) {
+            User::where('id', $id)
+            ->update([
+                'password' => \Hash::make($request->input('password'))
+            ]);
+        }
+
         return redirect()->back()
             ->with('success', 'User was updated.');
     }

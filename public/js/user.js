@@ -38,3 +38,15 @@ $(document).on('click', '.btn-confirm-archive', function(){
     });
   
 });
+
+$(document).on('click', '#btn-change-password', function(){
+    $(this).hide();
+    $('.new-password-container').removeClass('d-none');
+});
+
+$(document).on('click', '#cancel', function(){
+    $('.new-password-container').addClass('d-none');
+    $('#password').val(''); 
+    $('#password').removeAttr("required"); 
+    $('#btn-change-password').show();
+});

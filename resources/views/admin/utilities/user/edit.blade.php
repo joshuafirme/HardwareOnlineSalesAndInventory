@@ -79,10 +79,19 @@
                                 <label class="col-form-label">Username</label>
                                 <input type="text" class="form-control" name="username" id="username" value="{{ $user->username }}" required>
                               </div>
-    
+
+                              <div class="col-sm-12 col-md-6 new-password-container d-none">
+                                <label class="col-form-label">New password</label>
+                                <input type="password" class="form-control" name="password" id="password" required>
+                              </div>
+
+                              <div class="col-sm-12 mt-2 new-password-container d-none">
+                                <a class="btn btn-sm btn-default" id="cancel">Cancel</a>
+                              </div>
+                              
                               <div class="col-12 mt-4">
-                                <button type="submit" class="btn btn-sm btn-primary mr-2" id="btn-add-user">Save changes</button>
-                                <a href="{{ route('users.index') }}" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</a>
+                                <button type="submit" class="btn btn-sm btn-success mr-2" id="btn-add-user">Save changes</button>
+                                <a class="btn btn-sm btn-primary" id="btn-change-password">Change password</a>
                               </div>
                               
                 
