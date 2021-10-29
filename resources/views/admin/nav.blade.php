@@ -253,7 +253,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{url('/reports/stock-adjustment')}}" class="nav-link">
+                <a href="{{url('/reports/product-return')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product Return Report</p>
                 </a>
