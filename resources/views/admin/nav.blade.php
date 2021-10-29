@@ -184,7 +184,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/icons.html" class="nav-link">
+                <a href="{{ url('/product-return') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product Return</p>
                 </a>
@@ -195,7 +195,7 @@
 
           <li class="nav-item">
             <a href="{{ url('/pricing') }}" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <i class="nav-icon fas fa-tags"></i>
                 <p>
                   Pricing
                 </p>

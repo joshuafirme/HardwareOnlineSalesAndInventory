@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\InventoryReportController;
 use App\Http\Controllers\Admin\PricingController;
 use App\Http\Controllers\Admin\PurchaseOrderReportController;
 use App\Http\Controllers\Admin\SupplierDeliveryReportController;
+use App\Http\Controllers\Admin\ProductReturnController;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,6 +102,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/supplier-delivery/preview/{supplier_id}/{date_from}/{date_to}', [SupplierDeliveryReportController::class, 'previewReport']);
     Route::get('/supplier-delivery/download/{supplier_id}/{date_from}/{date_to}', [SupplierDeliveryReportController::class, 'downloadReport']);
 
+    Route::resource('product-return', ProductReturnController::class);
+    Route::get('/product-return-read-sales', [ProductReturnController::class, 'readSales']);
+    Route::post('/return', [ProductReturnController::class, 'return']);
   //  Route::middleware('access_level:2')->group(function () {
   //      Route::resource('users', UserController::class);
   //  });

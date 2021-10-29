@@ -81,6 +81,7 @@
                         <th>Product Code</th>
                         <th>Description</th>
                         <th>Unit</th>
+                        <th>Price</th>
                         <th>Qty</th>
                         <th>Amount</th>
                         <th>Payment method</th>
