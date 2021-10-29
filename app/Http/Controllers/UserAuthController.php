@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use Session;
 
-class LoginController extends Controller
+class UserAuthController extends Controller
 {
     public function index() {
         return view('admin.login');
+    }
+
+    public function customer_index() {
+        return view('login');
     }
 
     public function login(Request $data) {

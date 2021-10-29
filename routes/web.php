@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\ProductController;
@@ -22,6 +21,7 @@ use App\Http\Controllers\Admin\SupplierDeliveryReportController;
 use App\Http\Controllers\Admin\ProductReturnController;
 use App\Http\Controllers\Admin\ProductReturnReportController;
 use App\Http\Controllers\Admin\ReorderListController;
+use App\Http\Controllers\UserAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,13 +41,14 @@ Route::get('/', [HomePageController::class, 'index']);
 Route::get('/customer/product', [HomePageController::class, 'readAllProduct']);
 Route::get('/customer/product/search', [HomePageController::class, 'searchProduct']);
 
+Route::get('/login', [UserAuthController::class, 'customer_index']);
 
 /**
  * Admin
  */
-Route::get('/admin', [LoginController::class, 'index']);
-Route::post('/admin/login', [LoginController::class, 'login'])->name('login');
-Route::get('/admin/logout', [LoginController::class, 'logout']);
+Route::get('/admin', [UserAuthController::class, 'index']);
+Route::post('/admin/login', [UserAuthController::class, 'login'])->name('login');
+Route::get('/admin/logout', [UserAuthController::class, 'logout']);
 
 Route::middleware('auth')->group(function () {
     Route::resource('/admin/dashboard', UserController::class);

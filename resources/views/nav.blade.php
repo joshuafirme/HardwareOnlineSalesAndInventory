@@ -39,7 +39,7 @@
             <a href="#" class="nav-link">Sign up</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Login</a>
+            <a href="{{ url('/login') }}" class="nav-link">Login</a>
           </li>
           <!--
               <li class="nav-item dropdown">
