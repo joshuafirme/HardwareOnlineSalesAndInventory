@@ -19,7 +19,7 @@ class LoginController extends Controller
             $access_level = Auth::user()->access_level;
 
             if (in_array($access_level, array( 3, 4 )))
-                return redirect()->intended('/users');  
+                return redirect()->intended('/reports/sales');  
             else if (in_array($access_level, array( 1 )))
                 return redirect()->intended('/cashiering');  
             else if (in_array($access_level, array( 2 )))
