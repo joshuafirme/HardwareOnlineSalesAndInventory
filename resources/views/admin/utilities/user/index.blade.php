@@ -71,6 +71,9 @@
                                     case 4:
                                         $access_level = "Administrator";
                                         break;
+                                    case 5:
+                                        $access_level = "Customer";
+                                        break;
                                 }
                             @endphp
                                 <td>{{ $access_level }}</td>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Session;
+use App\Models\User;
 
 class UserAuthController extends Controller
 {
@@ -14,6 +15,10 @@ class UserAuthController extends Controller
 
     public function customer_index() {
         return view('login');
+    }
+
+    public function signup_view() {
+        return view('signup');
     }
 
     public function login(Request $data) {
@@ -32,6 +37,24 @@ class UserAuthController extends Controller
         else {
             return redirect()->back()->with('danger', 'Invalid username or password.');  
         }
+    }
+
+    public function createAccount(Request $data) {
+        
+        $user = new User;
+        $user->name = $data->input('firstname') ." ". $data->input('lastname');
+        $user->email = $data->input('email');
+        $user->access_level = 5;
+        $user->username = $data->input('username');
+        $user->password = \Hash::make($data->input('password'));
+        $user->identification_photo = $data->input('identification_photo');
+        $user->phone = $data->input('phone');
+        $user->status = 0;
+        $user->save();
+
+        return redirect()->back()
+            ->with('success', 'You have successfully registered!');
+    
     }
 
     public function logout()

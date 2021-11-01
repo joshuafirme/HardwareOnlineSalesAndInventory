@@ -1,3 +1,7 @@
+@php
+  $page_title =  "Val Construction Supply";
+@endphp
+
 @include('header')
 
   <!-- Navbar -->

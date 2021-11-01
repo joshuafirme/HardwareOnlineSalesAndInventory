@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Val Construction Supply</title>
+  <title>{{ isset($page_title) ? $page_title : "Val Construction Supply" }}</title>
   <link rel="stylesheet" href="{{asset('css/customer.css?v='.rand())}}">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">

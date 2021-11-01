@@ -70,6 +70,7 @@
                                     <option value="2">Inventory Clerk</option>
                                     <option value="3">Owner</option>
                                     <option value="4">Administrator</option>
+                                    <option value="5">Customer</option>
                                 </select>
                               </div>
                 
