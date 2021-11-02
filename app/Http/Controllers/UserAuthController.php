@@ -80,7 +80,7 @@ class UserAuthController extends Controller
             $user->username = $data->input('username');
             $user->password = \Hash::make($data->input('password'));
 
-            if ($data->hasFile('image')) {
+            if ($data->hasFile('identification_photo')) {
                 $user->identification_photo = $this->imageUpload($data);
             }
 
