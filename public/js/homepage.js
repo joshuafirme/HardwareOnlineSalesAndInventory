@@ -29,13 +29,52 @@ async function readAllProducts() {
     
                     if (enable_button) {
                         html += '<div class="col-12 load-more-container">';
-                            html +='<button class="btn btn-sm btn-outline-success btn-load-more">Load more</button>';
+                            html +='<button class="btn btn-sm btn-outline-success btn-load-more" data-type="all">Load more</button>';
                         html += '</div>';
                     }
                 
                 $('.lds-default').css('display', 'none');
                 $('#product-container').append(html);
             },300)
+
+        }
+    });
+}
+
+function readProductsByCategory(category_id) {
+    $.ajax({
+        url: '/category/'+category_id,
+        type: 'GET',
+        success:function(data){
+            data_storage = data;
+
+            var html = "";
+            var enable_button = false;
+            last_key = 3;
+                
+            if (data_storage.length > 0) {
+                for (var i = 0; i < last_key; i++) {
+                    if (typeof data_storage[i] != 'undefined') 
+                    html += getItems(data_storage[i]);
+                }
+                if(data_storage.length >= last_key){
+                    enable_button = true;
+                }
+
+                if (enable_button) {
+                    html += '<div class="col-12 load-more-container">';
+                        html +='<button class="btn btn-sm btn-outline-success btn-load-more" data-type="category" data-id="'+category_id+'">Load more</button>';
+                    html += '</div>';
+                }
+            }
+            else {
+                html += '<div class="col-12 text-center">';
+                    html +='<p class="text-muted mt-2">No product found in this category.</p>';
+                html += '</div>';
+            }
+        
+            $('.lds-default').css('display', 'none');
+            $('#product-container').append(html);
 
         }
     });
@@ -74,11 +113,29 @@ function getItems (data) {
 
 async function onClick () {
 
+    
+    $(document).on('click', '.category-name', function(){
+        var category_id = $(this).attr('data-id');
+        var category_name = $(this).attr('data-name');
+
+        $('#product-container').html('');
+        $('.lds-default').css('display', 'block');
+        $('#product-heading').text(category_name);
+
+        readProductsByCategory(category_id);
+    });
+
     $(document).on('click', '.btn-load-more', function(){
         $(this).html('<i class="fas fa-spinner fa-spin"></i>');
+        var request_type = $(this).attr('data-type');
+        var category_id = $(this).attr('data-id');
+        var url_request = '/customer/product';
+        if (request_type == 'category') {
+            url_request = '/category/'+category_id;
+        }
 
         $.ajax({
-            url: '/customer/product',
+            url: url_request,
             type: 'GET',
             
             success:function(data){
@@ -95,7 +152,7 @@ async function onClick () {
                             html += getItems(data_storage[i]);
                     }
 
-                    if (data_storage.length >= last_key) {
+                    if (data_storage.length >= last_key+1) {
                         enable_button = true;
                     }
 
@@ -155,7 +212,7 @@ function searchProduct () {
                             if (typeof data_storage[i] != 'undefined') 
                             html += getItems(data_storage[i]);
                         }
-                        if(data_storage.length >= last_key){
+                        if(data_storage.length >= last_key+1){
                             enable_button = true;
                         }
 
@@ -174,7 +231,7 @@ function searchProduct () {
                     $('#product-container').append(html);
 
                     
-                },500)
+                },100)
     
             }
         });   

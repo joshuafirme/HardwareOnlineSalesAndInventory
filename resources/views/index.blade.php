@@ -39,24 +39,53 @@
 
             <div class="col-md-12 col-lg-3 mt-5 p-3">
                 
-                <h4 class="text-light">Exclusive Sales</h4>
-                <h3 class="text-light">POWER TOOL AND
+                <h5 class="text-light">Exclusive Sales</h5>
+                <h4 class="text-light">POWER TOOL AND
                     ACCESORIES
-                    UP TO 50% OFF</h3>
+                    UP TO 50% OFF</h4>
             </div>
             <div class="col-md-12 col-lg-9">
                 <img class="cover"  src="{{asset('images/tool-g98333b673_1280.jpg')}}">
             </div>
         </div>
+        
+        <div class="row pt-2 pb-2" style="background-color: #EFF6EC">
+          <div class="col-md-12 text-center">
+                <div class="text-muted text-bold">FOR RELIABLE AND QUICK DELIVERY, CHOOSE VAL CONSTRUCTION SUPPLY</div>
+          </div>
+          <div class="col-sm-12 hidden-xs hidden-sm">
+            <div class="row text-center">
+              <div class="col-md-4">
+                <img src="https://getmeds.ph/public/front/images/genuine-medicines.png" alt="Genuine Medicines">
+                <div class="text-muted">Genuine Materials</div>
+              </div>
+              <div class="col-md-4">
+                <img src="https://getmeds.ph/public/front/images/timely-delivery.png" alt="Timely Delivery">
+                <div class="text-muted">Timely Delivery</div>
+              </div>
+              <div class="col-md-4">
+                <img src="https://getmeds.ph/public/front/images/secure-payments.png" alt="Secure Payments">
+                <div class="text-muted">Secure Payments</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
         <div class="row pl-3 pr-3 pt-1 pb-1 category-container">
+
           @foreach ($categories as $item)
             <div class="col-xs-6 col-sm-4 col-md-3 text-center">
-              <a href="{{ url('/category/'.$item->id) }}" class="text-dark">{{ $item->name }}</a> 
+              <div class="text-bold text-muted category-name"  data-id="{{ $item->id }}" 
+                data-name="{{ $item->name }}" >
+                {{ $item->name }}</div> 
             </div>
           @endforeach
         </div>
          
-        <h4 class="text-center mt-4 text-dark">Best Selling Products</h4>
+        <h4 class="text-center mt-4 text-dark" id="product-heading">Best Selling Products</h4>
+
+        <hr>
 
         <div class="row" id="product-container"></div>
         

@@ -230,13 +230,15 @@ body {
       background-color: #06513D !important;
       color: #FFF !important;
     }
-  
-    .category-container a:hover {
+    .category-container .category-name {
+      cursor: pointer;
+    }
+    .category-container .category-name:hover {
       color: #06513D !important;
     }
 
     .category-container {
-      background-color: #FFF;border-radius: 5px;
+      background-color: #FFF;
       box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     }
 
