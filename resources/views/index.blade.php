@@ -49,16 +49,16 @@
             </div>
         </div>
         <div class="category-container">
-          <div class="row pl-3 pr-3" style="background-color: #FFF">
+          <div class="row pl-3 pr-3 pt-1 pb-1" style="background-color: #FFF">
             @foreach ($categories as $item)
               <div class="col-xs-6 col-sm-4 col-md-3 text-center">
-                <a href="{{ url('/category/'.$item->id) }}" class="text-muted">{{ $item->name }}</a> 
+                <a href="{{ url('/category/'.$item->id) }}" class="text-dark">{{ $item->name }}</a> 
               </div>
             @endforeach
           </div>
         </div>
         
-        <h2 class="text-center mt-4 text-dark">Best Selling Products</h2>
+        <h4 class="text-center mt-4 text-dark">Best Selling Products</h4>
 
         <div class="row" id="product-container"></div>
         
