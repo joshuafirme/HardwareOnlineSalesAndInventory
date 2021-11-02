@@ -168,11 +168,9 @@ function searchProduct () {
         });   
 }
 
-function formatNumber(total)
-{
-  var decimal = (Math.round(total * 100) / 100).toFixed(2);
-  return money_format = parseFloat(decimal).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+  }
 
 async function render() {
     await readAllProducts();
