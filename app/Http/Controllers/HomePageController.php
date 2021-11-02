@@ -14,7 +14,7 @@ class HomePageController extends Controller
     {
         $product = new Product;
         $product = $product->readAllProduct();
-        $categories = Category::all();
+        $categories = Category::where('status', 1)->get();
         return view('index', compact('product', 'categories'));
     }
 

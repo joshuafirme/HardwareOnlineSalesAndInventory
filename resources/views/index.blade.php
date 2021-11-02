@@ -51,7 +51,7 @@
         <div class="category-container">
           <div class="row pl-3 pr-3" style="background-color: #FFF">
             @foreach ($categories as $item)
-              <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+              <div class="col-xs-6 col-sm-4 col-md-3 text-center">
                 <a href="{{ url('/category/'.$item->id) }}" class="text-muted">{{ $item->name }}</a> 
               </div>
             @endforeach
