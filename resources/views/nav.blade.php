@@ -2,6 +2,22 @@
   .nav-link span {
     background-color: #FCE501;
   }
+  .main-header {
+    background-color: #06513D;
+    border-color: #236649;
+  }
+
+  .nav-link, .fas, .brand-text {
+    color: #FFF !important;
+  }
+
+  .btn-load-more .fas {
+    color: #06513D !important;
+  }
+
+  .fa-search {
+    color: #06513D !important;
+  }
 </style>
 
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
@@ -42,7 +58,7 @@
         </li>
 
         
-        <!-- Notifications Dropdown Menu -->
+        <!-- Notifications Dropdown Menu 
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="fas fa-bell" style="color: #06513D;"></i>
@@ -69,7 +85,7 @@
             <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
           </div>
         </li>
-
+-->
       <div class="collapse navbar-collapse order-3" id="navbarCollapse">
         <!-- Left navbar links -->
         <ul class="navbar-nav">

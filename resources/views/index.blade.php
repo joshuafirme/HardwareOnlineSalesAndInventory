@@ -72,7 +72,7 @@
           </div>
         </div>
 
-        <div class="row pl-3 pr-3 pt-1 pb-1 category-container">
+        <div class="row pl-3 pr-3 pt-1 pb-1 mt category-container">
 
           @foreach ($categories as $item)
             <div class="col-xs-6 col-sm-4 col-md-3 text-center">

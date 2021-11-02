@@ -102,7 +102,7 @@ select.form-control {
 <div class="container registration-container">
   <div class="row py-5 align-items-center">
       <!-- For Demo Purpose -->
-      <div class="col-md-5  mb-md-0 ml-sm-0 ml-lg-5">
+      <div class="col-md-5 pr-lg-5 mb-5 mb-md-0 ml-sm-0 ml-lg-5">
           <img src="{{asset('images/undraw_under_construction_-46-pa.svg')}}" alt="" class="img-fluid mb-3 d-none d-md-block">
       </div>
 
