@@ -28,5 +28,8 @@
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 
 <script src="{{asset('js/homepage.js')}}"></script>
+
+<script src="{{asset('js/login.js')}}"></script>
+
 </body>
 </html>

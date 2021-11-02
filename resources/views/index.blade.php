@@ -8,6 +8,16 @@
  @include('nav')
   <!-- /.navbar -->
 
+  <style>
+    .btn-success {
+      background-color: #06513D;
+      border: #06513D;
+    }
+
+    .btn-outline-success {
+    }
+  </style>
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->

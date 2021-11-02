@@ -164,8 +164,6 @@ body {
       color: #000;
       font-weight: normal;
       margin-bottom: 23px; }
-    .login-card form {
-      max-width: 326px; }
     .login-card .form-control {
       border: 1px solid #d5dae2;
       padding: 15px 25px;
@@ -217,5 +215,20 @@ body {
     bottom: 1rem;
     text-align: center;
     width: 100%; }
+
+    .btn-success, .btn-primary {
+      background-color: #06513D !important;
+      border: #06513D !important;
+    }
+
+    .btn-load-more {
+      border-color: #06513D !important;
+      color: #06513D !important;
+    }
+
+    .btn-load-more:hover {
+      background-color: #06513D !important;
+      color: #FFF !important;
+    }
   
   /*# sourceMappingURL=login.css.map */

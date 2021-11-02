@@ -75,15 +75,19 @@ select.form-control {
           <div class="login-card">
             <div class="row no-gutters">
               <div class="col-md-5 mt-4">
-                <img src="{{asset('images/undraw_access_account_re_8spm.svg')}}" class="img-fluid" alt="login">
+                <img src="{{asset('images/undraw_under_construction_-46-pa.svg')}}" class="img-fluid" alt="login">
               </div>
               <div class="col-md-7">
                 <div class="card-body">
                  <!-- <div class="brand-wrapper">
                      <img src="" alt="logo" class="logo">
                   </div> -->
+
+                  @include('includes.alerts')
+
                   <p class="login-card-description">Sign into your account</p>
-                  <form action="#">
+                  <form method="POST" action="/do-login" id="login-form">
+                    @csrf
                     <div class="row">
       
                         <!-- First Name -->
@@ -93,7 +97,7 @@ select.form-control {
                                     <i class="fa fa-user text-muted"></i>
                                 </span>
                             </div>
-                            <input id="username" type="text" name="username" placeholder="Username" class="form-control bg-white border-left-0 border-md">
+                            <input id="username" type="text" name="username" placeholder="Username" class="form-control bg-white border-left-0 border-md" required>
                         </div>
       
                         <!-- Password -->
@@ -103,14 +107,14 @@ select.form-control {
                                     <i class="fa fa-lock text-muted"></i>
                                 </span>
                             </div>
-                            <input id="password" type="password" name="password" placeholder="Password" class="form-control bg-white border-left-0 border-md">
+                            <input id="password" type="password" name="password" placeholder="Password" class="form-control bg-white border-left-0 border-md" required  autocomplete="off">
                         </div>
       
                         <!-- Submit Button -->
                         <div class="form-group col-lg-12 mx-auto mb-0">
-                            <a href="#" class="btn btn-primary btn-block py-2">
+                            <button type="submit" class="btn btn-primary btn-block py-2" id="btn-login">
                                 <span class="font-weight-bold">Login</span>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -133,15 +137,3 @@ select.form-control {
 
 @include('footer')
 
-<script>
-  // For Demo Purpose [Changing input group text on focus]
-$(function () {
-  $('input, select').on('focus', function () {
-      $(this).parent().find('.input-group-text').css('border-color', '#80bdff');
-  });
-  $('input, select').on('blur', function () {
-      $(this).parent().find('.input-group-text').css('border-color', '#ced4da');
-  });
-});
-
-</script>

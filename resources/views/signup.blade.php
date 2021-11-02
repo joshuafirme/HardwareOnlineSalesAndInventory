@@ -100,32 +100,20 @@ select.form-control {
 
 
 <div class="container registration-container">
-  <div class="row py-5 mt-4 align-items-center mt-5">
+  <div class="row py-5 align-items-center">
       <!-- For Demo Purpose -->
-      <div class="col-md-5 pr-lg-5 mb-5 mb-md-0 mt-5">
-          <img src="https://bootstrapious.com/i/snippets/sn-registeration/illustration.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
-          <h1>Create an Account</h1>
+      <div class="col-md-5  mb-md-0 ml-sm-0 ml-lg-5">
+          <img src="{{asset('images/undraw_under_construction_-46-pa.svg')}}" alt="" class="img-fluid mb-3 d-none d-md-block">
       </div>
 
       <!-- Registeration Form -->
       <div class="col-md-7 col-lg-6 ml-auto">
+          
+        @include('includes.alerts')
+        <p class="login-card-description">Create your account</p>
           <form action="{{ route('createAccount') }}" method="POST" enctype="multipart/form-data">
             @csrf
               <div class="row">
-
-                @if(\Session::has('success'))
-                <div class="row">
-                    <div class="col-sm-12 col-md-8">
-                        <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h5><i class="icon fas fa-check"></i> </h5>
-                        {{ \Session::get('success') }}
-                    </div>
-                </div>
-                </div>
-        
-               
-                @endif
 
                   <!-- First Name -->
                   <div class="input-group col-lg-6 mb-4">
@@ -134,7 +122,7 @@ select.form-control {
                               <i class="fa fa-user text-muted"></i>
                           </span>
                       </div>
-                      <input id="firstName" type="text" name="firstname" placeholder="First Name" class="form-control bg-white border-left-0 border-md">
+                      <input id="firstName" type="text" name="firstname" placeholder="First Name" class="form-control bg-white border-left-0 border-md" required>
                   </div>
 
                   <!-- Last Name -->
@@ -144,7 +132,7 @@ select.form-control {
                               <i class="fa fa-user text-muted"></i>
                           </span>
                       </div>
-                      <input id="lastName" type="text" name="lastname" placeholder="Last Name" class="form-control bg-white border-left-0 border-md">
+                      <input id="lastName" type="text" name="lastname" placeholder="Last Name" class="form-control bg-white border-left-0 border-md" required>
                   </div>
 
                     <!-- User Name -->
@@ -154,7 +142,7 @@ select.form-control {
                               <i class="fa fa-user text-muted"></i>
                           </span>
                       </div>
-                      <input id="username" type="text" name="username" placeholder="Username" class="form-control bg-white border-left-0 border-md">
+                      <input id="username" type="text" name="username" placeholder="Username" class="form-control bg-white border-left-0 border-md" required>
                   </div>
 
                   <!-- Email Address -->
@@ -164,7 +152,7 @@ select.form-control {
                               <i class="fa fa-envelope text-muted"></i>
                           </span>
                       </div>
-                      <input id="email" type="email" name="email" placeholder="Email Address" class="form-control bg-white border-left-0 border-md">
+                      <input id="email" type="email" name="email" placeholder="Email Address" class="form-control bg-white border-left-0 border-md" required>
                   </div>
 
                   <!-- Phone Number -->
@@ -201,7 +189,7 @@ select.form-control {
                               <i class="fa fa-lock text-muted"></i>
                           </span>
                       </div>
-                      <input id="password" type="password" name="password" placeholder="Password" class="form-control bg-white border-left-0 border-md">
+                      <input id="password" type="password" name="password" placeholder="Password" class="form-control bg-white border-left-0 border-md" autocomplete="new-password">
                   </div>
 
                   <!-- Password Confirmation -->

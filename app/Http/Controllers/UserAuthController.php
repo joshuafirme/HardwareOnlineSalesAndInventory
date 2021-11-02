@@ -10,14 +10,32 @@ use App\Models\User;
 class UserAuthController extends Controller
 {
     public function index() {
+        if (Auth::check()) {
+            $access_level = Auth::user()->access_level;
+            // 5 = customer
+            if (in_array($access_level, array( 5 )))
+                 return redirect()->intended('/');  
+            else if (in_array($access_level, array( 3, 4 )))
+                return redirect()->intended('/reports/sales');  
+            else if (in_array($access_level, array( 1 )))
+                return redirect()->intended('/cashiering');  
+            else if (in_array($access_level, array( 2 )))
+                return redirect()->intended('/stock-adjustment'); 
+        }
         return view('admin.login');
     }
 
     public function customer_index() {
+        if (Auth::check()) {
+            return redirect()->intended('/');  
+        }
         return view('login');
     }
 
     public function signup_view() {
+        if (Auth::check()) {
+            return redirect()->intended('/');  
+        }
         return view('signup');
     }
 
@@ -25,8 +43,10 @@ class UserAuthController extends Controller
         if (Auth::attempt(['username' => $data['username'], 'password' => $data['password']])) 
         {
             $access_level = Auth::user()->access_level;
-
-            if (in_array($access_level, array( 3, 4 )))
+            // 5 = customer
+            if (in_array($access_level, array( 5 )))
+                 return redirect()->intended('/');  
+            else if (in_array($access_level, array( 3, 4 )))
                 return redirect()->intended('/reports/sales');  
             else if (in_array($access_level, array( 1 )))
                 return redirect()->intended('/cashiering');  
@@ -40,27 +60,72 @@ class UserAuthController extends Controller
     }
 
     public function createAccount(Request $data) {
-        
-        $user = new User;
-        $user->name = $data->input('firstname') ." ". $data->input('lastname');
-        $user->email = $data->input('email');
-        $user->access_level = 5;
-        $user->username = $data->input('username');
-        $user->password = \Hash::make($data->input('password'));
-        $user->identification_photo = $data->input('identification_photo');
-        $user->phone = $data->input('phone');
-        $user->status = 0;
-        $user->save();
+
+        $alert = 'success';
+        $message = 'You have successfully registered!';
+
+        if ($this->isEmailExists($data->input('email'))) {
+            $alert = 'danger';
+            $message = 'Email is already exists.';
+        }
+        else if ($this->isUsernameExists($data->input('username'))) {
+            $alert = 'danger';
+            $message = 'Username is already exists.';
+        }
+        else {
+            $user = new User;
+            $user->name = $data->input('firstname') ." ". $data->input('lastname');
+            $user->email = $data->input('email');
+            $user->access_level = 5;
+            $user->username = $data->input('username');
+            $user->password = \Hash::make($data->input('password'));
+
+            if ($data->hasFile('image')) {
+                $user->identification_photo = $this->imageUpload($data);
+            }
+
+            $user->phone = $data->input('phone');
+            $user->status = 0;
+            $user->save();
+        }
 
         return redirect()->back()
-            ->with('success', 'You have successfully registered!');
+            ->with($alert, $message);
     
+    }
+
+    public function isEmailExists($email)
+    {
+        $res = User::where('email', $email)->get();
+        return count($res) == 1 ? true : false;
+    }
+
+    public function isUsernameExists($username)
+    {
+        $res = User::where('username', $username)->get();
+        return count($res) == 1 ? true : false;
+    }
+
+    public function imageUpload($request) 
+    {
+        $folder_to_save = 'user-identification';
+        $image_name = uniqid() . "." . $request->identification_photo->extension();
+        $request->identification_photo->move(public_path('images/' . $folder_to_save), $image_name);
+        return $folder_to_save . "/" . $image_name;
     }
 
     public function logout()
     {
+        $access_level = Auth::user()->access_level;
+
         Auth::logout();
         Session::flush();
-        return redirect()->intended('/admin');
+
+        if ($access_level == 5) {
+            return redirect()->intended('/');
+        }
+        else {
+            return redirect()->intended('/admin');
+        }
     }
 }

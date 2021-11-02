@@ -44,6 +44,7 @@ Route::get('/customer/product/search', [HomePageController::class, 'searchProduc
 Route::get('/login', [UserAuthController::class, 'customer_index']);
 Route::get('/signup', [UserAuthController::class, 'signup_view']);
 Route::post('/create-account', [UserAuthController::class, 'createAccount'])->name('createAccount');
+Route::post('/do-login', [UserAuthController::class, 'login']);
 
 /**
  * Admin
