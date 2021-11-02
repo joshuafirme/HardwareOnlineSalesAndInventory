@@ -235,6 +235,11 @@ body {
       color: #06513D !important;
     }
 
+    .category-container {
+      background-color: #FFF;border-radius: 5px;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+
     .main-footer {
       background-color: #06513D !important;
       color: #FFF !important;

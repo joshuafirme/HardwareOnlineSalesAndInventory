@@ -16,7 +16,7 @@
         @if($page_title == "Val Construction Supply") 
         <div class="form-inline ml-0 ml-md-3 mr-3 form-search-product">
           <div class="input-group input-group-sm">
-            <input class="form-control form-control-navbar" id="input-search-product" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control form-control-navbar" id="input-search-product" type="search" placeholder="Search product..." aria-label="Search">
             <div class="input-group-append">
               <button class="btn btn-navbar btn-search-product">
                 <i class="fas fa-search"></i>
