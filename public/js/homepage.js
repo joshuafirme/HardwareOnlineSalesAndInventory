@@ -44,17 +44,29 @@ async function readAllProducts() {
 function getItems (data) {
     var html = "";
     html += '<div class="grid-item col-sm-6 col-md-4">';
-        html += '<div class="card">';
-        if (!data.image) {
-            data.image = "no-image.png";
-        }
-            html += '<a href="#"><img class="card-img-top cover" src="../images/'+ data.image +'" alt="product image"></a>';
-            html += '<div class="card-body">';
-                html += '<h5 class="card-title">'+ data.description +'</h5><br>';
-                html += '<p>₱ '+ formatNumber(data.selling_price) +'</p>';
-                html += '<button class="btn btn-sm btn-success">Add to cart</button>';
-            html +=' </div>';
-        html += '</div>';
+    html += '<div class="card">';
+    if (!data.image) {
+        data.image = "no-image.png";
+    }
+        html += '<div style="background-color:#C4BFC2;"><img class="card-img-top cover" src="../images/'+ data.image +'" alt="product image"></div>';
+        html += '<div class="card-body">';
+            var description = data.description.length > 60 ? data.description.substr(0, 50) + "..." : data.description;
+            html += '<div title=\"'+data.description+'"\ class="description">'+ description  +'</div>';
+            html += '<div class="d-flex">';
+            html += '<div class="card-text mr-2 mb-2 price-'+data.id+'">₱'+ formatNumber(data.selling_price) +'</div>';
+            var style = "";
+            if (data.qty == 0) {
+                style = 'style="color:red"';    
+            }
+            html += '<div class="card-text"> Stock: <span class="stock-'+data.id+'" '+style+'>'+data.qty+'</span></div>';
+            html += '</div>';
+            html += '<div class="d-flex">';
+            html += '<span>Qty</span><input class="qty-'+data.id+'" type="number" min="1" value="1" style="width:50px; margin-left:5px;">';
+            html += '<button class="btn btn-sm btn-success ml-2" data-id="'+data.id+'" data-product-code="'+data.product_code+'" id="btn-add-to-tray">';
+            html += 'Add to tray</button>';
+            html += '</div>';
+        html +=' </div>';
+    html += '</div>';
     html += '</div>'; 
     
     return html;

@@ -35,9 +35,10 @@
     <!-- Main content -->
     <div class="content" style="margin-top: -38px">
       <div class="container">
-        <div class="row" style="background-color: #C47A4A">
+        <div class="row banner" style="background-color: #06513D">
 
             <div class="col-md-12 col-lg-3 mt-5 p-3">
+                
                 <h4 class="text-light">Exclusive Sales</h4>
                 <h3 class="text-light">POWER TOOL AND
                     ACCESORIES
@@ -46,6 +47,15 @@
             <div class="col-md-12 col-lg-9">
                 <img class="cover"  src="{{asset('images/tool-g98333b673_1280.jpg')}}">
             </div>
+        </div>
+        <div class="category-container">
+          <div class="row pl-3 pr-3" style="background-color: #FFF">
+            @foreach ($categories as $item)
+              <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <a href="{{ url('/category/'.$item->id) }}" class="text-muted">{{ $item->name }}</a> 
+              </div>
+            @endforeach
+          </div>
         </div>
         
         <h2 class="text-center mt-4 text-dark">Best Selling Products</h2>

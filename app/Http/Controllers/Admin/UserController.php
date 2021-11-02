@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::where('status', 1)->paginate(5);
+        $user = User::whereIn('status', [1, 0])->paginate(10);
 
         return view('admin.utilities.user.index', compact('user'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -126,7 +126,7 @@ class UserController extends Controller
     {
         User::where('id', $id)
         ->update([
-            'status' => 0
+            'status' => -1
         ]);
 
         return redirect()->back()

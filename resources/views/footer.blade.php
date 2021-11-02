@@ -29,7 +29,10 @@
 
 <script src="{{asset('js/homepage.js')}}"></script>
 
-<script src="{{asset('js/login.js')}}"></script>
+@if(strpos($page_title,"Login") != "")
+  <script src="{{asset('js/login.js')}}"></script>
+@endif
+
 
 </body>
 </html>

@@ -34,10 +34,7 @@ $(function () {
                 btn_login.html('<i class="fas fa-spinner fa-spin"></i>');
             },
             success:function(){
-                setTimeout(function(result){
-                    
-        return false;
-                }, 1000);
+                return false;
             }
         });
     });

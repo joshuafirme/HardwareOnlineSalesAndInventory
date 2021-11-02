@@ -71,6 +71,7 @@
                                     <option value="2" {{ $user->access_level == 2 ? 'selected' : '' }}>Inventory Clerk</option>
                                     <option value="3" {{ $user->access_level == 3 ? 'selected' : '' }}>Owner</option>
                                     <option value="4" {{ $user->access_level == 4 ? 'selected' : '' }}>Administrator</option>
+                                    <option value="5" {{ $user->access_level == 5 ? 'selected' : '' }}>Customer</option>
                                 </select>
                               </div>
                 

@@ -231,4 +231,12 @@ body {
       color: #FFF !important;
     }
   
+    .category-container a:hover {
+      color: #06513D !important;
+    }
+
+    .main-footer {
+      background-color: #06513D !important;
+      color: #FFF !important;
+    }
   /*# sourceMappingURL=login.css.map */

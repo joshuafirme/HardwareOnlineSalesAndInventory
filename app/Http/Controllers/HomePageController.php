@@ -14,8 +14,8 @@ class HomePageController extends Controller
     {
         $product = new Product;
         $product = $product->readAllProduct();
-
-        return view('index', ['product' => $product]);
+        $categories = Category::all();
+        return view('index', compact('product', 'categories'));
     }
 
     public function readAllProduct()
@@ -30,4 +30,11 @@ class HomePageController extends Controller
         $product = new Product;
         return $product->seachProduct();
     }
+
+    public function readProductByCategory($category_id)
+    {
+        $product = new Product;
+        return $product->readProductByCategory($category_id);
+    }
 }
+
