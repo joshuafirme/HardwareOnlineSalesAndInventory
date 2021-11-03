@@ -17,7 +17,7 @@ async function readAllProducts() {
 
                 var html = "";
                 var enable_button = false;
-                    last_key = 3;
+                    last_key = 6;
                     
                     for (var i = 0; i < last_key; i++) {
                         if (typeof data_storage[i] != 'undefined') 
@@ -50,7 +50,7 @@ function readProductsByCategory(category_id) {
 
             var html = "";
             var enable_button = false;
-            last_key = 3;
+            last_key = 6;
                 
             if (data_storage.length > 0) {
                 for (var i = 0; i < last_key; i++) {
