@@ -81,7 +81,11 @@ class UserAuthController extends Controller
             $user->password = \Hash::make($data->input('password'));
 
             if ($data->hasFile('identification_photo')) {
-                $user->identification_photo = $this->imageUpload($data);
+                $user->identification_photo = $this->imageUpload($data, 'id_only');
+            }
+
+            if ($data->hasFile('selfie_with_identification_photo')) {
+                $user->selfie_with_identification_photo = $this->imageUpload($data, 'selfie_with_id');
             }
 
             $user->phone = $data->input('phone');
@@ -106,12 +110,20 @@ class UserAuthController extends Controller
         return count($res) == 1 ? true : false;
     }
 
-    public function imageUpload($request) 
+    public function imageUpload($request, $type) 
     {
         $folder_to_save = 'user-identification';
-        $image_name = uniqid() . "." . $request->identification_photo->extension();
-        $request->identification_photo->move(public_path('images/' . $folder_to_save), $image_name);
-        return $folder_to_save . "/" . $image_name;
+
+        if ($type == 'id_only') {
+            $image_name = uniqid() . "." . $request->identification_photo->extension();
+            $request->identification_photo->move(public_path('images/' . $folder_to_save), $image_name);
+            return $folder_to_save . "/" . $image_name;
+        }
+        else {
+            $image_name = uniqid() . "." . $request->selfie_with_identification_photo->extension();
+            $request->selfie_with_identification_photo->move(public_path('images/' . $folder_to_save), $image_name);
+            return $folder_to_save . "/" . $image_name;
+        }
     }
 
     public function logout()

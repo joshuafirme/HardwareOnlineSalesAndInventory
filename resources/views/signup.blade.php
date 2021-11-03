@@ -202,7 +202,6 @@ select.form-control {
                       <input id="passwordConfirmation" type="password" name="passwordConfirmation" placeholder="Confirm Password" class="form-control bg-white border-left-0 border-md">
                   </div>
 
-                     <!-- Password Confirmation -->
                   <div class="input-group col-lg-12 mb-4">
                     <div class="input-group-prepend">
                       <span class="input-group-text bg-white px-4 border-md border-right-0">
@@ -210,11 +209,24 @@ select.form-control {
                         </span>
                       </div>
                         <div class="custom-file"> 
-                          <input type="file" class="custom-file-input" name="identification_photo" id="identification_photo" required
+                          <input type="file" class="custom-file-input" name="identification_photo" required
                             aria-describedby="inputGroupFileAddon01">
                           <label class="custom-file-label" for="user-identification-photo">Upload your 1 valid ID for verification</label>
                         </div>
                       </div>
+
+                      <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text bg-white px-4 border-md border-right-0">
+                              <i class="fa fa-image text-muted"></i>
+                            </span>
+                          </div>
+                            <div class="custom-file"> 
+                              <input type="file" class="custom-file-input" name="selfie_with_identification_photo" required
+                                aria-describedby="inputGroupFileAddon01">
+                              <label class="custom-file-label" for="selfie_with_identification_photo">Upload a selfie with your 1 valid ID</label>
+                            </div>
+                          </div>
                 
 
                     <!-- Submit Button -->
