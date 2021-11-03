@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\SupplierDeliveryReportController;
 use App\Http\Controllers\Admin\ProductReturnController;
 use App\Http\Controllers\Admin\ProductReturnReportController;
 use App\Http\Controllers\Admin\ReorderListController;
+use App\Http\Controllers\Admin\VerifyCustomerController;
 use App\Http\Controllers\UserAuthController;
 
 /*
@@ -120,6 +121,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/reports/reorder', [ReorderListController::class, 'index']);
     Route::get('/reorder/preview/{supplier_id}', [ReorderListController::class, 'previewReport']);
     Route::get('/reorder/download/{supplier_id}', [ReorderListController::class, 'downloadReport']);
+
+    Route::get('/verify-customer', [VerifyCustomerController::class, 'index']);
 
   //  Route::middleware('access_level:2')->group(function () {
   //      Route::resource('users', UserController::class);
