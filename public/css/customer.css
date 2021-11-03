@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth !important;
+}
+
 body {
   font-family: "Karla", sans-serif;
   background-color: #d0d0ce;

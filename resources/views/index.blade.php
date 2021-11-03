@@ -53,7 +53,7 @@
           <div class="col-md-12 text-center">
                 <div class="text-muted text-bold">FOR RELIABLE AND QUICK DELIVERY, CHOOSE VAL CONSTRUCTION SUPPLY</div>
           </div>
-          <div class="col-sm-12 hidden-xs hidden-sm" id="a1b19e1a-55eb-4392-9325-9378f36a868d">
+          <div class="col-sm-12 hidden-xs hidden-sm" id="a1b19e1a">
             <div class="row text-center">
               <div class="col-md-4">
                 <img src="https://getmeds.ph/public/front/images/genuine-medicines.png" alt="Genuine Medicines">
@@ -75,7 +75,7 @@
         <div class="row pl-3 pr-3 pt-1 pb-1 category-container">
 
           @foreach ($categories as $item)
-            <a class="col-xs-6 col-sm-4 col-md-3 text-center" href="{{ url('/#a1b19e1a-55eb-4392-9325-9378f36a868d') }}">
+            <a class="col-xs-6 col-sm-4 col-md-3 text-center" href="{{ url('/#a1b19e1a') }}">
               <div class="text-bold text-muted category-name"  data-id="{{ $item->id }}" 
                 data-name="{{ $item->name }}" >
                 {{ $item->name }}</div> 
