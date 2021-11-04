@@ -123,6 +123,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/reorder/download/{supplier_id}', [ReorderListController::class, 'downloadReport']);
 
     Route::get('/verify-customer', [VerifyCustomerController::class, 'index']);
+    Route::get('/verified-customer', [VerifyCustomerController::class, 'readAllVerifiedCustomer']);
+    Route::post('/do-verify-customer/{user_id}', [VerifyCustomerController::class, 'verifyCustomer']);
 
   //  Route::middleware('access_level:2')->group(function () {
   //      Route::resource('users', UserController::class);

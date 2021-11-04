@@ -17,25 +17,60 @@ class VerifyCustomerController extends Controller
         { 
             return datatables()->of($data)
                 ->addColumn('action', function($data){
-                    $button = '<a class="btn btn-sm btn-view" data-id='. $data->id .'>
+                    $button = '<a class="btn btn-sm btn-full-view" data-id='. $data->id .' 
+                    data-image="/images/'.$data->identification_photo.'" data-selfie-image="/images/'.$data->selfie_with_identification_photo.'">
                     <i class="fa fa-eye"></i></a>';
                     return $button;
                 })
                 ->addColumn('status', function($data){
-                    $status = "Verified";
+                    $status = '<span class="badge badge-success">Verified</span>';
                     if ($data->status == 0) {
-                        $status = "Not verified";
+                        $status = '<span class="badge badge-danger">Unverified</span>';
                     }
                     return $status;
                 })
                 ->addColumn('created_at', function($data){
                     return $this->timeAgo($data->created_at);
                 })
-                ->rawColumns(['action', 'status'. 'created_at'])
+                ->addColumn('identification_photo', function($data){
+                    return '<img class="img-fluid" width="200"; heigth="200"; src="/images/'.$data->identification_photo.'">';
+                })
+                ->rawColumns(['action', 'status', 'created_at','identification_photo'])
                 ->make(true);
         }
 
         return view('admin.verify-customer.index');
+    }
+
+    public function readAllVerifiedCustomer() 
+    {
+        $data = User::where('status', 1)
+                    ->where('access_level', 5)->get();
+
+        if(request()->ajax())
+        { 
+            return datatables()->of($data)
+                ->addColumn('updated_at', function($data){
+                    return $this->timeAgo($data->updated_at);
+                })
+                ->addColumn('status', function($data){
+                    $status = '<span class="badge badge-success">Verified</span>';
+                    if ($data->status == 0) {
+                        $status = '<span class="badge badge-danger">Unverified</span>';
+                    }
+                    return $status;
+                })
+                ->addColumn('identification_photo', function($data){
+                    return '<img class="img-fluid" width="200"; heigth="200"; src="/images/'.$data->identification_photo.'">';
+                })
+                ->rawColumns(['status', 'created_at','identification_photo'])
+                ->make(true);
+        }
+
+    }
+
+    public function verifyCustomer($user_id) {
+        User::where('id', $user_id)->update(['status' => 1]);
     }
 
     function timeAgo($datetime, $full = false) {
