@@ -42,7 +42,7 @@ Route::get('/', [HomePageController::class, 'index']);
 Route::get('/customer/product', [HomePageController::class, 'readAllProduct']);
 Route::get('/customer/product/search', [HomePageController::class, 'searchProduct']);
 
-Route::get('/category/{category_id}', [HomePageController::class, 'readProductByCategory']);
+Route::get('/home/category/{category_id}', [HomePageController::class, 'readProductByCategory']);
 
 Route::get('/login', [UserAuthController::class, 'customer_index']);
 Route::get('/signup', [UserAuthController::class, 'signup_view']);

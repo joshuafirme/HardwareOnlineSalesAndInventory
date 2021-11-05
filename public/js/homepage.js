@@ -43,7 +43,7 @@ async function readAllProducts() {
 
 function readProductsByCategory(category_id) {
     $.ajax({
-        url: '/category/'+category_id,
+        url: '/home/category/'+category_id,
         type: 'GET',
         success:function(data){
             data_storage = data;
