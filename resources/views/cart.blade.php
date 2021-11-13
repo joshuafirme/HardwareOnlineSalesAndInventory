@@ -66,7 +66,7 @@ select.form-control {
             <div class="col-md-8">
               <div class="card">
                 <div class="card-body">
-                    <h3>Cart</h3>
+                    <h3>Cart (<span class="cart-count"></span> items)</h3>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="items" id="cart-items">

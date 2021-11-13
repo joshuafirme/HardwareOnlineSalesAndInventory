@@ -13,7 +13,7 @@ function cartCount() {
         type: 'GET',
 
         success:async function(data){ 
-            $('#cart-count').text(data);
+            $('.cart-count').text(data);
         }
     });
 }
