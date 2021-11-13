@@ -19,10 +19,11 @@ function getItems (data) {
     html +=                 '</div>'
     html +=                 '<div class="col-md-3 quantity">'
     html +=                     '<label for="quantity">Quantity:</label>'
-    html +=                     '<input id="quantity" type="number" min="1" value="'+data.qty+'" class="form-control quantity-input">'
+    html +=                     '<input id="quantity" data-id='+data.id+' type="number" min="1" value="'+data.qty+'" class="form-control quantity-input">'
     html +=                 '</div>'
     html +=                 '<div class="col-md-4 price">'
-    html +=                     '<span>Amount: ₱'+data.amount+'</span>'
+    html +=                     '<span>Amount: ₱'+data.amount+'</span><br>'
+    html +=                     '<button class="btn btn-remove-item" data-id='+data.id+' style="cursor:pointer;"><i class="fa fa-trash mt-2"></i></button>'
     html +=                 '</div>'
     html +=             '</div>'
     html +=         '</div>'
@@ -66,6 +67,28 @@ async function cartTotal() {
     });
 }
 
+$(document).on('click', '.btn-remove-item', async function(){ 
+    var $this = $(this);
+    var id = $(this).attr('data-id');
+    $.ajax({
+        url: '/cart/remove-item/'+id,
+        type: 'POST',
+        
+        beforeSend:function(){
+            $this.html('<i class="fa fa-spinner fa-pulse"></i>');
+        },
+        success:async function(data){ 
+            $this.closest('.product').fadeOut();
+            cartCount();
+            await cartTotal();
+            $.toast({
+                heading:'Item was removed from cart. ',
+                showHideTransition: 'plain',
+                hideAfter: 4500, 
+            });
+        }
+    });
+});
 
  
 async function renderConponents() {

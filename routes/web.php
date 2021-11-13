@@ -54,6 +54,7 @@ Route::get('/cart/read-items', [CartController::class, 'readCart']);
 Route::get('/cart-count', [CartController::class, 'cartCount']);
 Route::post('/add-to-cart', [CartController::class, 'addToCart']);
 Route::get('/cart-total', [CartController::class, 'cartTotal']);
+Route::post('/cart/remove-item/{id}', [CartController::class, 'removeItem']);
 /**
  * Admin
  */

@@ -19,6 +19,7 @@ class CartController extends Controller
     {
         return Cart::where('user_id', Auth::id())
         ->select("cart.*", 'P.*',
+                'cart.id',
                 'description',
                 'selling_price', 
                 'cart.qty', 
@@ -98,5 +99,22 @@ class CartController extends Controller
 
     public function cartTotal(){
         return Cart::where('user_id', Auth::id())->sum('amount');
+    }
+
+    public function removeItem($id){
+
+        $cart = Cart::where('id', $id);
+        if ($cart->delete()) {
+            return response()->json([
+                'status' =>  'success',
+                'message' => 'remove success'
+            ], 200);
+        }
+        
+        return response()->json([
+            'status' =>  'not_auth',
+            'message' => 'fail',
+            'message' => 'remove fail'
+        ], 200);
     }
 }
