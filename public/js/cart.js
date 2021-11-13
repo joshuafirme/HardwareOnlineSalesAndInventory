@@ -40,17 +40,16 @@ async function readCart() {
         url: '/cart/read-items',
         type: 'GET',
         success:function(data){
-            setTimeout(function() { console.log(data) 
 
-                var html = "";
-                for (var i = 0; i < data.length; i++) {
-                    if (typeof data[i] != 'undefined') 
-                    html += getItems(data[i]);
-                }
-                
                 $('.lds-default').css('display', 'none');
-                $('#cart-items').append(html);
-            },300)
+                $.each(data,function(i,v){
+                    var html = "";
+                    setTimeout(function() {
+                        html += getItems(data[i]);
+                        $('#cart-items').append(html);
+                    },(i)*300)
+                })
+                
 
         }
     });
