@@ -117,4 +117,28 @@ class CartController extends Controller
             'message' => 'remove fail'
         ], 200);
     }
+
+    public function changeQuantity(){
+
+        $input = Input::all();
+        $id = $input['id'];
+        $qty = $input['qty'];
+        $amount = $input['amount'];
+
+        if ($qty != 0 || $qty != null) {
+            Cart::where('id', $id)
+            ->update([
+                'amount' => $amount,
+                'qty' => $qty
+            ]);
+        }else {
+            Cart::where('id', $id)
+            ->delete();
+        }
+            
+        return response()->json([
+            'status' =>  'success',
+            'data' => $input
+        ], 200);
+    }
 }

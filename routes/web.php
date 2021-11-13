@@ -49,12 +49,6 @@ Route::get('/login', [UserAuthController::class, 'customer_index']);
 Route::get('/signup', [UserAuthController::class, 'signup_view']);
 Route::post('/create-account', [UserAuthController::class, 'createAccount'])->name('createAccount');
 Route::post('/do-login', [UserAuthController::class, 'login'])->name('login');
-Route::get('/cart', [CartController::class, 'index']);
-Route::get('/cart/read-items', [CartController::class, 'readCart']);
-Route::get('/cart-count', [CartController::class, 'cartCount']);
-Route::post('/add-to-cart', [CartController::class, 'addToCart']);
-Route::get('/cart-total', [CartController::class, 'cartTotal']);
-Route::post('/cart/remove-item/{id}', [CartController::class, 'removeItem']);
 /**
  * Admin
  */
@@ -63,6 +57,16 @@ Route::get('/admin', [UserAuthController::class, 'index']);
 Route::get('/admin/logout', [UserAuthController::class, 'logout']);
 
 Route::middleware('auth')->group(function () {
+
+  
+    Route::get('/cart', [CartController::class, 'index']);
+    Route::get('/cart/read-items', [CartController::class, 'readCart']);
+    Route::get('/cart-count', [CartController::class, 'cartCount']);
+    Route::post('/add-to-cart', [CartController::class, 'addToCart']);
+    Route::get('/cart-total', [CartController::class, 'cartTotal']);
+    Route::post('/cart/remove-item/{id}', [CartController::class, 'removeItem']);
+    Route::post('/cart/change-qty', [CartController::class, 'changeQuantity']);
+
     Route::resource('/admin/dashboard', UserController::class);
     Route::resource('users', UserController::class);
     Route::resource('supplier', SupplierController::class);
