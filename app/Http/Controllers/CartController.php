@@ -125,7 +125,7 @@ class CartController extends Controller
         $qty = $input['qty'];
         $amount = $input['amount'];
 
-        if ($qty != 0 || $qty != null) {
+        if ($qty > 0 || $qty != null) {
             Cart::where('id', $id)
             ->update([
                 'amount' => $amount,

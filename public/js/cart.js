@@ -18,7 +18,7 @@ function getItems (data) {
     html +=                     '</div>'
     html +=                 '</div>'
     html +=                 '<div class="col-md-3 quantity">'
-    html +=                     '<label for="quantity">Quantity:</label>'
+    html +=                     '<label for="quantity">Qty</label>'
     html +=                     '<input data-id='+data.id+' data-price="'+data.selling_price+'" type="number" min="1" value="'+data.qty+'" class="form-control quantity-input">'
     html +=                 '</div>'
     html +=                 '<div class="col-md-4 price">'
@@ -70,24 +70,7 @@ async function cartTotal() {
 $(document).on('click', '.btn-remove-item', async function(){ 
     var $this = $(this);
     var id = $(this).attr('data-id');
-    $.ajax({
-        url: '/cart/remove-item/'+id,
-        type: 'POST',
-        
-        beforeSend:function(){
-            $this.html('<i class="fa fa-spinner fa-pulse"></i>');
-        },
-        success:async function(data){ 
-            $this.closest('.product').fadeOut();
-            cartCount();
-            await cartTotal();
-            $.toast({
-                heading:'Item was removed from cart. ',
-                showHideTransition: 'plain',
-                hideAfter: 4500, 
-            });
-        }
-    });
+    removeFromCart(id, $this)
 });
 
 $(document).on('change', '.quantity-input', async function(){
@@ -114,18 +97,39 @@ $(document).on('change', '.quantity-input', async function(){
                 });
             }
             else {
-                if (qty == 0) {
-                    cartCount();
-                }
-                else {
+                if (qty > 0) { 
                     await cartTotal();
                     $('.amount-'+id).text(amount.toFixed(2));
+                }
+                else {
+                    cartCount();
+                    removeFromCart(id, $this);
                 } 
             }
         }
     });
 });
 
+function removeFromCart(id, $this = "") {
+    $.ajax({
+        url: '/cart/remove-item/'+id,
+        type: 'POST',
+        
+        beforeSend:function(){
+            $this.html('<i class="fa fa-spinner fa-pulse"></i>');
+        },
+        success:async function(data){ 
+            $this.closest('.product').fadeOut();
+            cartCount();
+            await cartTotal();
+            $.toast({
+                heading:'Item was removed from cart. ',
+                showHideTransition: 'plain',
+                hideAfter: 4500, 
+            });
+        }
+    });
+}
  
 async function renderConponents() {
     await readCart();
