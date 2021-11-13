@@ -10,7 +10,7 @@ function getItems (data) {
     html +=             '<div class="row">'
     html +=                 '<div class="col-md-5 product-name">'
     html +=                     '<div class="product-name">'
-    html +=                         '<a href="#">'+data.description+'</a>'
+    html +=                         '<a>'+data.description+'</a>'
     html +=                         '<div class="product-info">'
     html +=                             '<div>Price: <span class="value">₱'+data.selling_price+'</span></div>'
     html +=                             '<div>Unit: <span class="value">'+data.unit+'</span></div>'
