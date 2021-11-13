@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\ProductReturnReportController;
 use App\Http\Controllers\Admin\ReorderListController;
 use App\Http\Controllers\Admin\VerifyCustomerController;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,13 +48,17 @@ Route::get('/home/category/{category_id}', [HomePageController::class, 'readProd
 Route::get('/login', [UserAuthController::class, 'customer_index']);
 Route::get('/signup', [UserAuthController::class, 'signup_view']);
 Route::post('/create-account', [UserAuthController::class, 'createAccount'])->name('createAccount');
-Route::post('/do-login', [UserAuthController::class, 'login']);
-
+Route::post('/do-login', [UserAuthController::class, 'login'])->name('login');
+Route::get('/cart', [CartController::class, 'index']);
+Route::get('/cart/read-items', [CartController::class, 'readCart']);
+Route::get('/cart-count', [CartController::class, 'cartCount']);
+Route::post('/add-to-cart', [CartController::class, 'addToCart']);
+Route::get('/cart-total', [CartController::class, 'cartTotal']);
 /**
  * Admin
  */
 Route::get('/admin', [UserAuthController::class, 'index']);
-Route::post('/admin/login', [UserAuthController::class, 'login'])->name('login');
+//Route::post('/admin/login', [UserAuthController::class, 'login'])->name('login');
 Route::get('/admin/logout', [UserAuthController::class, 'logout']);
 
 Route::middleware('auth')->group(function () {

@@ -86,7 +86,7 @@ select.form-control {
                   @include('includes.alerts')
 
                   <p class="login-card-description">Sign into your account</p>
-                  <form method="POST" action="/do-login" id="login-form">
+                  <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="row">
       
@@ -112,7 +112,7 @@ select.form-control {
       
                         <!-- Submit Button -->
                         <div class="form-group col-lg-12 mx-auto mb-0">
-                            <button type="submit" class="btn btn-primary btn-block py-2" id="btn-login">
+                            <button type="submit" class="btn btn-primary btn-block py-2">
                                 <span class="font-weight-bold">Login</span>
                             </button>
                         </div>

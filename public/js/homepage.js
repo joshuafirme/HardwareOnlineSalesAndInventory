@@ -1,8 +1,4 @@
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-}); 
+
 
 var data_storage;
 var last_key = 0;
@@ -101,8 +97,8 @@ function getItems (data) {
             html += '</div>';
             html += '<div class="d-flex">';
             html += '<span>Qty</span><input class="qty-'+data.id+'" type="number" min="1" value="1" style="width:50px; margin-left:5px;">';
-            html += '<button class="btn btn-sm btn-success ml-2" data-id="'+data.id+'" data-product-code="'+data.product_code+'" id="btn-add-to-tray">';
-            html += 'Add to tray</button>';
+            html += '<button class="btn btn-sm btn-success ml-2 btn-add-to-cart" data-id="'+data.id+'" data-product-code="'+data.product_code+'">';
+            html += 'Add to cart</button>';
             html += '</div>';
         html +=' </div>';
     html += '</div>';
@@ -111,7 +107,49 @@ function getItems (data) {
     return html;
 }
 
+
 async function onClick () {
+
+    $(document).on('click', '.btn-add-to-cart', async function(){
+        var $this = $(this);
+        var product_code = $(this).attr('data-product-code');
+        var id           = $(this).attr('data-id');
+        var qty          = $('.qty-'+id).val();
+        var price        = $('.price-'+id).text().slice(1).replace(",", ""); 
+        var amount       = parseInt(qty) * parseFloat(price);
+        $.ajax({
+            url: '/add-to-cart',
+            type: 'POST',
+            data: {
+                product_code : product_code,
+                qty : qty,
+                amount : amount
+            },
+            
+            beforeSend:function(){
+                $this.html('<i class="fas fa-spinner fa-pulse"></i>');
+            },
+            success:async function(data){
+                $this.html('Add to cart');
+
+                if (data.status == 'not_auth') {
+                    $.toast({
+                        heading:'Please login first. ',
+                        showHideTransition: 'plain',
+                        hideAfter: 6000, 
+                    });
+                }
+                else {
+                    cartCount();
+                    $.toast({
+                        heading:'Item was successfully added to cart! ',
+                        showHideTransition: 'plain',
+                        hideAfter: 4000, 
+                    });
+                }
+            }
+        });
+    });
 
     
     $(document).on('click', '.category-name', function(){

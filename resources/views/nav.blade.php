@@ -51,9 +51,9 @@
           
           
         <li class="nav-item">
-          <a href="{{ url('/') }}" class="nav-link">
+          <a href="{{ url('/cart') }}" class="nav-link">
             <i class="fas fa-shopping-cart" style="color: #06513D;"></i>
-            <span class="badge badge-warning navbar-badge">0</span>
+            <span class="badge badge-warning navbar-badge" id="cart-count">0</span>
           </a>
         </li>
 
