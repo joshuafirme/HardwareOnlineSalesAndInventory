@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\ReorderListController;
 use App\Http\Controllers\Admin\VerifyCustomerController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,7 +59,8 @@ Route::get('/admin/logout', [UserAuthController::class, 'logout']);
 
 Route::middleware('auth')->group(function () {
 
-  
+    Route::resource('/account', AccountController::class);
+    Route::get('/edit-account', [AccountController::class, 'editAccount']);
     Route::get('/cart', [CartController::class, 'index']);
     Route::get('/cart/read-items', [CartController::class, 'readCart']);
     Route::get('/cart-count', [CartController::class, 'cartCount']);
