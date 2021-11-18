@@ -25,6 +25,8 @@ use App\Http\Controllers\Admin\VerifyCustomerController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\PayMongoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,7 +60,6 @@ Route::get('/admin', [UserAuthController::class, 'index']);
 Route::get('/admin/logout', [UserAuthController::class, 'logout']);
 
 Route::middleware('auth')->group(function () {
-
     Route::resource('/account', AccountController::class);
     Route::get('/edit-account', [AccountController::class, 'editAccount']);
     Route::get('/cart', [CartController::class, 'index']);
@@ -68,6 +69,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart-total', [CartController::class, 'cartTotal']);
     Route::post('/cart/remove-item/{id}', [CartController::class, 'removeItem']);
     Route::post('/cart/change-qty', [CartController::class, 'changeQuantity']);
+    Route::resource('/checkout', CheckoutController::class);
+    Route::post('/place-order', [CheckoutController::class,'placeOrder'])->name('placeOrder');
+    Route::get('/create-source', [PayMongoController::class, 'createSource'])->name('createSource');
+    Route::get('/create-payment', [PayMongoController::class, 'createPayment'])->name('createPayment');
+    
 
     Route::resource('/admin/dashboard', UserController::class);
     Route::resource('users', UserController::class);

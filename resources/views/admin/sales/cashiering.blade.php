@@ -6,6 +6,12 @@
     $page_title = "VCS | Cashiering";
 @endphp
 
+<style>
+    table,#product-container{
+        font-size:19px;
+    }
+</style>
+
 <div class="content-header"></div>
 
 <div class="page-header">

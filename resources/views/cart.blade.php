@@ -63,7 +63,7 @@ select.form-control {
   <main class="d-flex align-items-center py-3 py-md-0">
       <div class="container shopping-cart">
         <div class="row mt-5">
-            <div class="col-md-8">
+            <div class="col-md-12">
               <div class="card">
                 <div class="card-body">
                     <h3>Cart (<span class="cart-count"></span> items)</h3>
@@ -71,25 +71,21 @@ select.form-control {
                         <div class="col-md-12">
                             <div class="items" id="cart-items">
                             </div>
+                            <div class="loader-container">
+                              <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                          </div>
                         </div>
+                        <div class="col-md-12">
+                        
+                        <div class="summary">
+                            <div class="summary-item"><span style="font-size: 20px" class="text">Total amount </span><span style="font-size: 20px" id="total"></span></div>
+                            <a href="{{ route('checkout.index') }}" class="btn btn-primary btn-lg btn-block mt-2">Checkout</a>
+                        </div>
+                      </div>
                     </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-                <div class="card">
-                  <div class="card-body">
-                
-                    <div class="summary">
-                        <h3>Summary</h3>
-                        <div class="summary-item"><span class="text">Subtotal</span><span class="price" id="subtotal"></span></div>
-                        <div class="summary-item"><span class="text">Shipping</span><span class="price" id="shipping-fee">₱0</span></div>
-                        <div class="summary-item"><span class="text">Total</span><span class="price" id="total"></span></div>
-                        <button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
           </div>
       </div>
     </main>

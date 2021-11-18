@@ -14,8 +14,12 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
+        "luigel/laravel-paymongo": "^1.5",
+        "nyholm/psr7": "^1.4",
+        "symfony/psr-http-message-bridge": "^2.1",
         "yajra/laravel-datatables": "^1.5",
-        "yajra/laravel-datatables-oracle": "~9.0"
+        "yajra/laravel-datatables-oracle": "~9.0",
+        "zendframework/zend-diactoros": "^2.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
