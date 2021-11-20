@@ -22,7 +22,7 @@ class Cart extends Model
     ];
 
     public function readCart(){
-        Cart::where('user_id', Auth::id())
+        return Cart::where('user_id', Auth::id())
         ->select("cart.*", 'P.*',
                 'cart.id',
                 'description',

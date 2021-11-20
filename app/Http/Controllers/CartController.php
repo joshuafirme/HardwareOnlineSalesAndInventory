@@ -15,21 +15,9 @@ class CartController extends Controller
         return view('cart');
     }
 
-    public function readCart()
-    {
-        return Cart::where('user_id', Auth::id())
-        ->select("cart.*", 'P.*',
-                'cart.id',
-                'description',
-                'selling_price', 
-                'cart.qty', 
-                'U.name as unit', 
-                'C.name as category'
-                )
-        ->leftJoin('product as P', DB::raw('CONCAT(P.prefix, P.id)'), '=', 'cart.product_code')
-        ->leftJoin('category as C', 'C.id', '=', 'P.category_id')
-        ->leftJoin('unit as U', 'U.id', '=', 'P.unit_id')
-        ->get();
+    public function readCart(Cart $cart)
+    { 
+        return $cart->readCart();
     }
 
     public function addToCart()
