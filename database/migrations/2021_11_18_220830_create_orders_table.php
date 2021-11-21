@@ -19,7 +19,8 @@ class CreateOrdersTable extends Migration
             $table->string('order_no');
             $table->integer('qty');
             $table->decimal('amount');
-            $table->decimal('payment_method');
+            $table->string('payment_method');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }

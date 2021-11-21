@@ -17,7 +17,7 @@ $(function () {
         $(this).parent().find('.input-group-text').css('border-color', '#ced4da');
     });
   
-    document.querySelector("#login-form").addEventListener("submit", function(e){
+  /*  document.querySelector("#login-form").addEventListener("submit", function(e){
         var btn_login  = $('#btn-login');
         var username   = $('#username').val();
         var password   = $('#password').val();
@@ -38,6 +38,6 @@ $(function () {
             }
         });
     });
-
+    */
     CSRF_TOKEN();
   });

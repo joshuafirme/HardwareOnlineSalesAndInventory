@@ -71,6 +71,7 @@ $(document).on('click', '.btn-remove-item', async function(){
     var id = $(this).attr('data-id');
     removeFromCart(id, $this)
 });
+
 $(document).on('click', '#btn-place-order', async function(){ 
     var $this = $(this);
     $.ajax({
@@ -93,11 +94,6 @@ $(document).on('click', '#btn-place-order', async function(){
             }
             else {
                 cartCount();
-                $.toast({
-                    heading:'Item was successfully added to cart! ',
-                    showHideTransition: 'plain',
-                    hideAfter: 4000, 
-                });
             }
         }
     });

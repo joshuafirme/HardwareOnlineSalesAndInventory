@@ -39,13 +39,24 @@ $page_title =  "Val Construction Supply | Cart";
             <div class="col-md-12">
                 <div class="card">
                   <div class="card-body">
-                    <div class="summary">
-                        <h3>Summary</h3>
+                    <div class="summary p-2">
+                        <h3>Checkout</h3>
                         <div class="summary-item"><span class="text">Subtotal</span><span class="price" id="subtotal"></span></div>
                         <div class="summary-item"><span class="text">Shipping</span><span class="price" id="shipping-fee">₱0</span></div>
                         <div class="summary-item"><span class="text">Total</span><span class="price" id="total"></span></div>
-                        <button id="btn-place-order" class="btn btn-primary btn-lg btn-block">Place order</button>
+                        <label class=" mt-3">Payment method</label>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio">Cash on Delivery
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio">Gcash
+                          </label>
+                        </div>
                     </div>
+                    <a id="btn-place-order" class="btn btn-primary btn-sm mt-3">Place order</a>
                   </div>
                 </div>
               </div>
