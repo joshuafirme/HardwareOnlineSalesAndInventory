@@ -4,18 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserAddress;
 use Auth;
 
 class AccountController extends Controller
 {
     public function index() {
         $user = User::where('id', Auth::id())->first();
-        return view('account', compact('user'));
+        $address = UserAddress::where('user_id', Auth::id())->first();
+        return view('account', compact('user', 'address'));
     }
 
     public function editAccount() {
         $user = User::where('id', Auth::id())->first();
-        return view('edit-account', compact('user'));
+        $address = UserAddress::where('user_id', Auth::id())->first();
+        return view('edit-account', compact('user', 'address'));
     }
 
     public function update(Request $request, $id) {

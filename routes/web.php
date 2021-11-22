@@ -27,6 +27,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PayMongoController;
+use App\Http\Controllers\UserAddressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,7 @@ Route::get('/admin/logout', [UserAuthController::class, 'logout']);
 Route::middleware('auth')->group(function () {
     Route::resource('/account', AccountController::class);
     Route::get('/edit-account', [AccountController::class, 'editAccount']);
+    Route::resource('/address', UserAddressController::class);
     Route::get('/cart', [CartController::class, 'index']);
     Route::get('/cart/read-items', [CartController::class, 'readCart']);
     Route::get('/cart-count', [CartController::class, 'cartCount']);
@@ -75,7 +77,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/create-payment', [PayMongoController::class, 'createPayment'])->name('createPayment');
     
 
-  
+    Route::get('/get-brgy/{municipality}', [UserAddressController::class, 'getBrgyByMunicipality']);
 
     Route::middleware('access_level:1,2,3,4')->group(function () {
       Route::resource('/admin/dashboard', UserController::class);

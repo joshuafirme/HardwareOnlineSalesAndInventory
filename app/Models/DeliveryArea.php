@@ -24,4 +24,24 @@ class DeliveryArea extends Model
         'shipping_fee',
         'status'
     ];
+
+    public function getMunicipalityList(){
+
+        $json = @file_get_contents($this->getBrgyAPI());
+        $obj = $json === FALSE ? array() : json_decode($json, true);
+
+        return $obj['4A']['province_list']['BATANGAS']['municipality_list'];
+    }
+
+    public function getMunicipality(){
+        return $this::select('municipality')->distinct('municipality')->get();
+    }
+
+    public function getBrgy(){
+        return $this::select('brgy')->distinct('brgy')->get();
+    }
+
+    public function getBrgyByMunicipality($municipality){
+        return $this::select('brgy')->where('municipality', $municipality)->get();
+    }
 }

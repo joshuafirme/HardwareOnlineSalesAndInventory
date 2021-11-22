@@ -74,9 +74,18 @@ $(document).on('click', '.btn-remove-item', async function(){
 
 $(document).on('click', '#btn-place-order', async function(){ 
     var $this = $(this);
+    var payment_method = "GCash"
+    if ($('#opt-cod').is(':checked')) {
+        payment_method = "COD"
+    }
+
+  
     $.ajax({
         url: '/place-order',
         type: 'POST',
+        data: {
+            payment_method:payment_method
+        },
         
         beforeSend:function(){
             $this.html('<i class="fas fa-spinner fa-pulse"></i>');

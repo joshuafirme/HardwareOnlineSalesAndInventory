@@ -46,23 +46,26 @@ $page_title =  "Val Construction Supply | Cart";
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
                             <label class="col-form-label">Municipality</label><br>
-                            <div class="text-muted"></div>
+                            <div class="text-muted">{{ isset($address->municipality) ? $address->municipality : "" }}</div>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
                             <label class="col-form-label">Brgy</label><br>
-                            <div class="text-muted"></div>
+                            <div class="text-muted">{{ isset($address->brgy) ? $address->brgy : "" }}</div>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
                             <label class="col-form-label">Street</label><br>
-                            <div class="text-muted"></div>
+                            <div class="text-muted">{{ isset($address->street) ? $address->street : "" }}</div>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
                             <label class="col-form-label">Nearest landmark</label><br>
-                            <div class="text-muted"></div>
+                            <div class="text-muted">{{ isset($address->notes) ? $address->notes : "" }}</div>
                         </div>
                         <div class="col-sm-12 col-md-6 mt-4">
                             <label class="col-form-label">Map</label><br>
                             <div class="text-muted"></div>
+                        </div>
+                        <div class="col-sm-12 mt-4">
+                            <a href="{{ route('address.edit',Auth::id()) }}" class="btn btn-sm btn-primary">Update address</a>
                         </div>
                     </div>
                 </div>
