@@ -62,6 +62,7 @@ async function cartTotal() {
         success:function(data){
             $('#subtotal').text('₱'+data);
             $('#total').text('₱'+data);
+            $('#total-amount').val(data);
         }
     });
 }
@@ -70,6 +71,19 @@ $(document).on('click', '.btn-remove-item', async function(){
     var $this = $(this);
     var id = $(this).attr('data-id');
     removeFromCart(id, $this)
+});
+
+
+$(document).on('change', '[name=optpayment-method]', async function(){ 
+    var $this = $(this);
+    var total = $('#total-amount').val();
+    if ($this.val() == 'gcash'){
+        $('#btn-place-order').attr("href", "create-source?payment_method=gcash&total="+total);
+    }
+    else if ($this.val() == 'paymaya') {
+        $('#btn-place-order').attr("href", "create-payment-method?payment_method=paymaya&total="+total);
+    }
+    console.log($('#btn-place-order').attr('href'))
 });
 
 $(document).on('click', '#btn-place-order', async function(){ 

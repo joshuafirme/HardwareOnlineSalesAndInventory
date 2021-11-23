@@ -103,14 +103,8 @@ class DeliveryAreaController extends Controller
         //
     }
 
-    public function getMunicipalityList(){
-
-        $api = new DeliveryArea;
-
-        $json = @file_get_contents($api->getBrgyAPI());
-        $obj = $json === FALSE ? array() : json_decode($json, true);
-
-        return $obj['4A']['province_list']['BATANGAS']['municipality_list'];
+    public function getMunicipalityList(DeliveryArea $d){
+        return $d->getMunicipalityList();
      }
   
      public function getBrgyList($municipality_name){

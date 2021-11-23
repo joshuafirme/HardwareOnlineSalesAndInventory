@@ -47,16 +47,23 @@ $page_title =  "Val Construction Supply | Cart";
                         <label class=" mt-3">Payment method</label>
                         <div class="form-check">
                           <label class="form-check-label">
-                            <input type="radio" class="form-check-input" id="opt-cod" name="optpayment-method" checked>Cash on Delivery 
+                            <input type="radio" class="form-check-input" value="cod" id="opt-cod" name="optpayment-method" checked>Cash on Delivery 
                           </label>
                         </div>
                         <div class="form-check">
                           <label class="form-check-label">
-                            <input type="radio" class="form-check-input" id="opt-gcash" name="optpayment-method">Gcash
+                            <input type="radio" class="form-check-input" value="gcash" id="opt-gcash" name="optpayment-method">Gcash
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input type="radio" class="form-check-input" value="paymaya" id="opt-paymaya" name="optpayment-method">Paymaya
                           </label>
                         </div>
                     </div>
                     <a id="btn-place-order" class="btn btn-primary btn-sm mt-3">Place order</a>
+                    <input type="hidden" id="total-amount">
+                    <input type="hidden" id="payment-method">
                   </div>
                 </div>
               </div>

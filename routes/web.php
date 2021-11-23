@@ -73,9 +73,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/change-qty', [CartController::class, 'changeQuantity']);
     Route::resource('/checkout', CheckoutController::class);
     Route::post('/place-order', [CheckoutController::class,'placeOrder'])->name('placeOrder');
-    Route::get('/create-source', [PayMongoController::class, 'createSource'])->name('createSource');
-    Route::get('/create-payment', [PayMongoController::class, 'createPayment'])->name('createPayment');
-    
+    Route::get('/create-source', [CheckoutController::class, 'createSource'])->name('createSource');
+    Route::get('/create-payment', [CheckoutController::class, 'createPayment'])->name('createPayment');
+    Route::get('/create-payment-method', [CheckoutController::class,'createPaymayaPaymentMethod'])->name('createPaymayaPaymentMethod');
 
     Route::get('/get-brgy/{municipality}', [UserAddressController::class, 'getBrgyByMunicipality']);
 
