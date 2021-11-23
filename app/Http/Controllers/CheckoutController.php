@@ -56,6 +56,9 @@ class CheckoutController extends Controller
         }
     }
 
+    public function orderInfo() {
+        return view('payment-info');
+    }
 
     public function createSource(PayMongo $paymongo) {
         $amount = request()->total;
