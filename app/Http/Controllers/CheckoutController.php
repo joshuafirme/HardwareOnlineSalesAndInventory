@@ -44,7 +44,7 @@ class CheckoutController extends Controller
         $payment_method_id = $pm->data->id;
 
         if ($payment_method_id) {
-
+            session()->put('amount', $amount);
             $pi = $paymongo->createPaymayaPaymentIntent($amount);
             $payment_intent_id = $pi->data->id;
             
