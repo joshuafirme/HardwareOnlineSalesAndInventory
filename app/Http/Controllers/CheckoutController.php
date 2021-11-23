@@ -14,7 +14,7 @@ class CheckoutController extends Controller
         return view('checkout');
     }
 
-    public function placeOrder(Cart $cart, PayMongo $paymongo) {
+    public function placeOrder(Cart $cart) {
         $cart = $cart->readCart();
         $user_id = Auth::id();
         $order_no = $this->generateOrderNumber();
@@ -30,7 +30,7 @@ class CheckoutController extends Controller
                 ]);
                 $total = $total + $item->amount;
             }
-
+            Cart::truncate();
         }
     }
 

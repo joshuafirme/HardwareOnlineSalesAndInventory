@@ -102,6 +102,7 @@ $(document).on('click', '#btn-place-order', async function(){
         },
         
         beforeSend:function(){
+            $this.attr("disabled", true);
             $this.html('<i class="fas fa-spinner fa-pulse"></i>');
         },
 
