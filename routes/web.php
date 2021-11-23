@@ -76,7 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/create-source', [CheckoutController::class, 'createSource'])->name('createSource');
     Route::get('/create-payment', [CheckoutController::class, 'createPayment'])->name('createPayment');
     Route::get('/create-payment-method', [CheckoutController::class,'createPaymayaPaymentMethod'])->name('createPaymayaPaymentMethod');
-    Route::get('/order-info', [CheckoutController::class, 'orderInfo']);
+    Route::get('/order-info/{source_id}', [CheckoutController::class, 'orderInfo']);
 
     Route::get('/get-brgy/{municipality}', [UserAddressController::class, 'getBrgyByMunicipality']);
 

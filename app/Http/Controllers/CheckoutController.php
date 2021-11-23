@@ -56,8 +56,13 @@ class CheckoutController extends Controller
         }
     }
 
-    public function orderInfo() {
-        return view('payment-info');
+    public function orderInfo($source_id) {
+        if (session()->get('source_id') == $source_id) {
+            return view('payment-info');
+        }
+        else {
+            abort(404);
+        }
     }
 
     public function createSource(PayMongo $paymongo) {
