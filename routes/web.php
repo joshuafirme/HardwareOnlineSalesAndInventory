@@ -60,14 +60,16 @@ Route::get('/admin', [UserAuthController::class, 'index']);
 //Route::post('/admin/login', [UserAuthController::class, 'login'])->name('login');
 Route::get('/admin/logout', [UserAuthController::class, 'logout']);
 
+
+Route::get('/cart', [CartController::class, 'index']);
+Route::get('/cart/read-items', [CartController::class, 'readCart']);
+Route::get('/cart-count', [CartController::class, 'cartCount']);
+Route::post('/add-to-cart', [CartController::class, 'addToCart']);
+
 Route::middleware('auth')->group(function () {
     Route::resource('/account', AccountController::class);
     Route::get('/edit-account', [AccountController::class, 'editAccount']);
     Route::resource('/address', UserAddressController::class);
-    Route::get('/cart', [CartController::class, 'index']);
-    Route::get('/cart/read-items', [CartController::class, 'readCart']);
-    Route::get('/cart-count', [CartController::class, 'cartCount']);
-    Route::post('/add-to-cart', [CartController::class, 'addToCart']);
     Route::get('/cart-total', [CartController::class, 'cartTotal']);
     Route::post('/cart/remove-item/{id}', [CartController::class, 'removeItem']);
     Route::post('/cart/change-qty', [CartController::class, 'changeQuantity']);
