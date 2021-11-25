@@ -83,7 +83,7 @@
 
                               <div class="col-sm-12 col-md-6 new-password-container d-none">
                                 <label class="col-form-label">New password</label>
-                                <input type="password" class="form-control" name="password" id="password" required>
+                                <input type="password" class="form-control" name="password" id="password">
                               </div>
 
                               <div class="col-sm-12 mt-2 new-password-container d-none">
