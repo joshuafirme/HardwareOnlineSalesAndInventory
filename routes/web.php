@@ -80,7 +80,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/get-brgy/{municipality}', [UserAddressController::class, 'getBrgyByMunicipality']);
 
-    Route::middleware('access_level:1,2,3,4')->group(function () {
+    Route::middleware('access_level:1:2:3:4')->group(function () {
       Route::resource('/admin/dashboard', UserController::class);
       Route::resource('users', UserController::class);
       Route::resource('supplier', SupplierController::class);

@@ -17,7 +17,8 @@ class AccessLevel
      */
     public function handle(Request $request, Closure $next, $access_levels)
     {
-        $allowed_access_levels = explode(',', $access_levels);
+        $allowed_access_levels = explode(':', $access_levels);
+     
         if (in_array(Auth::user()->access_level, $allowed_access_levels)) {
             return $next($request);
         }
