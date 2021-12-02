@@ -97,6 +97,7 @@ $(document).on('change', '[name=optpayment-method]', async function(){
 $(document).on('click', '#btn-place-order', async function(){ 
     var $this = $(this);
     var payment_method = "GCash";
+    var total = $('#total-amount').val();
     if ($('#opt-paymaya').is(':checked')) {
         payment_method = "PayMaya"
     }
@@ -119,11 +120,10 @@ $(document).on('click', '#btn-place-order', async function(){
 
         success:async function(order_no){
             $this.html('Place order');
-
+            let message = 'Order recieved, please prepare your payment amounting of ₱'+total+' before the item arrived.'
             if (payment_method == 'COD') { 
-                window.location.href = '/order-info/'+order_no+'/'+payment_method+'?success=Order cod test';
+                window.location.href = '/order-info/'+order_no+'/'+payment_method+'?success='+message;
             }
-            cartCount();
         }
     });
 });
