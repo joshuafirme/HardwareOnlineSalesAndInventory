@@ -139,9 +139,18 @@ function validateAmount() { console.log($('#total-amount').val())
     }
 }
 
-async function renderConponents() {
+async function renderConponents() { 
     await readCart();
     await cartTotal();
+    validateAmount();
+    
+    if ($('#meta-delivery').attr('content').length > 0) {
+      
+    }
+    else {
+        $('#btn-place-order').addClass('d-none');
+        $('#invalid-amount-message').html('Please add your delivery address <a href="/account">here</a> before checkout.');
+    }
 }
                              
 renderConponents();

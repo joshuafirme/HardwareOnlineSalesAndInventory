@@ -14,8 +14,13 @@ class CheckoutController extends Controller
 {
     public function index() {
         $address = UserAddress::where('user_id', Auth::id())->first();
+        if (isset($address)) {
+            $charge = $this->getDeliveryCharge();
+        }
+        else {
+            $charge = 0.00;
+        }
         $subtotal = $this->cartTotal();
-        $charge = $this->getDeliveryCharge();
         return view('checkout', compact('charge', 'address', 'subtotal'));
     }
 

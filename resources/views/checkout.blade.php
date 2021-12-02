@@ -42,7 +42,12 @@ $page_title =  "Val Construction Supply | Cart";
                     <div class="summary p-2">
                         <h3>Checkout</h3>
                         <label>Delivery Address</label>
+                        <meta content="{{ $address }}" id="meta-delivery">
+                        @if (isset($address))
                         <p>{{ $address->municipality . " " . $address->brgy . " " . $address->street }}</p>
+                        @else
+                        <p>-</p>
+                        @endif
                         <div class="summary-item"><span class="text">Subtotal</span><span class="price">₱{{$subtotal}}</span></div>
                         <div class="summary-item"><span class="text">Shipping</span><span class="price">₱{{$charge}}</span></div>
                         @php
