@@ -106,6 +106,11 @@ $page_title =  "Val Construction Supply | Order Info";
               <div class="card">
                 <div class="card-body">
                     <div class="row">
+                      @php
+                      if (isset($_GET['success'])) {
+                          \Session::put('success', $_GET['success']);
+                      }
+                      @endphp
                         <div class="col-md-12">
                             @include('includes.alerts')
                         </div>

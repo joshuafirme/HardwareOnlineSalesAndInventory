@@ -75,9 +75,17 @@ $(document).on('click', '.btn-remove-item', async function(){
 
 
 $(document).on('change', '[name=optpayment-method]', async function(){ 
+
     var $this = $(this);
     var total = $('#total-amount').val();
-    if ($this.val() == 'gcash'){
+
+    validateAmount();   
+    
+    if ($this.val() == 'cod') {
+        $('#btn-place-order').removeClass('d-none');
+        $('#invalid-amount-message').addClass('d-none');
+    }
+    else if ($this.val() == 'gcash') {
         $('#btn-place-order').attr("href", "create-source?payment_method=gcash&total="+total);
     }
     else if ($this.val() == 'paymaya') {
@@ -88,7 +96,10 @@ $(document).on('change', '[name=optpayment-method]', async function(){
 
 $(document).on('click', '#btn-place-order', async function(){ 
     var $this = $(this);
-    var payment_method = "GCash"
+    var payment_method = "GCash";
+    if ($('#opt-paymaya').is(':checked')) {
+        payment_method = "PayMaya"
+    }
     if ($('#opt-cod').is(':checked')) {
         payment_method = "COD"
     }
@@ -106,22 +117,28 @@ $(document).on('click', '#btn-place-order', async function(){
             $this.html('<i class="fas fa-spinner fa-pulse"></i>');
         },
 
-        success:async function(data){
+        success:async function(order_no){
             $this.html('Place order');
 
-            if (data.status == 'not_auth') {
-                $.toast({
-                    heading:'Please login first. ',
-                    showHideTransition: 'plain',
-                    hideAfter: 6000, 
-                });
+            if (payment_method == 'COD') { 
+                window.location.href = '/order-info/'+order_no+'/'+payment_method+'?success=Order cod test';
             }
-            else {
-                cartCount();
-            }
+            cartCount();
         }
     });
 });
+
+function validateAmount() {
+    if ($('#total-amount').val() < 100) { console.log('disabled')
+        $('#btn-place-order').addClass('d-none');
+        $('#invalid-amount-message').removeClass('d-none');
+        $('#invalid-amount-message').text('GCash and PayMaya payments only accept amounts over 100 PHP');
+    }
+    else { 
+        $('#btn-place-order').removeClass('d-none');
+        $('#invalid-amount-message').addClass('d-none');
+    }
+}
 
 async function renderConponents() {
     await readCart();

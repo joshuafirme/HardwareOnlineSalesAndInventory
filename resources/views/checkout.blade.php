@@ -61,6 +61,7 @@ $page_title =  "Val Construction Supply | Cart";
                           </label>
                         </div>
                     </div>
+                    <small class="text-danger d-none" id="invalid-amount-message"></small><br>
                     <a id="btn-place-order" class="btn btn-primary btn-sm mt-3">Place order</a>
                     <input type="hidden" id="total-amount">
                     <input type="hidden" id="payment-method">

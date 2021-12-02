@@ -18,6 +18,7 @@ class CheckoutController extends Controller
         $cart = $cart->readCart();
         $user_id = Auth::id();
         $order_no = $this->generateOrderNumber();
+        $payment_method = request()->payment_method;
         if ($cart) {
             $total = 0;
             foreach ($cart as $item) {
@@ -31,6 +32,7 @@ class CheckoutController extends Controller
                 $total = $total + $item->amount;
             }
             Cart::truncate();
+            return $order_no;
         }
     }
 
@@ -56,12 +58,18 @@ class CheckoutController extends Controller
         }
     }
 
-    public function orderInfo($source_id) {
-        if (session()->get('source_id') == $source_id) {
-            return view('payment-info');
+    public function orderInfo($source_id, $payment_method) {
+        if ($payment_method == 'COD') {
+            return view('payment-info')->with('success', 'test cod');
         }
         else {
-            abort(404);
+            // get source id from session is temporary, use paymongo_payment table to save source id with order #.
+            if (session()->get('source_id') == $source_id) {
+                return view('payment-info');
+            }
+            else {
+                abort(404);
+            }
         }
     }
 
