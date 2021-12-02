@@ -103,7 +103,8 @@ class DeliveryAreaController extends Controller
         //
     }
 
-    public function getMunicipalityList(DeliveryArea $d){
+    public function getMunicipalityList(){
+        $d = new DeliveryArea;
         return $d->getMunicipalityList();
      }
   
