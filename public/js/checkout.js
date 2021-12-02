@@ -151,7 +151,7 @@ function validateAmount() { console.log($('#total-amount').val())
     else {
         $('#btn-place-order').addClass('d-none');
         $('#invalid-amount-message').removeClass('d-none')
-        $('#invalid-amount-message').html('Please add your delivery address <a href="/account">here</a> before checkout.');
+        $('#invalid-amount-message').html('Please add your delivery address <a target="_blank" href="/account">here</a> before checkout.');
     }
 }
 

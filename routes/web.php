@@ -27,6 +27,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PayMongoController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserAddressController;
 
 /*
@@ -79,6 +80,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/create-payment', [CheckoutController::class, 'createPayment'])->name('createPayment');
     Route::get('/create-payment-method', [CheckoutController::class,'createPaymayaPaymentMethod'])->name('createPaymayaPaymentMethod');
     Route::get('/order-info/{source_id}/{payment_method}', [CheckoutController::class, 'orderInfo']);
+
+    Route::get('/my-orders', [OrderController::class, 'index']);
 
     Route::get('/get-brgy/{municipality}', [UserAddressController::class, 'getBrgyByMunicipality']);
 

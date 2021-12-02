@@ -99,6 +99,9 @@
           <li class="nav-item">
             <a href="#" class="nav-link">About us</a>
           </li>
+          <li class="nav-item">
+            <a href="{{url('/my-orders')}}" class="nav-link">My Orders</a>
+          </li>
           @if (Auth::check())
             <li class="nav-item dropdown">
               <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{ Auth::user()->name }}</a>
