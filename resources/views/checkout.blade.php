@@ -41,9 +41,14 @@ $page_title =  "Val Construction Supply | Cart";
                   <div class="card-body">
                     <div class="summary p-2">
                         <h3>Checkout</h3>
-                        <div class="summary-item"><span class="text">Subtotal</span><span class="price" id="subtotal"></span></div>
-                        <div class="summary-item"><span class="text">Shipping</span><span class="price" id="shipping-fee">₱0</span></div>
-                        <div class="summary-item"><span class="text">Total</span><span class="price" id="total"></span></div>
+                        <label>Delivery Address</label>
+                        <p>{{ $address->municipality . " " . $address->brgy . " " . $address->street }}</p>
+                        <div class="summary-item"><span class="text">Subtotal</span><span class="price">₱{{$subtotal}}</span></div>
+                        <div class="summary-item"><span class="text">Shipping</span><span class="price">₱{{$charge}}</span></div>
+                        @php
+                            $total = $subtotal+$charge;
+                        @endphp
+                        <div class="summary-item"><span class="text">Total</span><span class="price">₱{{ number_format($total,2,".",",")}}</span></div>
                         <label class=" mt-3">Payment method</label>
                         <div class="form-check">
                           <label class="form-check-label">
@@ -63,7 +68,7 @@ $page_title =  "Val Construction Supply | Cart";
                     </div>
                     <small class="text-danger d-none" id="invalid-amount-message"></small><br>
                     <a id="btn-place-order" class="btn btn-primary btn-sm mt-3">Place order</a>
-                    <input type="hidden" id="total-amount">
+                    <input type="hidden" id="total-amount" value="{{ $total }}">
                     <input type="hidden" id="payment-method">
                   </div>
                 </div>

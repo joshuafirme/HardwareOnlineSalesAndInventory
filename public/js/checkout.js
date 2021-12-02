@@ -62,7 +62,6 @@ async function cartTotal() {
         success:function(data){
             $('#subtotal').text('₱'+data);
             $('#total').text('₱'+data);
-            $('#total-amount').val(data);
         }
     });
 }
@@ -128,7 +127,7 @@ $(document).on('click', '#btn-place-order', async function(){
     });
 });
 
-function validateAmount() {
+function validateAmount() { console.log($('#total-amount').val())
     if ($('#total-amount').val() < 100) { console.log('disabled')
         $('#btn-place-order').addClass('d-none');
         $('#invalid-amount-message').removeClass('d-none');

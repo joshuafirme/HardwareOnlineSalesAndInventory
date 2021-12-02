@@ -6,12 +6,31 @@ use Illuminate\Http\Request;
 use App\Models\PayMongo;
 use App\Models\Order;
 use App\Models\Cart;
+use App\Models\UserAddress;
+use App\Models\DeliveryArea;
 use Auth;
 
 class CheckoutController extends Controller
 {
     public function index() {
-        return view('checkout');
+        $address = UserAddress::where('user_id', Auth::id())->first();
+        $subtotal = $this->cartTotal();
+        $charge = $this->getDeliveryCharge();
+        return view('checkout', compact('charge', 'address', 'subtotal'));
+    }
+
+    public function cartTotal(){
+        return Cart::where('user_id', Auth::id())->sum('amount');
+    }
+
+    public function getDeliveryCharge() {
+
+        $address = UserAddress::where('user_id', Auth::id())->first();
+
+        $charge = DeliveryArea::where('municipality', $address->municipality)
+        ->where('brgy', $address->brgy)
+        ->value('shipping_fee');
+        return $charge;    
     }
 
     public function placeOrder(Cart $cart) {
