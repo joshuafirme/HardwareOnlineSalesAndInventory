@@ -43,6 +43,7 @@ $page_title =  "Val Construction Supply | Cart";
                         <h3>Checkout</h3>
                         <label>Delivery Address</label>
                         <meta content="{{ $address }}" id="meta-delivery">
+                        <meta id="subtotal-hidden" content="{{$subtotal}}">
                         @if (isset($address))
                         <p>{{ $address->municipality . " " . $address->brgy . " " . $address->street }}</p>
                         @else

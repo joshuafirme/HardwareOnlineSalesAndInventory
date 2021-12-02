@@ -77,8 +77,7 @@ $(document).on('change', '[name=optpayment-method]', async function(){
 
     var $this = $(this);
     var total = $('#total-amount').val();
-
-    validateAmount();   
+ 
     
     if ($this.val() == 'cod') {
         $('#btn-place-order').removeClass('d-none');
@@ -91,6 +90,8 @@ $(document).on('change', '[name=optpayment-method]', async function(){
         $('#btn-place-order').attr("href", "create-payment-method?payment_method=paymaya&total="+total);
     }
     console.log($('#btn-place-order').attr('href'))
+    
+    validateAmount();  
 });
 
 $(document).on('click', '#btn-place-order', async function(){ 
@@ -137,20 +138,28 @@ function validateAmount() { console.log($('#total-amount').val())
         $('#btn-place-order').removeClass('d-none');
         $('#invalid-amount-message').addClass('d-none');
     }
+
+    
+    if ($('#subtotal-hidden').attr('content')) {
+        $('#btn-place-order').addClass('d-none');
+    }
+    
+    if ($('#meta-delivery').attr('content').length > 0) {
+        $('#btn-place-order').removeClass('d-none');
+        $('#invalid-amount-message').addClass('d-none');
+    }
+    else {
+        $('#btn-place-order').addClass('d-none');
+        $('#invalid-amount-message').removeClass('d-none')
+        $('#invalid-amount-message').html('Please add your delivery address <a href="/account">here</a> before checkout.');
+    }
 }
 
 async function renderConponents() { 
     await readCart();
     await cartTotal();
     validateAmount();
-    
-    if ($('#meta-delivery').attr('content').length > 0) {
-      
-    }
-    else {
-        $('#btn-place-order').addClass('d-none');
-        $('#invalid-amount-message').html('Please add your delivery address <a href="/account">here</a> before checkout.');
-    }
+
 }
                              
 renderConponents();
