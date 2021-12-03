@@ -81,9 +81,11 @@ select.form-control {
                         @php
                             $total = DB::table('orders')->where('order_no', $item->order_no)->sum('amount')
                         @endphp
-
-                        <div>Total: ₱{{ number_format($total,2,".",",")}} </div> 
-                        <div>Payment Method: {{$item->payment_method}} 
+                        <div>Shipping fee: ₱{{ number_format($item->shipping_fee,2,".",",")}} </div> 
+                        <div>Subtotal: ₱{{ number_format($total,2,".",",")}} </div> 
+                        <div>Total: ₱{{ number_format($total+$item->shipping_fee,2,".",",")}} </div> 
+                        <div>Payment Method: {{$item->payment_method}} </div>
+                        <small>Date order: {{date('F d, Y', strtotime($item->created_at))}} </small>
                         @endif
 
                         <div class="row mt-3">

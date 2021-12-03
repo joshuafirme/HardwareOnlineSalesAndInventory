@@ -9,6 +9,7 @@ use App\Models\Cart;
 use App\Models\UserAddress;
 use App\Models\DeliveryArea;
 use Auth;
+use DB;
 
 class CheckoutController extends Controller
 {
@@ -42,6 +43,7 @@ class CheckoutController extends Controller
         $cart = $cart->readCart();
         $user_id = Auth::id();
         $order_no = $this->generateOrderNumber();
+        $shipping_fee = $this->getDeliveryCharge();
         $payment_method = request()->payment_method;
         if ($cart) {
             $total = 0;
@@ -57,6 +59,12 @@ class CheckoutController extends Controller
                 $total = $total + $item->amount;
             }
             Cart::truncate();
+
+            DB::table('order_shipping_fee')->insert([
+                'order_no' => $order_no,
+                'shipping_fee' => $shipping_fee
+            ]);
+
             return $order_no;
         }
     }
