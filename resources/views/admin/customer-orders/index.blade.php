@@ -1,9 +1,9 @@
-@extends('admin.verify-customer.layout')
+@extends('admin.customer-orders.layout')
 
 @section('content')
 
 @php
-    $page_title = "VCS | Verify Customer";
+    $page_title = "VCS | Customer Orders";
 @endphp
 
 <div class="content-header"></div>
@@ -39,69 +39,48 @@
                 <div class="card">
                   <div class="card-body">
 
+                    <ul class="nav nav-pills" id="myTab" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="true">Pending</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="prepared-tab" data-toggle="tab" href="#prepared" role="tab" aria-controls="prepared" aria-selected="false">Prepared</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="shipped-tab" data-toggle="tab" href="#shipped" role="tab" aria-controls="shipped" aria-selected="false">Shipped</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed" role="tab" aria-controls="completed" aria-selected="false">Completed</a>
+                      </li>
 
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-
-                        <li class="nav-item">
-                          <a class="nav-link  active" id="unverified-tab" data-toggle="tab" href="#reordertab" role="tab" aria-controls="contact" aria-selected="true">Unverified   
-        
-                          </a>
-                        </li>
-        
-                        <li class="nav-item">
-                          <a class="nav-link" id="verified-tab" data-toggle="tab" href="#orderstab" role="tab" aria-controls="contact" aria-selected="true">Verified   
-        
-                          </a>
-                        </li>
-         
-                      </ul>
-        
-                      <div class="tab-content mt-5" id="myTabContent">
-                        <div class="tab-pane fade active show" id="reordertab" role="tabpanel" aria-labelledby="unverified-tab">
-                          
-                          <table class="table table-hover tbl-unverified-users">
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+                        <div class="mt-4">
+                          <table class="table table-hover" id="tbl-pending-order">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Username</th>
+                                    <th>Order #</th>
+                                    <th>Customer Name</th>
                                     <th>Email</th>
                                     <th>Phone number</th>
-                                    <th>Status</th>
-                                    <th>Created at</th>
-                                    <th>Customer's ID</th>
+                                    <th>Date Order</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                         </table>
-                            
-                          </div>
-        
-                          <div class="tab-pane fade" id="orderstab" role="tabpanel" aria-labelledby="verified-tab">
-        
-        
-                              <div class="row mt-4 ml-1">
-        
-                                  <div class="col-12">        
-                                    <table class="table responsive  table-hover tbl-verified-users" width="100%">       
-                                      <thead>
-                                        <tr>
-                                          <th>Name</th>
-                                          <th>Username</th>
-                                          <th>Email</th>
-                                          <th>Phone number</th>
-                                          <th>Status</th>
-                                          <th>Verified since</th>
-                                          <th>Customer's ID</th>
-                                        </tr>
-                                    </thead>
-                                    
-                                    </table> 
-                                  </div>
-        
-                               </div>
-                              </div>
-        
                         </div>
+                      </div>
+                      <div class="tab-pane fade" id="prepared" role="tabpanel" aria-labelledby="prepared-tab">
+                        
+                      </div>
+                      <div class="tab-pane fade" id="shipped" role="tabpanel" aria-labelledby="shipped-tab">
+                        
+                      </div>
+                      <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+
+                      </div>
+                    </div>
         
                           </div>
                         </div>

@@ -41,6 +41,9 @@ async function readCart() {
         type: 'GET',
         success:function(data){
 
+                if ($('.cart-count:first').text() == 0) {
+                    $('#btn-place-order').addClass('d-none');
+                }
                 $('.lds-default').css('display', 'none');
                 $.each(data,function(i,v){
                     var html = "";

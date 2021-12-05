@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\ProductReturnController;
 use App\Http\Controllers\Admin\ProductReturnReportController;
 use App\Http\Controllers\Admin\ReorderListController;
 use App\Http\Controllers\Admin\VerifyCustomerController;
+use App\Http\Controllers\Admin\CustomerOrderController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AccountController;
@@ -29,7 +30,6 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PayMongoController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserAddressController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -154,6 +154,13 @@ Route::middleware('auth')->group(function () {
       Route::get('/verify-customer', [VerifyCustomerController::class, 'index']);
       Route::get('/verified-customer', [VerifyCustomerController::class, 'readAllVerifiedCustomer']);
       Route::post('/do-verify-customer/{user_id}', [VerifyCustomerController::class, 'verifyCustomer']);
+
+      Route::get('/customer-orders', [CustomerOrderController::class, 'index']);
+      Route::get('/read-pending-orders', [CustomerOrderController::class, 'readPendingOrders']);
+      Route::get('/read-one-order/{order_no}', [CustomerOrderController::class, 'readOneOrder']);
+      Route::post('/prepare-order/{order_no}', [CustomerOrderController::class, 'prepareOrder']);
+      Route::get('/get-shipping-fee/{order_no}', [CustomerOrderController::class, 'getShippingFee']);
+      Route::get('/read-shipping-address/{user_id}', [CustomerOrderController::class, 'readShippingAddress']);
     });
     
 });

@@ -79,7 +79,7 @@ select.form-control {
                         
                         <div class="summary">
                             <div class="summary-item"><span style="font-size: 20px" class="text">Total amount </span><span style="font-size: 20px" id="total"></span></div>
-                            <a href="{{ route('checkout.index') }}" class="btn btn-primary btn-lg btn-block mt-2">Checkout</a>
+                            <a href="{{ route('checkout.index') }}" class="btn btn-primary btn-lg btn-block mt-2" id="btn-checkout">Checkout</a>
                         </div>
                       </div>
                     </div>
