@@ -15,9 +15,19 @@ class CustomerOrderController extends Controller
         return view('admin.customer-orders.index');
     }
 
-    public function readPendingOrders(Order $o)
+    public function readOrders(Order $o)
     {
-        $order = $o->readPendingOrders();
+        $status = 1;
+        if (request()->object == "prepared") {
+            $status = 2;
+        }
+        else if (request()->object == "shipped") {
+            $status = 3;
+        }
+        else if (request()->object == "completed") {
+            $status = 4;
+        }
+        $order = $o->readOrdersByStatus($status);
         if(request()->ajax())
         { 
             return datatables()->of($order)
@@ -54,9 +64,9 @@ class CustomerOrderController extends Controller
         ->value('shipping_fee');
     }
 
-    public function prepareOrder($order_no) {
+    public function orderChangeStatus($order_no) {
         Order::where('order_no', $order_no)->update([
-            'status' => 2
+            'status' => request()->status
         ]);
 
         return response()->json([

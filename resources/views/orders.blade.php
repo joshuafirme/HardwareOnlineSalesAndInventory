@@ -75,7 +75,16 @@ select.form-control {
                         @if ($item->order_no != $order_number_temp)
                         <hr>
                         <div class="text-bold mt-5">Order #: {{ $item->order_no }}
-                            <div class="float-right"><span class="badge badge-success">Pending</span></div>
+                          @php
+                              $status = "Pending";
+                              if ($item->status == 2)
+                              $status = "Prepared";
+                              else if ($item->status == 3)
+                              $status = "Shipped";
+                              else if ($item->status == 4)
+                              $status = "Completed";
+                          @endphp
+                            <div class="float-right"><span class="badge badge-success">{{ $status}}</span></div>
                         </div> 
 
                         @php

@@ -26,25 +26,25 @@ class Order extends Model
     {
         return DB::table($this->table . ' as O')
             ->select("O.amount", 'O.qty', DB::raw('CONCAT(prefix, P.id) as product_code'), 'O.order_no', 'O.payment_method', 'O.created_at', 
-                'P.image', 'P.description', 'selling_price', 'U.name as unit', 'S.shipping_fee'
+                'P.image', 'P.description', 'selling_price', 'U.name as unit', 'S.shipping_fee', 'O.status'
                     )
             ->leftJoin('product as P', DB::raw('CONCAT(prefix, P.id)'), '=', 'O.product_code')
             ->leftJoin('unit as U', 'U.id', '=', 'P.unit_id')
             ->leftJoin('order_shipping_fee as S', 'S.order_no', '=', 'O.order_no')
             ->where('O.user_id', $user_id)
             ->groupBy('O.order_no', 'O.amount', 'O.qty', 'P.prefix', 'P.id', 'P.description', 'P.image', 
-            'O.payment_method', 'selling_price', 'U.name', 'O.created_at', 'S.shipping_fee')
+            'O.payment_method', 'selling_price', 'U.name', 'O.created_at', 'S.shipping_fee', 'O.status')
             ->orderBy('O.id', 'desc')
             ->get();
     }
 
-    public function readPendingOrders()
+    public function readOrdersByStatus($status)
     {
         $data = DB::table($this->table . ' as O')
             ->select('O.*', 'O.created_at as date_order', 'users.*')
             ->leftJoin('order_shipping_fee as S', 'S.order_no', '=', 'O.order_no')
             ->leftJoin('users', 'users.id', '=', 'O.user_id')
-            ->where('O.status', 1)
+            ->where('O.status', $status)
             ->orderBy('O.id', 'desc')
             ->get();
 

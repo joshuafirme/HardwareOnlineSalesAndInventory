@@ -72,13 +72,52 @@
                         </div>
                       </div>
                       <div class="tab-pane fade" id="prepared" role="tabpanel" aria-labelledby="prepared-tab">
-                        
+                        <div class="mt-4">
+                          <table class="table table-hover" id="tbl-prepared-order">
+                            <thead>
+                                <tr>
+                                    <th>Order #</th>
+                                    <th>Customer Name</th>
+                                    <th>Email</th>
+                                    <th>Phone number</th>
+                                    <th>Date Order</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        </div>
                       </div>
                       <div class="tab-pane fade" id="shipped" role="tabpanel" aria-labelledby="shipped-tab">
-                        
+                        <div class="mt-4">
+                          <table class="table table-hover" id="tbl-shipped-order">
+                            <thead>
+                                <tr>
+                                    <th>Order #</th>
+                                    <th>Customer Name</th>
+                                    <th>Email</th>
+                                    <th>Phone number</th>
+                                    <th>Date Order</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        </div>
                       </div>
                       <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
-
+                        <div class="mt-4">
+                          <table class="table table-hover" id="tbl-completed-order">
+                            <thead>
+                                <tr>
+                                    <th>Order #</th>
+                                    <th>Customer Name</th>
+                                    <th>Email</th>
+                                    <th>Phone number</th>
+                                    <th>Date Order</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        </div>
                       </div>
                     </div>
         

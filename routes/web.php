@@ -156,9 +156,9 @@ Route::middleware('auth')->group(function () {
       Route::post('/do-verify-customer/{user_id}', [VerifyCustomerController::class, 'verifyCustomer']);
 
       Route::get('/customer-orders', [CustomerOrderController::class, 'index']);
-      Route::get('/read-pending-orders', [CustomerOrderController::class, 'readPendingOrders']);
+      Route::get('/read-orders', [CustomerOrderController::class, 'readOrders']);
       Route::get('/read-one-order/{order_no}', [CustomerOrderController::class, 'readOneOrder']);
-      Route::post('/prepare-order/{order_no}', [CustomerOrderController::class, 'prepareOrder']);
+      Route::post('/order-change-status/{order_no}', [CustomerOrderController::class, 'orderChangeStatus']);
       Route::get('/get-shipping-fee/{order_no}', [CustomerOrderController::class, 'getShippingFee']);
       Route::get('/read-shipping-address/{user_id}', [CustomerOrderController::class, 'readShippingAddress']);
     });

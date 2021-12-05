@@ -5,8 +5,8 @@ $.ajaxSetup({
 }); 
 
 
-async function fetchPendingOrder(){
-    $('#tbl-pending-order').DataTable({
+async function fetchOrder(object = 'pending'){
+    $('#tbl-'+object+'-order').DataTable({
     
         processing: true,
         serverSide: true,
@@ -17,8 +17,11 @@ async function fetchPendingOrder(){
         },
 
         ajax:{
-            url: "/read-pending-orders",
+            url: "/read-orders",
             type:"GET",
+            data: {
+                object : object
+            },
         },
    
         columnDefs: [{
@@ -60,7 +63,7 @@ async function readOneOrder(order_no) {
                         html += getComputation(total);
                     }
                     $('#orders-container').append(html);
-                },(i)*200)
+                },(i)*100)
             });
         }
     });
@@ -135,6 +138,22 @@ function formatNumber(num) {
 async function on_Click() {
     
     $(document).on('click','.btn-show-order', async function(){
+        let active_pill = $('.nav-pills .active').attr('aria-controls');
+        let btn_text = ''
+        let status = 1;
+        if (active_pill == 'pending') {
+            btn_text = 'Prepare';
+            status = 2;
+        }
+        else if (active_pill == 'prepared') {
+            btn_text = 'Ship';
+            status = 3;
+        }
+        else if (active_pill == 'shipped') {
+            btn_text = 'Completed';
+            status = 4;
+        }
+
         let order_no = $(this).attr('data-order-no');
         let customer_name = $(this).attr('data-name');
         let phone = $(this).attr('data-phone');
@@ -142,7 +161,9 @@ async function on_Click() {
         let payment_method = $(this).attr('data-payment');
         let user_id = $(this).attr('data-user-id');
         let btn = '<button class="btn btn-sm btn-outline-dark" id="btn-print" type="button">Print</button>';
-            btn += '<button class="btn btn-sm btn-success" id="btn-prepare" type="button">Prepare</button>';
+        if (active_pill != 'completed') {
+            btn += '<button class="btn btn-sm btn-success" id="btn-change-status" data-active-pill="'+active_pill+'" data-status="'+status+'"  type="button">'+btn_text+'</button>';
+        }
 
                   
         let html = '<div class="col-sm-12 col-md-6">';
@@ -162,25 +183,29 @@ async function on_Click() {
         
         
         
-        $('#btn-prepare').attr('data-order-no', order_no);
+        $('#btn-change-status').attr('data-order-no', order_no);
         
     });
 
-    $(document).on('click','#btn-prepare', function(){
+    $(document).on('click','#btn-change-status', function(){
         let order_no = $(this).attr('data-order-no');
+        let data_status = $(this).attr('data-status');
+        let active_pill = $(this).attr('data-active-pill');
         let btn = $(this);
         $.ajax({
-            url: '/prepare-order/'+order_no,
+            url: '/order-change-status/'+order_no,
             type: 'POST',
+            data: {
+                status : data_status,
+            },
             beforeSend:function(){
                 btn.text('Please wait...');
             },
-            success:function(data){
-                btn.text('Prepare');
-                $('#tbl-pending-order').DataTable().ajax.reload();
+            success:function(){
+                $('#tbl-'+active_pill+'-order').DataTable().ajax.reload();
                 $('#show-orders-modal').modal('hide');
                 $.toast({
-                    text: 'Order was successfully prepared.',
+                    text: 'Order was successfully changed status.',
                     showHideTransition: 'plain',
                     hideAfter: 4500, 
                 })
@@ -192,6 +217,25 @@ async function on_Click() {
         printElement(document.getElementById("printable-order-info"));
       });
 
+      $(document).on('click','#pending-tab', function(){
+        $('#tbl-pending-order').DataTable().destroy();
+        fetchOrder('pending');  
+      });
+
+      $(document).on('click','#prepared-tab', function(){
+            $('#tbl-prepared-order').DataTable().destroy();
+            fetchOrder('prepared');  
+      });
+
+      $(document).on('click','#shipped-tab', function(){
+        $('#tbl-shipped-order').DataTable().destroy();
+        fetchOrder('shipped');  
+    });
+    $(document).on('click','#completed-tab', function(){
+        $('#tbl-completed-order').DataTable().destroy();
+        fetchOrder('completed');  
+    });
+      
   
 }
 
@@ -214,7 +258,7 @@ function printElement(elem) {
 }
 
   async function render() {
-    await fetchPendingOrder();  
+    await fetchOrder();  
     await on_Click();
   }
 
