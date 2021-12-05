@@ -3,6 +3,53 @@
 
 @include('admin.nav')
 
+<style>
+  @media screen {
+  #printSection {
+      display: none;
+  }
+}
+
+@media print {
+  body * {
+    visibility:hidden; page-break-after: avoid !important;
+  }
+  #printSection, #printSection * {
+    visibility:visible;
+  }
+  #printSection {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+  }
+}
+
+
+/* style sheet for "A4" printing */
+@media print and (width: 21cm) and (height: 29.7cm) {
+     @page {
+        margin: 3cm;
+     }
+}
+
+/* style sheet for "letter" printing */
+@media print and (width: 8.5in) and (height: 11in) {
+    @page {
+        margin: 1in;
+    }
+}
+
+/* A4 Landscape*/
+@page {
+    size: A4 landscape;
+    margin: 0;
+}
+@page {  }
+</style>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 

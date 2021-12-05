@@ -2,14 +2,15 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
           <div class="modal-header">
-              <h5 class="modal-title">Orders</h5>
+              <h5 class="modal-title">Order Information</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
           </div>
-          <div class="modal-body">
-              <p id="order-no-text"></p>
-              <div class="mt-3 mb-3" id="user-info-container"></div>
+          <div class="modal-body" id="printable-order-info">
+              <div class="row" id="user-info">
+              </div>
+              <div class="mt-3 mb-3" id="shipping-info-container"></div>
             <table class="table table-hover">
                 <thead>
                     <tr>

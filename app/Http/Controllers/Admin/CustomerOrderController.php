@@ -24,7 +24,8 @@ class CustomerOrderController extends Controller
                 ->addColumn('action', function($order)
                 {
                     $button = '<a class="btn btn-sm btn-show-order" data-name="'. $order->name .'" data-order-no="'. $order->order_no .'" ';
-                    $button .= 'data-user-id="'. $order->user_id .'" style="color:#1970F1;">Show orders</a>';
+                    $button .= 'data-user-id="'. $order->user_id .'" data-payment="'. $order->payment_method .'" ';
+                    $button .= 'data-phone="'. $order->phone .'" data-email="'. $order->email .'" style="color:#1970F1;">Show orders</a>';
                     return $button;
                 })
                 ->rawColumns(['action'])

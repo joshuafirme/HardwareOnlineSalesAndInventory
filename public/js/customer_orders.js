@@ -123,7 +123,7 @@ async function readShippingAddress(user_id) {
             html += '<label>Shipping Address</label>';
             html += '<div>'+data.municipality+', '+data.brgy+' '+data.street+'</div>';
             html += '<div>Nearest landmark: '+data.notes+'</div>';
-            $('#user-info-container').html(html);
+            $('#shipping-info-container').html(html);
         }
     });
 }
@@ -137,12 +137,24 @@ async function on_Click() {
     $(document).on('click','.btn-show-order', async function(){
         let order_no = $(this).attr('data-order-no');
         let customer_name = $(this).attr('data-name');
+        let phone = $(this).attr('data-phone');
+        let email = $(this).attr('data-email');
+        let payment_method = $(this).attr('data-payment');
         let user_id = $(this).attr('data-user-id');
-        let btn = '<button class="btn btn-sm btn-success" id="btn-prepare" type="button">Prepare</button>';
+        let btn = '<button class="btn btn-sm btn-outline-dark" id="btn-print" type="button">Print</button>';
+            btn += '<button class="btn btn-sm btn-success" id="btn-prepare" type="button">Prepare</button>';
 
+                  
+        let html = '<div class="col-sm-12 col-md-6">';
+            html += '<div>Customer name: '+customer_name+'</div>';
+            html += '<div>Contact #: '+phone+'</div>';
+            html += '<div>Email: '+email+'</div>';
+            html += '</div>';
+            html += '<div class="col-sm-12 col-md-6">';
+            html += '<div class="float-right">Order #: <b>'+order_no+'</b><div>Payment method: '+payment_method+'</div></div>';
+            html += '</div>';
         $('#show-orders-modal').modal('show');
-        $('#show-orders-modal').find('.modal-title').text('Customer '+customer_name);
-        $('#show-orders-modal').find('#order-no-text').html('Order #: <b>'+order_no+'</b>');
+        $('#show-orders-modal').find('#user-info').html(html);
         $('#show-orders-modal').find('.modal-footer').html(btn);
 
         await readOneOrder(order_no);
@@ -175,9 +187,31 @@ async function on_Click() {
             }
         });
       });
+
+      $(document).on('click','#btn-print', function(){
+        printElement(document.getElementById("printable-order-info"));
+      });
+
   
 }
 
+
+    
+function printElement(elem) {
+    var domClone = elem.cloneNode(true);
+    
+    var $printSection = document.getElementById("printSection");
+    
+    if (!$printSection) {
+        var $printSection = document.createElement("div");
+        $printSection.id = "printSection";
+        document.body.appendChild($printSection);
+    }
+    
+    $printSection.innerHTML = "";
+    $printSection.appendChild(domClone);
+    window.print();
+}
 
   async function render() {
     await fetchPendingOrder();  
