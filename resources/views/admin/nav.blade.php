@@ -56,7 +56,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4"  style="background-color: #06513D;">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="{{ asset('images/logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light" style="font-size: 16px;">Val Construction Supply</span>
     </a>
 
