@@ -82,7 +82,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/order-info/{source_id}/{payment_method}', [CheckoutController::class, 'orderInfo']);
 
     Route::get('/my-orders', [OrderController::class, 'index']);
-
+    Route::post('/cancel-order/{order_no}', [OrderController::class, 'cancelOrder']);
     Route::get('/get-brgy/{municipality}', [UserAddressController::class, 'getBrgyByMunicipality']);
 
     Route::middleware('access_level:1:2:3:4')->group(function () {
@@ -161,6 +161,8 @@ Route::middleware('auth')->group(function () {
       Route::post('/order-change-status/{order_no}', [CustomerOrderController::class, 'orderChangeStatus']);
       Route::get('/get-shipping-fee/{order_no}', [CustomerOrderController::class, 'getShippingFee']);
       Route::get('/read-shipping-address/{user_id}', [CustomerOrderController::class, 'readShippingAddress']);
+
+     
     });
     
 });

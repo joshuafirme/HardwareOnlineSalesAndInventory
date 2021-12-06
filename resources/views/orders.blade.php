@@ -76,6 +76,8 @@ select.form-control {
                         <hr>
                         <div class="text-bold mt-5">Order #: {{ $item->order_no }}
                           @php
+                              $badge_class = "success";
+                              if ($item->status == 1)
                               $status = "Pending";
                               if ($item->status == 2)
                               $status = "Prepared";
@@ -83,8 +85,18 @@ select.form-control {
                               $status = "Shipped";
                               else if ($item->status == 4)
                               $status = "Completed";
+                              else if ($item->status == 0) {
+                              $status = "Cancelled";
+                              $badge_class = "light";
+                              }
                           @endphp
-                            <div class="float-right"><span class="badge badge-success">{{ $status}}</span></div>
+                            <div class="float-right"><span class="badge badge-{{ $badge_class }}">{{ $status}}</span></div>
+                            @if ($item->status == 1)
+                              <a style="cursor: pointer; color:#DC3545;" data-order-no="{{ $item->order_no }}" data-date-time="{{ $item->created_at }}"
+                              class="float-right mr-2 cancel-order">
+                                Cancel
+                              </a>
+                            @endif
                         </div> 
 
                         @php
@@ -94,7 +106,8 @@ select.form-control {
                         <div>Subtotal: ₱{{ number_format($total,2,".",",")}} </div> 
                         <div>Total: ₱{{ number_format($total+$item->shipping_fee,2,".",",")}} </div> 
                         <div>Payment Method: {{$item->payment_method}} </div>
-                        <small>Date order: {{date('F d, Y h:i A', strtotime($item->created_at))}} </small>
+                        <div>Date order: {{date('F d, Y h:i A', strtotime($item->created_at))}} </div><br>
+                  
                         @endif
 
                         <div class="row mt-3">
@@ -143,6 +156,29 @@ select.form-control {
 </div>
 <!-- /.content-wrapper -->
 
+<!--Confirm Modal-->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cancel Order</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure do you want to cancel this order?</p>
+        <small class="validation-text text-danger"></small>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm btn-outline-dark" id="btn-confirm-cancel" type="button">Yes</button>
+        <button class="btn btn-sm btn-danger" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 @include('footer')
 
+<script src="{{asset('js/myorder.js')}}"></script>
 

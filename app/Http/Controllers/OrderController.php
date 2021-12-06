@@ -16,4 +16,20 @@ class OrderController extends Controller
 
         return view('orders', compact('orders'));
     }
+
+    public function cancelOrder($order_no)
+    {
+        $date_order = strtotime(request()->date_time_order);
+        $five_minutes_ago = strtotime("-5 minutes");
+    
+        if ($date_order >= $five_minutes_ago) {
+            Order::where('order_no', $order_no)->update([
+                'status' => 0
+            ]);
+            return 'status changed to cancel';
+        }
+        else {
+            return 'more than 5 mins';
+        }
+    }
 }
