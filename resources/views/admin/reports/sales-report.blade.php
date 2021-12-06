@@ -52,6 +52,7 @@
         <select class="form-control w-auto m-1 float-left" id="payment_method">
             <option value="Cash">Cash</option>
             <option value="GCash">GCash</option>
+            <option value="COD">Cash on Delivery</option>
         </select>
 
         <div class="float-left mt-2 ml-3">

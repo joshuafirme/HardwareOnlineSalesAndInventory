@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Sales;
 use DB;
 
 class CustomerOrderController extends Controller
@@ -65,14 +66,66 @@ class CustomerOrderController extends Controller
     }
 
     public function orderChangeStatus($order_no) {
+        
+        if (request()->status == 2) { 
+            $orders = $this->readOneOrder($order_no);
+            $this->recordSale($orders);
+        }
+
         Order::where('order_no', $order_no)->update([
             'status' => request()->status
         ]);
 
         return response()->json([
             'status' => 'success',
-            'message' => 'order prepared'
+            'message' => 'order changed status success'
         ]);
+    }
+
+    public function recordSale($orders)
+    {
+        $invoice_no = $this->readInvoice();
+
+        if (!$this->isInvoiceExists($invoice_no)) {
+            foreach ($orders as $items) {
+                $sales = new Sales;
+                $sales->prefix = date('Ymd');
+                $sales->invoice_no = $invoice_no;
+                $sales->product_code = $items->product_code;
+                $sales->qty = $items->qty;
+                $sales->amount = $items->amount;
+                $sales->payment_method = $items->payment_method;
+                $sales->order_from = 'online';
+                $sales->status = 1;
+                $sales->save();
+    
+                $this->updateInventory($items->product_code, $items->qty);
+            }
+
+            return 'success';
+        }
+        else {
+            return 'invoice_exists';
+        }
+    }
+
+    public function readInvoice(){
+        $invoice_no = DB::table('sales')->max('invoice_no');
+        return isset($invoice_no) ? $invoice_no+1 : 0;
+    }
+
+    public function isInvoiceExists($invoice_no){
+        $row = DB::table('sales')->where('invoice_no', $invoice_no)->get();
+        return count($row) > 0 ? true : false;
+    }
+
+    public function updateInventory($product_code, $qty){
+        
+        DB::table('product')
+            ->where(DB::raw('CONCAT(prefix, id)'), $product_code)
+            ->update([
+                'qty' => DB::raw('qty - '. $qty .'')
+            ]);
     }
 
 }
