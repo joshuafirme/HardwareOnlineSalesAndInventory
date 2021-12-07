@@ -9,7 +9,7 @@
 <div class="content-header"></div>
 
 <div class="page-header">
-  <h3 class="mt-2" id="page-title">Customer Orders</h3>
+  <h3 class="mt-2" id="page-title">Verify Customer</h3>
           <hr>
       </div>
 
