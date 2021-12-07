@@ -161,7 +161,7 @@ async function on_Click() {
         let payment_method = $(this).attr('data-payment');
         let user_id = $(this).attr('data-user-id');
         let btn = '<button class="btn btn-sm btn-outline-dark" id="btn-print" type="button">Print</button>';
-        if (active_pill != 'completed') {
+        if (active_pill != 'completed' && active_pill != 'cancelled') {
             btn += '<button class="btn btn-sm btn-success" id="btn-change-status" data-active-pill="'+active_pill+'" data-status="'+status+'"  type="button">'+btn_text+'</button>';
         }
 
@@ -223,19 +223,25 @@ async function on_Click() {
       });
 
       $(document).on('click','#prepared-tab', function(){
-            $('#tbl-prepared-order').DataTable().destroy();
-            fetchOrder('prepared');  
+        $('#tbl-prepared-order').DataTable().destroy();
+        fetchOrder('prepared');  
       });
 
       $(document).on('click','#shipped-tab', function(){
         $('#tbl-shipped-order').DataTable().destroy();
         fetchOrder('shipped');  
-    });
-    $(document).on('click','#completed-tab', function(){
+      });
+
+      $(document).on('click','#completed-tab', function(){
         $('#tbl-completed-order').DataTable().destroy();
         fetchOrder('completed');  
-    });
-      
+      });
+
+      $(document).on('click','#cancelled-tab', function(){
+        $('#tbl-cancelled-order').DataTable().destroy();
+        fetchOrder('cancelled');  
+      });
+  
   
 }
 

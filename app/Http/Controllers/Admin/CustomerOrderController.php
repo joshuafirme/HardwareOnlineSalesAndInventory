@@ -28,6 +28,9 @@ class CustomerOrderController extends Controller
         else if (request()->object == "completed") {
             $status = 4;
         }
+        else if (request()->object == "cancelled") {
+            $status = 0;
+        }
         $order = $o->readOrdersByStatus($status);
         if(request()->ajax())
         { 

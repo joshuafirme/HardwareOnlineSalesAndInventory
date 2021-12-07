@@ -52,6 +52,9 @@
                       <li class="nav-item">
                         <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed" role="tab" aria-controls="completed" aria-selected="false">Completed</a>
                       </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="cancelled-tab" data-toggle="tab" href="#cancelled" role="tab" aria-controls="cancelled" aria-selected="false">Cancelled</a>
+                      </li>
 
                     </ul>
                     <div class="tab-content" id="myTabContent">
@@ -106,6 +109,22 @@
                       <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
                         <div class="mt-4">
                           <table class="table table-hover" id="tbl-completed-order">
+                            <thead>
+                                <tr>
+                                    <th>Order #</th>
+                                    <th>Customer Name</th>
+                                    <th>Email</th>
+                                    <th>Phone number</th>
+                                    <th>Date Order</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        </div>
+                      </div>
+                      <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="cancelled-tab">
+                        <div class="mt-4">
+                          <table class="table table-hover" id="tbl-cancelled-order">
                             <thead>
                                 <tr>
                                     <th>Order #</th>
