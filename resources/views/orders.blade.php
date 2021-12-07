@@ -77,14 +77,29 @@ select.form-control {
                         <div class="text-bold mt-5">Order #: {{ $item->order_no }}
                           @php
                               $badge_class = "success";
-                              if ($item->status == 1)
-                              $status = "Pending";
-                              if ($item->status == 2)
-                              $status = "Prepared";
-                              else if ($item->status == 3)
-                              $status = "Shipped";
-                              else if ($item->status == 4)
-                              $status = "Completed";
+                              $pending_active_class = 'active';
+                              $prepared_active_class = '';
+                              $shipped_active_class = '';
+                              $delivered_active_class = '';
+
+                              if ($item->status == 1) {
+                                $status = "Pending";
+                              }
+                              if ($item->status == 2) {
+                                $prepared_active_class = 'active';
+                                $status = "Prepared";
+                              }
+                              else if ($item->status == 3) {
+                                $prepared_active_class = 'active';
+                                $shipped_active_class = 'active';
+                                $status = "Shipped";
+                              }
+                              else if ($item->status == 4) {
+                                $prepared_active_class = 'active';
+                                $shipped_active_class = 'active';
+                                $delivered_active_class = 'active';
+                                $status = "Completed";
+                              }
                               else if ($item->status == 0) {
                               $status = "Cancelled";
                               $badge_class = "light";
@@ -107,7 +122,25 @@ select.form-control {
                         <div>Total: ₱{{ number_format($total+$item->shipping_fee,2,".",",")}} </div> 
                         <div>Payment Method: {{$item->payment_method}} </div>
                         <div>Date order: {{date('F d, Y h:i A', strtotime($item->created_at))}} </div><br>
-                  
+                          @if ($item->status != 0) 
+                            <div class="card card-timeline shadow-none">
+                              <ul class="bs4-order-tracking">
+                                  <li class="step {{$pending_active_class}}">
+                                      <div><i class="fas fa-cog"></i></div> Pending
+                                  </li>
+                                  <li class="step {{$prepared_active_class}}">
+                                      <div><i class="fas fa-cube"></i></div> Prepared
+                                  </li>
+                                  <li class="step {{$shipped_active_class}}">
+                                      <div><i class="fas fa-truck-moving"></i></div> Shipped
+                                  </li>
+                                  <li class="step {{$delivered_active_class}}">
+                                    <div><i class="fas fa-check-circle"></i></div> Delivered
+                                </li>
+                                
+                              </ul>
+                            </div>
+                            @endif
                         @endif
 
                         <div class="row mt-3">
