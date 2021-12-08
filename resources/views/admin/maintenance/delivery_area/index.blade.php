@@ -48,7 +48,7 @@
                         <tr>
                             <th class="py-2 text-left">Municipality</th>
                             <th class="py-2 text-left">Brgy</th>
-                            <th class="py-2 text-left">Shipping Fee</th>
+                            <th class="py-2 text-left">Delivery fee</th>
                             <th class="py-2 text-left">Status</th>
                             <th class="py-2 text-left">Action</th>
                         </tr>

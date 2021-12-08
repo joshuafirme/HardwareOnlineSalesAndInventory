@@ -69,7 +69,7 @@
                             </div>
 
                             <div class="col-sm-12 col-md-6 mt-3">
-                                <label class="col-form-label">Shipping Fee</label>
+                                <label class="col-form-label">Delivery fee</label>
                                 <input type="number" step=".01" class="form-control" name="shipping_fee" value="{{$delivery_area->shipping_fee}}" required>
                               </div>
 
