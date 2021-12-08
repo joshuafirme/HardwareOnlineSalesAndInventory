@@ -88,7 +88,7 @@
 
           @if(in_array($access_level, array( 3, 4)))
           <li class="nav-item">
-            <a href="{{ url('/admin/dashboard') }}" class="nav-link">
+            <a href="{{ url('/dashboard') }}" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard

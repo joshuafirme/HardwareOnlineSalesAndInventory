@@ -34,14 +34,14 @@ class DeliveryArea extends Model
     }
 
     public function getMunicipality(){
-        return $this::select('municipality')->distinct('municipality')->get();
+        return $this::select('municipality')->distinct('municipality')->where('status', 1)->get();
     }
 
     public function getBrgy(){
-        return $this::select('brgy')->distinct('brgy')->get();
+        return $this::select('brgy')->distinct('brgy')->where('status', 1)->get();
     }
 
     public function getBrgyByMunicipality($municipality){
-        return $this::select('brgy')->where('municipality', $municipality)->get();
+        return $this::select('brgy')->where('municipality', $municipality)->where('status', 1)->get();
     }
 }

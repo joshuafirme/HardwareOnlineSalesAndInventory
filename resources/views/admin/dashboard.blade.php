@@ -31,9 +31,8 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
-
-                <p>New Orders</p>
+                <h3>{{$walk_in_sales}}</h3>
+                <p>Walk-in Sales</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
@@ -46,9 +45,10 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>{{$orders_today}}</h3>
 
-                <p>Bounce Rate</p>
+
+                <p>Orders Today</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -61,9 +61,9 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3>{{$total_users}}</h3>
 
-                <p>User Registrations</p>
+                <p>Total User Registrations</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
@@ -76,9 +76,9 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                <h3>{{$online_sales}}</h3>
 
-                <p>Unique Visitors</p>
+                <p>Online sales</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
@@ -95,4 +95,17 @@
   </div>
   <!-- /.content-wrapper -->
 
-  @include('admin.footer')
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2021 Val Construction Supply.</strong>
+    All rights reserved.
+  </footer>
+
+</div>
+<!-- ./wrapper -->
+
+@include('admin.scripts')
+@include('admin.datatables-scripts')
+<script src="{{asset('js/verify_customer.js')}}"></script>
+
+</body>
+</html>

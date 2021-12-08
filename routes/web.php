@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\UnitController;
@@ -93,7 +94,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-brgy/{municipality}', [UserAddressController::class, 'getBrgyByMunicipality']);
 
     Route::middleware('access_level:1:2:3:4')->group(function () {
-      Route::resource('/admin/dashboard', UserController::class);
+      Route::get('/dashboard', [DashboardController::class, 'index']);
       Route::resource('users', UserController::class);
       Route::resource('supplier', SupplierController::class);
       Route::resource('unit', UnitController::class);
