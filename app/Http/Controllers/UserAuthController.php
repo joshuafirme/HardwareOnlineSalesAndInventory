@@ -14,7 +14,7 @@ class UserAuthController extends Controller
             $access_level = Auth::user()->access_level;
             // 5 = customer
             if (in_array($access_level, array( 5 )))
-                 return redirect()->intended('/');  
+                 return redirect()->intended('/dashboard');  
             else if (in_array($access_level, array( 3, 4 )))
                 return redirect()->intended('/reports/sales');  
             else if (in_array($access_level, array( 1 )))
