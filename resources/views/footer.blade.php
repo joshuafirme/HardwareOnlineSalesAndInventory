@@ -10,8 +10,20 @@
   <footer class="main-footer">
     <main class="d-flex align-items-center py-3 py-md-0">
       <div class="container">
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2021 Val Construction Supply</strong> All rights reserved.
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <small><a style="color: #FFF;" target="_blank" href="{{ url('/terms-and-condition') }}">Terms and condition</a></small>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <small><a style="color: #FFF;" target="_blank" href="{{ url('/terms-and-condition') }}">About us</a></small>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <small><a style="color: #FFF;" target="_blank" href="{{ url('/terms-and-condition') }}">Contact us</a></small>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <small><strong>Copyright &copy; 2021 Val Construction Supply</strong></small>
+          </div>
+        </div>
       </div>
     </main>
   </footer>

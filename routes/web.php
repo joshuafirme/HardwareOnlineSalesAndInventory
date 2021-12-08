@@ -67,6 +67,13 @@ Route::get('/cart/read-items', [CartController::class, 'readCart']);
 Route::get('/cart-count', [CartController::class, 'cartCount']);
 Route::post('/add-to-cart', [CartController::class, 'addToCart']);
 
+/**
+ * Pages
+ */
+Route::get('/terms-and-condition', function(){
+  return view('pages.terms-and-condition');
+});
+
 Route::middleware('auth')->group(function () {
     Route::resource('/account', AccountController::class);
     Route::get('/edit-account', [AccountController::class, 'editAccount']);

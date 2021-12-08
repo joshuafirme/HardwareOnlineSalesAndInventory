@@ -237,6 +237,9 @@ select.form-control {
                     </div>
                   </div>
 
+                  <div class="mt-3">
+                    <a href="{{ url('/terms-and-condition') }}" target="_blank">Terms and condition</a>
+                  </div>
                   <!-- Divider Text 
                   <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-4">
                       <div class="border-bottom w-100 ml-5"></div>

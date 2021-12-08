@@ -122,8 +122,7 @@ select.form-control {
                     <a href="#!" class="forgot-password-link">Forgot password?</a>
                     <p class="text-muted font-weight-bold">Don't have an account? <a href="{{ url('/signup') }}" class="text-primary ml-2">Register here</a></p>
                     <nav class="login-card-footer-nav">
-                      <a href="#!">Terms of use.</a>
-                      <a href="#!">Privacy policy</a>
+                      <a href="{{ url('/terms-and-condition') }}" target="_blank">Terms and condition.</a>
                     </nav>
                 </div>
               </div>
