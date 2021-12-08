@@ -50,7 +50,7 @@
             Payment method
         </div>
         <select class="form-control w-auto m-1 float-left" id="payment_method">
-            <option value="Cash (walk-in)">Cash</option>
+            <option value="Cash">Cash (walk-in)</option>
             <option value="COD">Cash on Delivery</option>
             <option value="GCash">GCash</option>
             <option value="PayMaya">PayMaya</option>
