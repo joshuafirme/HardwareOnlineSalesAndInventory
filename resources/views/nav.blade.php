@@ -9,6 +9,7 @@
 
   .nav-link, .fas, .brand-text {
     color: #FFF !important;
+    white-space: nowrap;
   }
 
   .btn-load-more .fas {
