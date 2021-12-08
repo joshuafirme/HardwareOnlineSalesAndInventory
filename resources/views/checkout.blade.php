@@ -50,7 +50,7 @@ $page_title =  "Val Construction Supply | Cart";
                         <p>-</p>
                         @endif
                         <div class="summary-item"><span class="text">Subtotal</span><span class="price">₱{{$subtotal}}</span></div>
-                        <div class="summary-item"><span class="text">Shipping</span><span class="price">₱{{$charge}}</span></div>
+                        <div class="summary-item"><span class="text">Delivery fee</span><span class="price">₱{{$charge}}</span></div>
                         @php
                             $total = $subtotal+$charge;
                         @endphp
