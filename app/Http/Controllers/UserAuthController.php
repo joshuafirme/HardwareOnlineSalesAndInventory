@@ -47,7 +47,7 @@ class UserAuthController extends Controller
             if (in_array($access_level, array( 5 )))
                  return redirect()->intended('/');  
             else if (in_array($access_level, array( 3, 4 )))
-                return redirect()->intended('/reports/sales');  
+                return redirect()->intended('/dashboard');  
             else if (in_array($access_level, array( 1 )))
                 return redirect()->intended('/cashiering');  
             else if (in_array($access_level, array( 2 )))
