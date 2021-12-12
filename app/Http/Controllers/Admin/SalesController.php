@@ -94,7 +94,7 @@ class SalesController extends Controller
                 <tr>
                     <th>Invoice #</th>  
                     <th>Product Code</th>    
-                    <th>Description</th>   
+                    <th>Name</th>   
                     <th>Unit</th>   
                     <th>Qty</th>  
                     <th>Amount</th>  

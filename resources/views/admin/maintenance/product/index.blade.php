@@ -48,7 +48,7 @@
                         <thead>
                             <tr>
                                 <th>Product Code</th>
-                                <th>Description</th>
+                                <th>Name</th>
                                 <th>Qty</th>
                                 <th>Reorder point</th>
                                 <th>Unit</th>

@@ -51,7 +51,7 @@
                         @csrf
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
-                                <label class="col-form-label">Description</label>
+                                <label class="col-form-label">Name</label>
                                 <input type="text" class="form-control" name="description" required>
                             </div>
 
@@ -67,7 +67,8 @@
 
                             <div class="col-sm-12 col-md-6 col-lg-4 mt-2">    
                               <label class="col-form-label">Unit</label>
-                              <select class="form-control" name="unit_id">
+                              <select class="form-control" name="unit_id" required>
+                                <option value="0" disabled selected>-- Select unit --</option>
                                   @foreach ($unit as $item)
                                   <option value="{{ $item->id }}">{{ $item->name }}</option>
                                   @endforeach
@@ -77,7 +78,8 @@
 
                             <div class="col-sm-12 col-md-6 col-lg-4 mt-2">    
                               <label class="col-form-label">Category</label>
-                              <select class="form-control" name="category_id">
+                              <select class="form-control" name="category_id" required>
+                                <option value="0" disabled selected>-- Select category --</option>
                                   @foreach ($category as $item)
                                   <option value="{{ $item->id }}">{{ $item->name }}</option>
                                   @endforeach
@@ -86,7 +88,8 @@
 
                             <div class="col-sm-12 col-md-6 col-lg-4 mt-2">    
                               <label class="col-form-label">Supplier</label>
-                              <select class="form-control" name="supplier_id" id="supplier_id">
+                              <select class="form-control" name="supplier_id" id="supplier_id" required>
+                                <option value="0" disabled selected>-- Select supplier --</option>
                                   @foreach ($supplier as $item)
                                   <option value="{{ $item->id }}">{{ $item->supplier_name }}</option>
                                   @endforeach

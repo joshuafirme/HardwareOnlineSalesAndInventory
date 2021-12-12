@@ -17,7 +17,8 @@ class ProductReturn extends Model
         'product_code',
         'qty',
         'reason',
-        'date_returned'
+        'date_returned',
+        'type_reason'
     ];
     
     public function readProductReturn($date_from, $date_to) {

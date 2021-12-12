@@ -433,7 +433,7 @@ function on_Keyup() {
         var tendered = $(this).val();
         var total = $('#total').text().slice(1).replace(",", ""); 
         var change = parseFloat(tendered) - parseFloat(total);
-        $('#change').val(change);
+        $('#change').val(change.toFixed(2));
     });
 }
 

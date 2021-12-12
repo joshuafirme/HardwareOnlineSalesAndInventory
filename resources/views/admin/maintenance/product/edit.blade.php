@@ -52,7 +52,7 @@
                         @method('PUT')
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
-                                <label class="col-form-label">Description</label>
+                                <label class="col-form-label">Name</label>
                                 <input type="text" class="form-control" name="description" value="{{ $product->description }}" required>
                             </div>
 

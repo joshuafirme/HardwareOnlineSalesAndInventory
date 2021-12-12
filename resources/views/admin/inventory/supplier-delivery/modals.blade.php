@@ -22,7 +22,7 @@
               </div>
   
               <div class="col-md-4 mb-2">
-                <label class="col-form-label">Description</label><br>
+                <label class="col-form-label">Name</label><br>
                 <div class="form-control" id="po_description"></div>
               </div>
   

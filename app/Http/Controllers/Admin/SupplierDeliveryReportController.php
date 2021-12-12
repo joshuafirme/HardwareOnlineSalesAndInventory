@@ -74,7 +74,7 @@ class SupplierDeliveryReportController extends Controller
                     <th style="border: 1px solid;">Delivery #</th>
                     <th style="border: 1px solid;">PO #</th>
                     <th style="border: 1px solid;">Product Code</th>     
-                    <th style="border: 1px solid;">Description</th>   
+                    <th style="border: 1px solid;">Name</th>   
                     <th style="border: 1px solid;">Supplier</th> 
                     <th style="border: 1px solid;">Unit</th>      
                     <th style="border: 1px solid;">Qty Ordered</th>                              

@@ -42,7 +42,7 @@
                         <thead>
                             <tr>
                                 <th>Product Code</th>
-                                <th>Description</th>
+                                <th>Name</th>
                                 <th>Qty</th>
                                 <th>Reorder point</th>
                                 <th>Unit</th>
@@ -82,7 +82,7 @@
                     </div>
                     
                     <div class="col-sm-12 col-md-6 mt-2">
-                        <label class="col-form-label">Description</label>
+                        <label class="col-form-label">Name</label>
                         <input type="text" class="form-control" name="description" id="description" readonly>
                     </div>
 

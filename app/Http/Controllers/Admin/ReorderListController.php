@@ -76,7 +76,7 @@ class ReorderListController extends Controller
             <thead>
                 <tr>  
                     <th style="border: 1px solid;">Product Code</th>
-                    <th style="border: 1px solid;">Description</th> 
+                    <th style="border: 1px solid;">Name</th> 
                     <th style="border: 1px solid;">Unit</th>      
                     <th style="border: 1px solid;">Category</th>      
                     <th style="border: 1px solid;">Supplier</th>   

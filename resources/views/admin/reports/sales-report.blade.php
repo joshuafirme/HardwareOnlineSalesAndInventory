@@ -81,7 +81,7 @@
                       <tr>
                         <th>Invoice #</th>
                         <th>Product Code</th>
-                        <th>Description</th>
+                        <th>Name</th>
                         <th>Unit</th>
                         <th>Price</th>
                         <th>Qty</th>

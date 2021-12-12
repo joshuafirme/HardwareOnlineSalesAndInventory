@@ -60,7 +60,7 @@
                                 <th>Delivery #</th>
                                 <th>PO #</th>
                                 <th>Product Code</th>     
-                                <th>Description</th>   
+                                <th>Name</th>   
                                 <th>Supplier</th> 
                                 <th>Unit</th>      
                                 <th>Qty Ordered</th>                              

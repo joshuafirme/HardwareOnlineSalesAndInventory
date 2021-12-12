@@ -133,6 +133,7 @@ $(document).on('click', '.btn-confirm-return', function(){
     var qty_return      = $('#qty_return').val();
     var qty_purchased   = $('#qty_purchased').val();
     var reason          = $('#reason').val();
+    var other_reason          = $('#other_reason').val();
     $.ajax({
         url: '/return',
         type: 'POST',
@@ -142,7 +143,8 @@ $(document).on('click', '.btn-confirm-return', function(){
             selling_price   :selling_price,
             qty_return      :qty_return,
             qty_purchased   :qty_purchased,
-            reason          :reason
+            reason          :reason,
+            other_reason    :other_reason
         },
         beforeSend:function(){
             $('.btn-confirm-return').text('Please wait...');

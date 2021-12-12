@@ -25,4 +25,10 @@ class Supplier extends Model
             return $this::where('id', $id)->pluck('supplier_name')[0];
         }
     }
+
+    public function getSupplierContact($id) {
+        if ($id) {
+            return $this::where('id', $id)->value('contact');
+        }
+    }
 }

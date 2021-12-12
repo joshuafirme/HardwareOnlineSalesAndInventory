@@ -58,11 +58,12 @@
                       <tr>
                         <th>Invoice #</th>
                         <th>Product Code</th>   
-                        <th>Description</th>   
+                        <th>Name</th>   
                         <th>Unit</th>   
                         <th>Selling price</th>     
                         <th>Qty returned</th>     
                         <th>Reason</th>   
+                        <th>Other Reason</th>   
                         <th>Date time Return</th> 
                       </tr>
                   </thead>

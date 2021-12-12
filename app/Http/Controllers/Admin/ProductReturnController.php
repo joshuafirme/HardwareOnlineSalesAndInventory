@@ -40,27 +40,33 @@ class ProductReturnController extends Controller
         $qty_return = Input::input('qty_return');
         $qty_purchased = Input::input('qty_purchased');
         $reason = Input::input('reason');
+        $other_reason = Input::input('other_reason');
         $date_returned = date('Y-m-d');
 
         if($reason == 'Damaged'){
-            $this->recordReturn($invoice_no, $product_code, $qty_return, $reason, $date_returned);
+            $this->recordReturn($invoice_no, $product_code, $qty_return, $reason, $date_returned, "");
             $this->updateSales($invoice_no, $product_code, $qty_return , $qty_purchased, $selling_price);
         }
         else if($reason == 'Wrong item'){
-            $this->recordReturn($invoice_no, $product_code, $qty_return, $reason, $date_returned);
+            $this->recordReturn($invoice_no, $product_code, $qty_return, $reason, $date_returned, "");
             $this->updateInventory($product_code, $qty_return);
             $this->updateSales($invoice_no, $product_code, $qty_return , $qty_purchased, $selling_price);
-        }        
+        }  
+        else {
+            $this->recordReturn($invoice_no, $product_code, $qty_return, $reason, $date_returned, $other_reason);
+            $this->updateSales($invoice_no, $product_code, $qty_return , $qty_purchased, $selling_price);
+        }      
 
     }
 
-    public function recordReturn($invoice_no, $product_code, $qty_return, $reason, $date_returned){
+    public function recordReturn($invoice_no, $product_code, $qty_return, $reason, $date_returned, $other_reason){
         $return = new ProductReturn;
         $return->invoice_no = $invoice_no;
         $return->product_code = $product_code;
         $return->qty = $qty_return;  
         $return->reason = $reason; 
         $return->date_returned = $date_returned;  
+        $return->type_reason = $other_reason; 
         $return->save();     
     }
 

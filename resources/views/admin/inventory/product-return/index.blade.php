@@ -71,7 +71,7 @@
                       <tr>
                         <th>Invoice #</th>
                         <th>Product Code</th>
-                        <th>Description</th>
+                        <th>Name</th>
                         <th>Unit</th>
                         <th>Selling price</th>
                         <th>Qty</th>
@@ -114,7 +114,7 @@
                     </div>
                     
                     <div class="col-sm-12 col-md-12 mt-2">
-                        <label class="col-form-label">Description</label>
+                        <label class="col-form-label">Name</label>
                         <input type="text" class="form-control" id="description" readonly>
                     </div>
 
@@ -146,9 +146,16 @@
                     <div class="col-sm-12 col-md-6 mt-2">
                       <label class="col-form-label">Reason</label>
                       <select  class="form-control" id="reason">
+                        <option value="" selected disabled>--select a reason--</option>
                         <option value="Wrong item">Wrong item</option>
                         <option value="Damaged">Damaged</option>
+                        <option value="Other">Other</option>
                       </select>
+                    </div>
+
+                    <div class="col-sm-12 mt-2">
+                      <label class="col-form-label">Other Reason</label>
+                      <textarea rows="3"  class="form-control" id="other_reason"></textarea>
                     </div>
 
                 </div>

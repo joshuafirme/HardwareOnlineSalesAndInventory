@@ -56,7 +56,7 @@
                   <thead>
                       <tr>
                         <th>Product Code</th>
-                        <th>Description</th>
+                        <th>Name</th>
                         <th>Qty</th>
                         <th>Unit</th>
                         <th>Category</th>

@@ -136,7 +136,8 @@ class PurchaseOrderController extends Controller
         $data = $po->readRequestOrderBySupplier($supplier_id);
         $supplier_name = $supplier->getSupplierNameByID($supplier_id);
 
-        $output = $this->generateHTML($data, $supplier_name);
+        $supplier_contact = $supplier->getSupplierContact($supplier_id);
+        $output = $this->generateHTML($data, $supplier_name, $supplier_contact );
         
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($output);
@@ -153,8 +154,8 @@ class PurchaseOrderController extends Controller
 
         $data = $po->readRequestOrderBySupplier($supplier_id);
         $supplier_name = $supplier->getSupplierNameByID($supplier_id);
-
-        $output = $this->generateHTML($data, $supplier_name);
+        $supplier_contact = $supplier->getSupplierContact($supplier_id);
+        $output = $this->generateHTML($data, $supplier_name, $supplier_contact );
         
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($output);
@@ -163,7 +164,7 @@ class PurchaseOrderController extends Controller
         return $pdf->download();
     }
 
-    public function generateHTML($items, $supplier_name){
+    public function generateHTML($items, $supplier_name, $supplier_contact ){
 
         $output = '
         <!DOCTYPE html>
@@ -185,12 +186,13 @@ class PurchaseOrderController extends Controller
         <h1 class="p-name">VAL CONSTRUCTION SUPPLY</h1>
         <h2 style="text-align:center;">Purchase Order</h2>
         <p style="text-align:left;">Supplier: '.$supplier_name.'</p>
+        <p style="text-align:left;">Contact number: '.$supplier_contact .'</p>
         <p style="text-align:left;">Date: '. date("F j, Y") .'</p>
         <table width="100%" style="border-collapse:collapse; border: 1px solid;">                
             <thead>
                 <tr>
                     <th>Product Code</th>    
-                    <th>Description</th>   
+                    <th>Name</th>   
                     <th>Unit</th>   
                     <th>Category</th>  
                     <th>Supplier</th>  

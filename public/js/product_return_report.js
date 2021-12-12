@@ -34,6 +34,7 @@ async function fetchReturns(date_from, date_to){
             {data: 'selling_price', name: 'selling_price'},
             {data: 'qty', name: 'qty'},
             {data: 'reason', name: 'reason'},
+            {data: 'type_reason', name: 'type_reason'},
             {data: 'created_at', name: 'created_at'},
         ]
        });

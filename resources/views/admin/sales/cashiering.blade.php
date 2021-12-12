@@ -59,7 +59,7 @@
                                 <table class="table responsive table-bordered table-hover tbl-tray" style="margin-bottom:20px;">
                                     <thead>
                                         <th width="150px">Product Code</th>
-                                        <th>Description</th>
+                                        <th>Name</th>
                                         <th>Unit</th>
                                         <th>Price</th>
                                         <th>Qty</th>

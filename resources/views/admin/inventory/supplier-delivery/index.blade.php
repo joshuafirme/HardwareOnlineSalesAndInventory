@@ -96,7 +96,7 @@
                           <tr>
                               <th>PO #</th>
                               <th>Product Code</th>     
-                              <th>Description</th>   
+                              <th>Name</th>   
                               <th>Supplier</th>  
                               <th>Unit</th>                                 
                               <th>Qty Order</th>        
@@ -151,7 +151,7 @@
                                     <th>Delivery #</th>
                                     <th>PO #</th>
                                     <th>Product Code</th>     
-                                    <th>Description</th>   
+                                    <th>Name</th>   
                                     <th>Supplier</th> 
                                     <th>Unit</th>      
                                     <th>Qty Ordered</th>                              
@@ -199,7 +199,7 @@
                     </div>
                     
                     <div class="col-sm-12 col-md-6 mt-2">
-                        <label class="col-form-label">Description</label>
+                        <label class="col-form-label">Name</label>
                         <input type="text" class="form-control" name="description" id="description" readonly>
                     </div>
 

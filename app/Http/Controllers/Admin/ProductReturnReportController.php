@@ -64,7 +64,7 @@ class ProductReturnReportController extends Controller
                 <tr>  
                     <th style="border: 1px solid;">Invoice #</th>
                     <th style="border: 1px solid;">Product Code</th>   
-                    <th style="border: 1px solid;">Description</th>   
+                    <th style="border: 1px solid;">Name</th>   
                     <th style="border: 1px solid;">Unit</th>   
                     <th style="border: 1px solid;">Selling price</th>     
                     <th style="border: 1px solid;">Qty returned</th>     
