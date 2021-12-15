@@ -112,7 +112,7 @@
                                 <button class="btn btn-sm btn-success" id="proccess">Proccess</button>
                             </div>
                             <div class="col-sm-12 mt-3 img-gcash-qr">
-                                <img width="300" height="300" src="{{asset('images/gcash.jpg')}}" alt="">
+                                <img width="300" height="300" src="{{asset('images/qr-vsc.jpg')}}" alt="">
                             </div>
                         </div>        
                     </div>
