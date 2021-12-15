@@ -1,10 +1,3 @@
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-}); 
-
-
 var product_id;
 
 $(document).on('click', '.btn-adjust-qty', function(){

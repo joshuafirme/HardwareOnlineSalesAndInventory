@@ -45,6 +45,20 @@ async function fetchData(){
      
 }
 
+$(document).on('keyup', '#markup', async function() {
+  var markup = $(this).val();
+  await computeSellingPrice(markup);
+});
+
+async function computeSellingPrice(markup){
+
+  var orig_price = $('#orig_price').val();
+  var markup = orig_price * markup;
+  var selling_price = parseFloat(markup) + parseFloat(orig_price);
+
+  return $('#selling_price').val(selling_price);
+}
+
 
   async function renderProducts() {
     await fetchData();   
