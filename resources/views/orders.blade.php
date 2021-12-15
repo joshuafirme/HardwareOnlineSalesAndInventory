@@ -113,6 +113,9 @@ select.form-control {
                               </a>
                             @endif
                         </div> 
+                        @if ($item->status == 2 || $item->status == 3)
+                          <div class="float-right mt-3">Estimated delivery date <br> <span>{{date('F d, Y', strtotime($item->delivery_date))}}</span></div>
+                        @endif
 
                         @php
                             $total = DB::table('orders')->where('order_no', $item->order_no)->sum('amount');
