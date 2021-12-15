@@ -160,6 +160,7 @@ async function on_Click() {
         let email = $(this).attr('data-email');
         let payment_method = $(this).attr('data-payment');
         let user_id = $(this).attr('data-user-id');
+        let delivery_date = $(this).attr('data-delivery-date');
         let btn = '<button class="btn btn-sm btn-outline-dark" id="btn-print" type="button">Print</button>';
         if (active_pill != 'completed' && active_pill != 'cancelled') {
             btn += '<button class="btn btn-sm btn-success" id="btn-change-status" data-active-pill="'+active_pill+'" data-status="'+status+'"  type="button">'+btn_text+'</button>';
@@ -173,6 +174,12 @@ async function on_Click() {
             html += '</div>';
             html += '<div class="col-sm-12 col-md-6">';
             html += '<div class="float-right">Order #: <b>'+order_no+'</b><div>Payment method: '+payment_method+'</div></div>';
+            if (active_pill == 'pending') {
+                html += '<div class="float-right" style="margin-right:55px;"><b>Estimated Delivery Date:</b> <input id="delivery_date" type="date" class="form-control"></div>';
+            }
+            else {
+                html += '<div class="float-right" style="margin-right:65px;"><b>Estimated Delivery Date:</b><br> '+delivery_date+'</div>';
+            }
             html += '</div>';
         $('#show-orders-modal').modal('show');
         $('#show-orders-modal').find('#user-info').html(html);
@@ -191,12 +198,23 @@ async function on_Click() {
         let order_no = $(this).attr('data-order-no');
         let data_status = $(this).attr('data-status');
         let active_pill = $(this).attr('data-active-pill');
+        let delivery_date = "";
+        if($('#delivery_date').length > 0) {
+            if ($('#delivery_date').val().length > 0) {
+                delivery_date  = $('#delivery_date').val();
+            }
+            else {
+                alert('Please input the estimated delivery date.');
+                return;
+            }
+        }
         let btn = $(this);
         $.ajax({
             url: '/order-change-status/'+order_no,
             type: 'POST',
             data: {
                 status : data_status,
+                delivery_date : delivery_date
             },
             beforeSend:function(){
                 btn.text('Please wait...');

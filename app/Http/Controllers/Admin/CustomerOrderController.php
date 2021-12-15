@@ -37,8 +37,9 @@ class CustomerOrderController extends Controller
             return datatables()->of($order)
                 ->addColumn('action', function($order)
                 {
+                    $order->delivery_date = date('F d, Y', strtotime($order->delivery_date));
                     $button = '<a class="btn btn-sm btn-show-order" data-name="'. $order->name .'" data-order-no="'. $order->order_no .'" ';
-                    $button .= 'data-user-id="'. $order->user_id .'" data-payment="'. $order->payment_method .'" ';
+                    $button .= 'data-user-id="'. $order->user_id .'" data-payment="'. $order->payment_method .'" data-delivery-date="'. $order->delivery_date .'" '; 
                     $button .= 'data-phone="'. $order->phone .'" data-email="'. $order->email .'" style="color:#1970F1;">Show orders</a>';
                     return $button;
                 })
@@ -75,8 +76,14 @@ class CustomerOrderController extends Controller
             $this->recordSale($orders);
         }
 
+        $delivery_date = date('Y-m-d');
+        
+        if (request()->delivery_date) {
+            $delivery_date = request()->delivery_date;
+        }
         Order::where('order_no', $order_no)->update([
-            'status' => request()->status
+            'status' => request()->status,
+            'delivery_date' => $delivery_date
         ]);
 
         return response()->json([

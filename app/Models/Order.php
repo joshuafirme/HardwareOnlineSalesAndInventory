@@ -20,6 +20,7 @@ class Order extends Model
         'qty',
         'amount',
         'payment_method',
+        'delivery_date'
     ];
 
     public function readOrders($user_id)
