@@ -64,7 +64,7 @@ $(document).on('click', '#btn-send-feedback', function(){
                     showHideTransition: 'plain',
                     hideAfter: 6500, 
                 });
-                $('#confirmModal').modal('hide');
+                $('#feedback-modal').modal('hide');
             }
             btn.html('Send');
         }
