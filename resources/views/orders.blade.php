@@ -10,49 +10,6 @@ $page_title =  "Val Construction Supply | Orders";
 <!-- /.navbar -->
 
 <style>
-.border-md {
-  border-width: 2px !important;
-}
-
-.btn-facebook {
-  background: #405D9D;
-  border: none;
-}
-
-.btn-facebook:hover, .btn-facebook:focus {
-  background: #314879;
-}
-
-.btn-twitter {
-  background: #42AEEC;
-  border: none;
-}
-
-.btn-twitter:hover, .btn-twitter:focus {
-  background: #1799e4;
-}
-
-body {
-  min-height: 100vh;
-}
-
-.form-control:not(select) {
-  padding: 1.5rem 0.5rem;
-}
-
-select.form-control {
-  height: 52px;
-  padding-left: 0.5rem;
-}
-
-.form-control::placeholder {
-  color: #ccc;
-  font-weight: bold;
-  font-size: 0.9rem;
-}
-.form-control:focus {
-  box-shadow: none;
-}
 
 </style>
 
@@ -115,6 +72,10 @@ select.form-control {
                         </div> 
                         @if ($item->status == 2 || $item->status == 3)
                           <div class="float-right mt-3">Estimated delivery date <br> <span>{{date('F d, Y', strtotime($item->delivery_date))}}</span></div>
+                        @endif
+
+                        @if ($item->status == 4)
+                          <a  class="float-right mt-3 btn-write-feedback" style="cursor: pointer;" data-order-no="{{ $item->order_no }}">Write a feedback</a>
                         @endif
 
                         @php
@@ -208,6 +169,36 @@ select.form-control {
       </div>
       <div class="modal-footer">
         <button class="btn btn-sm btn-outline-dark" id="btn-confirm-cancel" type="button">Yes</button>
+        <button class="btn btn-sm btn-danger" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="feedback-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Feedback</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+              <label class="col-form-label">Comment</label>
+              <textarea rows="3" type="text" class="form-control" name="comment"  id="comment" required></textarea>
+          </div>  
+          <div class="col-sm-12">
+            <label class="col-form-label">Suggestion</label>
+            <textarea rows="3" type="text" class="form-control" name="suggestion"  id="suggestion" required></textarea>
+          </div>  
+
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm btn-outline-dark" id="btn-send-feedback" type="button">Send</button>
         <button class="btn btn-sm btn-danger" data-dismiss="modal">Cancel</button>
       </div>
     </div>

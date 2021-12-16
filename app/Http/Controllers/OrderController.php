@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Feedback;
 use Auth;
 use DB;
 
@@ -31,5 +32,23 @@ class OrderController extends Controller
         else {
             return 'more than 5 mins';
         }
+    }
+
+    
+    public function sendFeedback()
+    {
+        Feedback::create([
+            'user_id' => Auth::id(),
+            'order_no' => request()->order_no,
+            'comment' => request()->comment,
+            'suggestion' => request()->suggestion,
+        ]);
+    }
+
+    public function readOneFeedback()
+    {
+        return Feedback::where('user_id', Auth::id())
+            ->where('order_no', request()->order_no)
+            ->first();
     }
 }

@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\VerifyCustomerController;
 use App\Http\Controllers\Admin\CustomerOrderController;
 use App\Http\Controllers\Admin\AuditTrailController;
 use App\Http\Controllers\Admin\ArchiveController;
+use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AccountController;
@@ -94,7 +95,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-orders', [OrderController::class, 'index']);
     Route::post('/cancel-order/{order_no}', [OrderController::class, 'cancelOrder']);
     Route::get('/get-brgy/{municipality}', [UserAddressController::class, 'getBrgyByMunicipality']);
-
+    Route::post('/send-feedback', [OrderController::class, 'sendFeedback']);
+    Route::get('/read-feedback', [OrderController::class, 'readOneFeedback']);
+    
     Route::middleware('access_level:1:2:3:4')->group(function () {
       Route::get('/dashboard', [DashboardController::class, 'index']);
       Route::resource('users', UserController::class);
@@ -178,6 +181,8 @@ Route::middleware('auth')->group(function () {
       Route::get('/archive/products', [ArchiveController::class, 'readArchiveProduct']);
       Route::get('/archive/users', [ArchiveController::class, 'readArchiveUsers']);
       Route::post('/archive/restore/{id}', [ArchiveController::class, 'restore']);
+
+      Route::get('/feedback', [FeedbackController::class, 'index']);
     });
     
 });

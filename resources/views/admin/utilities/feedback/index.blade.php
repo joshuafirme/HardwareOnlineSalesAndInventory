@@ -3,13 +3,13 @@
 @section('content')
 
 @php
-    $page_title = "VCS | Audit Trail";
+    $page_title = "VCS | Feedback";
 @endphp
 
 <div class="content-header"></div>
 
 <div class="page-header">
-  <h3 class="mt-2" id="page-title">Audit Trail</h3>
+  <h3 class="mt-2" id="page-title">Feedback</h3>
           <hr>
       </div>
 
@@ -44,8 +44,8 @@
                        <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Module</th>
-                            <th>Action</th>
+                            <th>Comment</th>
+                            <th>Suggestion</th>
                             <th>Date time</th>
                         </tr>
                        </thead>

@@ -15,6 +15,63 @@ $(document).on('click', '.cancel-order', function(){
    
 }); 
 
+$(document).on('click', '.btn-write-feedback', function(){ console.log('test')
+    let order_no = $(this).attr('data-order-no');
+    $('#btn-send-feedback').attr('data-order-no', order_no);
+    $('#feedback-modal').modal('show');
+
+    $.ajax({
+        url: '/read-feedback',
+        type: 'GET',
+        data: {
+            order_no : order_no,
+        },
+        success:function(data){
+            if (data) {
+                $('#comment').prop('disabled', true);
+                $('#suggestion').prop('disabled', true);
+                $('#comment').val(data.comment);
+                $('#suggestion').val(data.suggestion);
+                $('#btn-send-feedback').prop('disabled', true);
+            }
+        }
+    });
+   
+}); 
+$(document).on('click', '#btn-send-feedback', function(){
+    let order_no = $(this).attr('data-order-no');
+    let comment = $('#comment').val();
+    let suggestion = $('#suggestion').val();
+    let btn = $(this);
+
+    btn.html('Sending...');
+
+    $.ajax({
+        url: '/send-feedback',
+        type: 'POST',
+        data: {
+            order_no : order_no,
+            comment : comment,
+            suggestion : suggestion
+        },
+        success:function(data){
+            if (data == 'more than 5 mins') {
+                $('.validation-text').html('Unable to cancel order, order was placed more than 5 minutes.');
+            }
+            else {
+                $.toast({
+                    text: 'Your feedback has been sent!',
+                    showHideTransition: 'plain',
+                    hideAfter: 6500, 
+                });
+                $('#confirmModal').modal('hide');
+            }
+            btn.html('Send');
+        }
+    });
+}); 
+
+
 $(document).on('click', '#btn-confirm-cancel', function(){
     let order_no = $(this).attr('data-order-no');
     let date_time = $(this).attr('data-date-time');
