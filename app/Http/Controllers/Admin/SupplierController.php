@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Supplier;
+use App\Models\AuditTrail;
 use Input;
 
 class SupplierController extends Controller
 {
+    public $module = "Supplier Maintenance";
+
     /**
      * Display a listing of the resource.
      *
@@ -41,6 +44,9 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
+        $at = new AuditTrail;
+        $at->audit($this->module, 'Add');
+
         $request->validate([
             'supplier_name' => 'required|unique:supplier',
             'address' => 'required:supplier',
@@ -85,6 +91,9 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $at = new AuditTrail;
+        $at->audit($this->module, 'Update');
+
         $request->validate([
             'supplier_name' => 'required:supplier',
             'address' => 'required:supplier',

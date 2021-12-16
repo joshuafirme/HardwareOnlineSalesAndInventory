@@ -8,6 +8,8 @@ use App\Models\DeliveryArea;
 
 class DeliveryAreaController extends Controller
 {
+    public $module = "Delivery Area Maintenance";
+
     /**
      * Display a listing of the resource.
      *
@@ -40,6 +42,9 @@ class DeliveryAreaController extends Controller
      */
     public function store(Request $request)
     {
+        $at = new AuditTrail;
+        $at->audit($this->module, 'Add');
+
         $request->validate([
             'municipality' => 'required:delivery_area',
             'brgy' => 'required:delivery_area',
@@ -84,6 +89,9 @@ class DeliveryAreaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $at = new AuditTrail;
+        $at->audit($this->module, 'Update');
+        
         $data = $request->except(['_token', '_method']);
         DeliveryArea::where('id', $id)->update($data);
 

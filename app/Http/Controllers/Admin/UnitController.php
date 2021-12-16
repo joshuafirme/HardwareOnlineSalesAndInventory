@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Unit;
+use App\Models\AuditTrail;
 
 class UnitController extends Controller
 {
+    public $module = "Unit Maintenance";
     /**
      * Display a listing of the resource.
      *
@@ -39,6 +41,9 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
+        $at = new AuditTrail;
+        $at->audit($this->module, 'Add');
+
         $request->validate([
             'name' => 'required|unique:unit',
         ]);
@@ -80,6 +85,9 @@ class UnitController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $at = new AuditTrail;
+        $at->audit($this->module, 'Update');
+
         $request->validate([
             'name' => 'required:unit',
         ]);

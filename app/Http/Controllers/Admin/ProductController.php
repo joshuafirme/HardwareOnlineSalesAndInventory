@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Unit;
 use App\Models\Category;
 use App\Models\Supplier;
+use App\Models\AuditTrail;
 use Cache;
 
 class ProductController extends Controller
@@ -17,6 +18,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public $module = "Product Maintenance";
+
     public function index()
     {
         $product = new Product;
@@ -73,6 +77,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $at = new AuditTrail;
+        $at->audit($this->module, 'Add');
+
         $this->validateInputs($request);
 
         $data = $request->all();
@@ -147,6 +154,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $at = new AuditTrail;
+        $at->audit($this->module, 'Update');
+
         $this->validateInputs($request);
 
         $data = $request->except(['_token', '_method', 'markup']);

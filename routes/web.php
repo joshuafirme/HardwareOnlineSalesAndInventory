@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\ProductReturnReportController;
 use App\Http\Controllers\Admin\ReorderListController;
 use App\Http\Controllers\Admin\VerifyCustomerController;
 use App\Http\Controllers\Admin\CustomerOrderController;
+use App\Http\Controllers\Admin\AuditTrailController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AccountController;
@@ -170,7 +171,7 @@ Route::middleware('auth')->group(function () {
       Route::get('/get-shipping-fee/{order_no}', [CustomerOrderController::class, 'getShippingFee']);
       Route::get('/read-shipping-address/{user_id}', [CustomerOrderController::class, 'readShippingAddress']);
 
-     
+      Route::get('/audit-trail', [AuditTrailController::class, 'index']);
     });
     
 });
