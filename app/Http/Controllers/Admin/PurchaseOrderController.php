@@ -184,6 +184,8 @@ class PurchaseOrderController extends Controller
         <div style="width:100%">
         
         <h1 class="p-name">VAL CONSTRUCTION SUPPLY</h1>
+        <div style="text-align:center;">Calzada Ermita Balayan, Batangas<div>
+        <div style="text-align:center;">Contact number: 09238985588<div>
         <h2 style="text-align:center;">Purchase Order</h2>
         <p style="text-align:left;">Supplier: '.$supplier_name.'</p>
         <p style="text-align:left;">Contact number: '.$supplier_contact .'</p>
