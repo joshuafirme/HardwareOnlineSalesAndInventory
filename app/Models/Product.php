@@ -48,6 +48,28 @@ class Product extends Model
             ->get();
     }
 
+    public function readArchiveProduct($date_from, $date_to)
+    {
+        return DB::table($this->table . ' as P')
+            ->select("P.*", DB::raw('CONCAT(prefix, P.id) as product_code'),
+                    'description',
+                    'reorder', 
+                    'orig_price', 
+                    'selling_price', 
+                    'qty', 
+                    'U.name as unit', 
+                    'S.supplier_name as supplier', 
+                    'C.name as category',
+                    'P.updated_at'
+                    )
+            ->leftJoin('supplier as S', 'S.id', '=', 'P.supplier_id')
+            ->leftJoin('category as C', 'C.id', '=', 'P.category_id')
+            ->leftJoin('unit as U', 'U.id', '=', 'P.unit_id')
+            ->whereBetween(DB::raw('DATE(P.updated_at)'), [$date_from, $date_to])
+            ->where('P.status', -1)
+            ->get();
+    }
+
     public function readProductByCategory($category_id)
     {
         return DB::table($this->table . ' as P')

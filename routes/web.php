@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\ReorderListController;
 use App\Http\Controllers\Admin\VerifyCustomerController;
 use App\Http\Controllers\Admin\CustomerOrderController;
 use App\Http\Controllers\Admin\AuditTrailController;
+use App\Http\Controllers\Admin\ArchiveController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AccountController;
@@ -101,6 +102,7 @@ Route::middleware('auth')->group(function () {
       Route::resource('unit', UnitController::class);
       Route::post('user/archive/{id}', [UserController::class, 'archive']);
       Route::resource('product', ProductController::class);
+      Route::post('/product/archive/{id}', [ProductController::class, 'archive']);
       Route::resource('category', CategoryController::class);
       Route::resource('delivery_area', DeliveryAreaController::class);
       Route::get('delivery_area/brgylist/{municipality}', [DeliveryAreaController::class,'getBrgyList']);
@@ -172,6 +174,9 @@ Route::middleware('auth')->group(function () {
       Route::get('/read-shipping-address/{user_id}', [CustomerOrderController::class, 'readShippingAddress']);
 
       Route::get('/audit-trail', [AuditTrailController::class, 'index']);
+      Route::get('/archive', [ArchiveController::class, 'index']);
+      Route::get('/archive/products', [ArchiveController::class, 'readArchiveProduct']);
+      Route::post('/archive/restore/{id}', [ArchiveController::class, 'restore']);
     });
     
 });

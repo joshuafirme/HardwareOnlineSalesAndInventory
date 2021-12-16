@@ -178,8 +178,14 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function archive($id)
     {
-        //
+        Product::where('id', $id)
+        ->update([
+            'status' => -1,
+        ]);
+
+        return redirect()->back()
+            ->with('success', 'Product was archived.');
     }
 }

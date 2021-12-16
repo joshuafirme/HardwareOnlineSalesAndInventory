@@ -50,6 +50,48 @@ $(document).on('keyup', '#markup', async function() {
   await computeSellingPrice(markup);
 });
 
+
+$.ajaxSetup({
+  headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+}); 
+
+var product_id;
+$(document).on('click', '.btn-archive-product', function(){
+  product_id = $(this).attr('data-id');
+  var row = $(this).closest("tr");
+  var name = row.find("td:eq(1)").text();
+  $('#confirmModal').modal('show');
+  $('.delete-success').hide();
+  $('.delete-message').html('Are you sure do you want to archive <b>'+ name +'</b>?');
+}); 
+
+$(document).on('click', '.btn-confirm-archive', function(){
+  $.ajax({
+      url: '/product/archive/'+ product_id,
+      type: 'POST',
+    
+      beforeSend:function(){
+          $('.btn-confirm-archive').text('Please wait...');
+      },
+      
+      success:function(){
+          setTimeout(function(){
+
+              $('.btn-confirm-archive').text('Yes');
+              $('.tbl-product').DataTable().ajax.reload();
+              $('#confirmModal').modal('hide');
+              $.toast({
+                  text: 'Product was successfully archived.',
+                  showHideTransition: 'plain'
+              })
+          }, 1000);
+      }
+  });
+
+});
+
 async function computeSellingPrice(markup){
 
   var orig_price = $('#orig_price').val();
