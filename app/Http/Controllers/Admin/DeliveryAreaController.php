@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DeliveryArea;
+use App\Models\AuditTrail;
 
 class DeliveryAreaController extends Controller
 {
@@ -91,7 +92,7 @@ class DeliveryAreaController extends Controller
     {
         $at = new AuditTrail;
         $at->audit($this->module, 'Update');
-        
+
         $data = $request->except(['_token', '_method']);
         DeliveryArea::where('id', $id)->update($data);
 
