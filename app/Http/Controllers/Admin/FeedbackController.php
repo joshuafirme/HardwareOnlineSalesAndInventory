@@ -24,7 +24,12 @@ class FeedbackController extends Controller
                     $date_time = date('F d, Y h:i A', strtotime($p->created_at));
                     return $date_time;
                 })
-                ->rawColumns(['created_at'])
+                ->addColumn('action', function($p)
+                {
+                    $button = ' <a style="color:#1970F1;" class="btn btn-sm btn-show-order" data-phone="'. $p->phone .'" data-email="'. $p->email .'" data-order-no="'. $p->order_no .'">Show orders</a>';
+                    return $button;
+                })
+                ->rawColumns(['action', 'created_at'])
                 ->make(true);            
         }
         return view('admin.utilities.feedback.index');
