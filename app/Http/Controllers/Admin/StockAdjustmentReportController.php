@@ -55,6 +55,9 @@ class StockAdjustmentReportController extends Controller
         <div style="width:100%">
         <p style="text-align:right;">Date: '. date("F j, Y", strtotime($date_from)) .' - '. date("F j, Y", strtotime($date_to)) .'</p>
         <h1 style="text-align:center;">Val Construction Supply</h1>
+
+        <div style="text-align:center;">Calzada Ermita Balayan, Batangas<div>
+        <div style="text-align:center;">Contact number: 09238985588<div>
         <h2 style="text-align:center;">Stock Adjustment Report</h2>
     
         <table width="100%" style="border-collapse:collapse; border: 1px solid;">

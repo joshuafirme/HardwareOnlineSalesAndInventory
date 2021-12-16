@@ -62,6 +62,9 @@ class SupplierDeliveryReportController extends Controller
         $output = '
         <div style="width:100%">
         <h1 style="text-align:center;">Val Construction Supply</h1>
+
+        <div style="text-align:center;">Calzada Ermita Balayan, Batangas<div>
+        <div style="text-align:center;">Contact number: 09238985588<div>
         <h2 style="text-align:center;">Supplier Delivery Report</h2>
 
         <p style="text-align:left;">Date: '. date("F j, Y", strtotime($date_from)) .' - '. date("F j, Y", strtotime($date_to)) .'</p>

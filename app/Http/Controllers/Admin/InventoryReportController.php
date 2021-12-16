@@ -87,6 +87,9 @@ class InventoryReportController extends Controller
         $output = '
         <div style="width:100%">
         <h1 style="text-align:center;">Val Construction Supply</h1>
+
+        <div style="text-align:center;">Calzada Ermita Balayan, Batangas<div>
+        <div style="text-align:center;">Contact number: 09238985588<div>
         <h2 style="text-align:center;">Inventory Report</h2>
         
         ';
