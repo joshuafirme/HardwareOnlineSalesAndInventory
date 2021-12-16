@@ -126,7 +126,8 @@ class UserController extends Controller
     {
         User::where('id', $id)
         ->update([
-            'status' => -1
+            'status' => -1,
+            'updated_at' => date('Y-m-d h:m:s')
         ]);
 
         return redirect()->back()

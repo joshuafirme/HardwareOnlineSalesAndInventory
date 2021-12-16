@@ -176,6 +176,7 @@ Route::middleware('auth')->group(function () {
       Route::get('/audit-trail', [AuditTrailController::class, 'index']);
       Route::get('/archive', [ArchiveController::class, 'index']);
       Route::get('/archive/products', [ArchiveController::class, 'readArchiveProduct']);
+      Route::get('/archive/users', [ArchiveController::class, 'readArchiveUsers']);
       Route::post('/archive/restore/{id}', [ArchiveController::class, 'restore']);
     });
     

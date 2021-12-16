@@ -32,8 +32,30 @@ async function fetchProduct(date_from, date_to){
       });
 }
 
+async function fetchUser(date_from, date_to){
+    $('#user-archive-table').DataTable({
+       processing: true,
+       serverSide: true,
+       ajax:{
+        url: "/archive/users",
+        type:"GET",
+        data:{
+            date_from   :date_from,
+            date_to     :date_to
+            }
+        },
+       columns:[       
+        {data: 'name', name: 'name',orderable: true},
+        {data: 'email', name: 'email'},
+        {data: 'access_level', name: 'access_level'},
+        {data: 'updated_at',name: 'updated_at'},   
+        {data: 'action', name: 'action',orderable: false},
+       ]
+      });
+}
+
 var product_id;
-$(document).on('click', '.btn-restore-product', function(){
+$(document).on('click', '.btn-restore', function(){
   product_id = $(this).attr('data-id');
   var row = $(this).closest("tr");
   var name = row.find("td:eq(1)").text();
@@ -43,27 +65,41 @@ $(document).on('click', '.btn-restore-product', function(){
 }); 
 
 $(document).on('click', '.btn-confirm-restore', function(){
-  $.ajax({
-      url: '/archive/restore/'+ product_id,
-      type: 'POST',
-    
-      beforeSend:function(){
-          $('.btn-confirm-restore').text('Please wait...');
-      },
-      
-      success:function(){
-          setTimeout(function(){
-
-              $('.btn-confirm-restore').text('Yes');
-              $('#product-archive-table').DataTable().ajax.reload();
-              $('#restoreModal').modal('hide');
-              $.toast({
-                  text: 'Product was successfully restored.',
-                  showHideTransition: 'plain'
-              })
-          }, 1000);
-      }
-  });
+    var object = ""
+    if ($('.nav-item').find('.active').attr('aria-controls') == 'pending') {
+        object = "product";
+    }
+    else {
+        object = "user";
+    } 
+    $.ajax({
+        url: '/archive/restore/'+ product_id,
+        type: 'POST',
+        data: {
+            object : object
+        },      
+        beforeSend:function(){
+            $('.btn-confirm-restore').text('Please wait...');
+        },
+        
+        success:async function(){
+  
+                $('.btn-confirm-restore').text('Yes');
+        //        $('#'+object+'-archive-table').DataTable().destroy();
+                
+                if (object == 'product') {
+                    $('#product-archive-table').DataTable().ajax.reload();
+                }
+                else {
+                    $('#user-archive-table').DataTable().ajax.reload();
+                }
+                $('#restoreModal').modal('hide');
+                $.toast({
+                    text: object+' was successfully restored.',
+                    showHideTransition: 'plain'
+                })
+        }
+    });
 
 });
   
@@ -73,8 +109,12 @@ $(document).on('change','#date_from', async function(){
     var date_to = $('#date_to').val();
 
     $('#product-archive-table').DataTable().destroy();
-
-    await fetchData(date_from, date_to);
+    if ($('.nav-item').find('.active').attr('aria-controls') == 'pending') {
+        await fetchProduct(date_from, date_to);
+    }
+    else {
+        await fetchUser(date_from, date_to);
+    }
 });
 
 $(document).on('change','#date_to', async function(){
@@ -83,15 +123,39 @@ $(document).on('change','#date_to', async function(){
     var date_from = $('#date_from').val();
 
     $('#product-archive-table').DataTable().destroy();
+    if ($('.nav-item').find('.active').attr('aria-controls') == 'pending') {
+        await fetchProduct(date_from, date_to);
+    }
+    else {
+        await fetchUser(date_from, date_to);
+    }
+});
 
-    await fetchProduct(date_from, date_to);
+$(document).on('click','.nav-item', async function(){
+
+    var date_to = $('#date_to').val();
+    var date_from = $('#date_from').val();
+
+    if ($('.nav-item').find('.active').attr('aria-controls') == 'pending') {
+        $('#product-archive-table').DataTable().destroy();
+        await fetchProduct(date_from, date_to);
+    }
+    else {
+        $('#user-archive-table').DataTable().destroy();
+        await fetchUser(date_from, date_to);
+    }
 });
 
   async function render() {
     var date_to = $('#date_to').val();
     var date_from = $('#date_from').val();
 
-    await fetchProduct(date_from, date_to);
+    if ($('.nav-item').find('.active').attr('aria-controls') == 'pending') {
+        await fetchProduct(date_from, date_to);
+    }
+    else {
+        await fetchUser(date_from, date_to);
+    }
   }
 
   render();
