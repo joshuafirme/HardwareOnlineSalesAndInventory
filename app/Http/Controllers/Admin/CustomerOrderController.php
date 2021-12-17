@@ -74,16 +74,19 @@ class CustomerOrderController extends Controller
         if (request()->status == 2) { 
             $orders = $this->readOneOrder($order_no);
             $this->recordSale($orders);
+
+            $delivery_date = date('Y-m-d');
+            
+            if (request()->delivery_date) {
+                $delivery_date = request()->delivery_date;
+            }
+            Order::where('order_no', $order_no)->update([
+                'delivery_date' => $delivery_date
+            ]);
         }
 
-        $delivery_date = date('Y-m-d');
-        
-        if (request()->delivery_date) {
-            $delivery_date = request()->delivery_date;
-        }
         Order::where('order_no', $order_no)->update([
-            'status' => request()->status,
-            'delivery_date' => $delivery_date
+            'status' => request()->status
         ]);
 
         return response()->json([
