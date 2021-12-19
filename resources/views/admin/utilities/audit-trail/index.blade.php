@@ -1,4 +1,4 @@
-@extends('admin.utilities.feedback.layout')
+@extends('admin.utilities.audit-trail.layout')
 
 @section('content')
 
@@ -40,7 +40,7 @@
           <div class="col-md-12 col-lg-12 mt-3">
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-hover" id="feedback-table">
+                    <table class="table table-hover" id="audit-trail-table">
                        <thead>
                         <tr>
                             <th>Name</th>
