@@ -105,6 +105,7 @@ Route::middleware('auth')->group(function () {
       Route::resource('unit', UnitController::class);
       Route::post('user/archive/{id}', [UserController::class, 'archive']);
       Route::resource('product', ProductController::class);
+      Route::get('/product-search', [ProductController::class, 'productSearch']);
       Route::post('/product/archive/{id}', [ProductController::class, 'archive']);
       Route::resource('category', CategoryController::class);
       Route::resource('delivery_area', DeliveryAreaController::class);

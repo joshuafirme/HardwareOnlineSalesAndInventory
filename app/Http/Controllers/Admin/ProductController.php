@@ -43,6 +43,20 @@ class ProductController extends Controller
         return view('admin.maintenance.product.index');
     }
 
+    public function productSearch()
+    {
+        $product = new Product;
+        $product = $product->readAllProduct();
+
+        if(request()->ajax())
+        { 
+            return datatables()->of($product)
+                ->make(true);
+        }
+
+        return view('admin.products.index');
+    }
+
     public function cacheProducts() 
     {
         Cache::rememberForever('all_products',  function () {
