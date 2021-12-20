@@ -25,7 +25,17 @@ class SupplierDeliveryController extends Controller
         $product = $product->readSupplierDelivery($request->supplier_id, $request->date_from, $request->date_to);
         if(request()->ajax())
         { 
-            return datatables()->of($product)->make(true);
+            return datatables()->of($product)
+            ->addColumn('action', function($data){
+                if ($data->remarks == 'Partially Completed') {
+                    $button = '<a class="btn btn-sm btn-outline-success btn-show-order"
+                    data-toggle="modal" data-target="#delivery-modal" 
+                    data-id="'. $data->id .'">Add delivery</a>';
+                    return $button;
+                }
+            })
+            ->rawColumns(['action'])
+            ->make(true);
         }
 
     }
@@ -33,20 +43,43 @@ class SupplierDeliveryController extends Controller
     public function createDelivery(){
 
         $data = Input::all();
-        
+        $qty_delivered = "";
+        if (request()->active_tab == 'delivered') {
+            SupplierDelivery::where('id', request()->data_id)
+            ->update([
+                'qty_delivered' => DB::raw('qty_delivered + '. request()->qty_delivered .'')
+            ]);
 
-        $s = new SupplierDelivery;
-        $s->po_id = $data['data_id'];
-        $s->po_no = $data['po_no'];
-        $s->product_code = $data['product_code'];
-        $s->qty_delivered = $data['qty_delivered'];
-        $s->date_delivered = $data['date_recieved'];
-        $remarks = $this->validateDeliveredQty($s->po_no, $s->product_code, $s->qty_delivered);
-        $s->remarks = $remarks;
-        $s->save();
+            $qty_delivered = SupplierDelivery::where('id', request()->data_id)->value('qty_delivered');
+           // $qty_delivered = (int)$qty_delivered + (int)request()->qty_delivered;
+            $remarks = $this->validateDeliveredQty($data['po_no'], $data['product_code'], $qty_delivered);
+
+            SupplierDelivery::where('id', request()->data_id)
+            ->update([
+                'remarks' => $remarks
+            ]);
+        }
+        else {
+            $s = new SupplierDelivery;
+            $s->po_id = $data['data_id'];
+            $s->po_no = $data['po_no'];
+            $s->product_code = $data['product_code'];
+            $s->qty_delivered = $data['qty_delivered'];
+            $s->date_delivered = $data['date_recieved'];
+            $qty_delivered = $data['qty_delivered'];
+
+            $remarks = $this->validateDeliveredQty($data['po_no'], $data['product_code'], $qty_delivered);
+            $s->remarks = $remarks;
+            $s->save();
+
+        }
 
         $this->updatePurchaseOrder($data['po_no'], $data['product_code'], $remarks);
         $this->updateInventory($data['product_code'], $data['qty_delivered']); 
+    }
+
+    public function updateDelivery() {
+
     }
 
     public function updatePurchaseOrder($po_no, $product_code, $remarks){
@@ -76,7 +109,7 @@ class SupplierDeliveryController extends Controller
         ->where('product_code', $product_code)
         ->value('qty_order');
         
-        $res = 'Completed';
+        $res = '';
         if($qty_order == $qty_delivered){
             $res = 'Completed';
         }

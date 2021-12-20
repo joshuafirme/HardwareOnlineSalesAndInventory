@@ -46,7 +46,7 @@ class PurchaseOrderController extends Controller
                 return datatables()->of($data)
                 ->addColumn('action', function($data){
                     $button = '<a class="btn btn-sm btn-outline-success btn-show-order"
-                    data-toggle="modal" data-target="#delivery-modal" data-id='. $data->id .'>Show</a>';
+                    data-toggle="modal" data-target="#delivery-modal" data-id='. $data->id .'>Add delivery</a>';
                     return $button;
                 })
                 ->rawColumns(['action'])

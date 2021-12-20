@@ -41,13 +41,13 @@
                   <ul class="nav nav-tabs" id="myTab" role="tablist">
 
                     <li class="nav-item">
-                      <a class="nav-link  active" id="po-tab" data-toggle="tab" href="#potab" role="tab" aria-controls="contact" aria-selected="true">Purchased Orders   
+                      <a class="nav-link  active" id="po-tab" data-toggle="tab" href="#potab" role="tab" aria-controls="purchased" aria-selected="true">Purchased Orders   
     
                       </a>
                     </li>
     
                     <li class="nav-item">
-                      <a class="nav-link" id="delivered-tab" data-toggle="tab" href="#deliveredtab" role="tab" aria-controls="contact" aria-selected="true">Delivered Products   
+                      <a class="nav-link" id="delivered-tab" data-toggle="tab" href="#deliveredtab" role="tab" aria-controls="delivered" aria-selected="true">Delivered Products   
     
                       </a>
                     </li>
@@ -158,6 +158,7 @@
                                     <th>Qty Delivered</th>   
                                     <th>Date Recieved</th>
                                     <th>Remarks</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>

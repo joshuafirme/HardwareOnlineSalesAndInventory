@@ -26,6 +26,7 @@ class SupplierDelivery extends Model
         return DB::table('supplier_delivery AS SD')
         ->select('SD.*', 'P.*',
                 'SD.remarks',
+                'SD.id as id',
                 'PO.qty_order',
                 'U.name as unit', 
                 'S.supplier_name as supplier', 

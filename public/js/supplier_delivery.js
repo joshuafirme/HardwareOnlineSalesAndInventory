@@ -81,7 +81,8 @@ async function readSupplierDelivery(supplier_id, date_from, date_to){
             {data: 'qty_order', name: 'qty_order'},
             {data: 'qty_delivered', name: 'qty_delivered'},
             {data: 'date_delivered', name: 'date_delivered'},
-            {data: 'remarks', name: 'remarks',orderable: false}
+            {data: 'remarks', name: 'remarks',orderable: false},
+            {data: 'action', name: 'action',orderable: false},
         ]
        });
 }
@@ -106,13 +107,27 @@ async function on_Click() {
         var row             = $this.closest("tr");
 
         localStorage.setItem('data-id', $this.attr('data-id'));
-
-        var po_no           = row.find("td:eq(0)").text();
-        var product_code    = row.find("td:eq(1)").text();
-        var description     = row.find("td:eq(2)").text();
-        var supplier        = row.find("td:eq(3)").text();
-        var unit            = row.find("td:eq(4)").text();
-        var qty_order       = row.find("td:eq(5)").text();
+        var active_tab = $('[class="nav-link active"]').attr('aria-controls');
+        var po_eq = 0;
+        var pcode_eq = 1;
+        var desc_eq = 2;
+        var supp_eq = 3;
+        var unit_eq = 5;
+        var qty_eq = 6;
+        if (active_tab == 'delivered') {
+            po_eq = 1;
+            pcode_eq = 2;
+            desc_eq = 3;
+            supp_eq = 4;
+            unit_eq = 5;
+            qty_eq = 6;
+        }
+        var po_no           = row.find("td:eq("+po_eq+")").text();
+        var product_code    = row.find("td:eq("+pcode_eq+")").text();
+        var description     = row.find("td:eq("+desc_eq+")").text();
+        var supplier        = row.find("td:eq("+supp_eq+")").text();
+        var unit            = row.find("td:eq("+unit_eq+")").text();
+        var qty_order       = row.find("td:eq("+qty_eq+")").text();
 
         $('#po_no').text(po_no);
         $('#po_product_code').text(product_code);
@@ -129,6 +144,8 @@ async function on_Click() {
         var product_code    = $('#po_product_code').text();
         var qty_delivered   = $('#qty_delivered').val();
         var date_recieved   = $('#date_recieved').val();
+        var active_tab = $('[class="nav-link active"]').attr('aria-controls');
+        console.log(product_code + " " + po_no)
         $.ajax({
             url: '/create-delivery',
             type: 'POST',
@@ -137,7 +154,8 @@ async function on_Click() {
                 po_no           :po_no,
                 product_code    :product_code,
                 qty_delivered   :qty_delivered,
-                date_recieved   :date_recieved
+                date_recieved   :date_recieved,
+                active_tab      : active_tab
             },
             beforeSend:function(){
                 btn.text('Please wait...');
@@ -148,6 +166,7 @@ async function on_Click() {
                 setTimeout(function(){
                     btn.text('Add deliver');
                     $('#po-table').DataTable().ajax.reload();
+                    $('#sd-table').DataTable().ajax.reload();
                     $('#delivery-modal').modal('hide');
                     $.toast({
                         text:'Delivery was successfully added.',
