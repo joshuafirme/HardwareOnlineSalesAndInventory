@@ -112,8 +112,8 @@ async function on_Click() {
         var pcode_eq = 1;
         var desc_eq = 2;
         var supp_eq = 3;
-        var unit_eq = 5;
-        var qty_eq = 6;
+        var unit_eq = 4;
+        var qty_eq = 5;
         if (active_tab == 'delivered') {
             po_eq = 1;
             pcode_eq = 2;

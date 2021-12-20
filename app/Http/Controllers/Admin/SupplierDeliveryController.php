@@ -78,10 +78,6 @@ class SupplierDeliveryController extends Controller
         $this->updateInventory($data['product_code'], $data['qty_delivered']); 
     }
 
-    public function updateDelivery() {
-
-    }
-
     public function updatePurchaseOrder($po_no, $product_code, $remarks){
         $status = 3;
     //    $remarks = "Pending";
