@@ -75,6 +75,7 @@
 @include('admin.customer-orders.modals')
 @include('admin.scripts')
 @include('admin.datatables-scripts')
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8wVIr_ne8CDZ_NM_9RPkL5nBUa7TlVms&callback=initMap&v=weekly&channel=2" async></script>
 <script src="{{asset('js/customer_orders.js')}}"></script>
 
 </body>

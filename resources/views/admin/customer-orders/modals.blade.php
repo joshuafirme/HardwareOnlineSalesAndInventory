@@ -10,7 +10,6 @@
           <div class="modal-body" id="printable-order-info">
               <div class="row" id="user-info">
               </div>
-              <div class="mt-3 mb-3" id="shipping-info-container"></div>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -25,6 +24,9 @@
                 <tbody id="orders-container"></tbody>
             </table>
 
+            <div class="mt-3 mb-3" id="shipping-info-container"></div>
+            <div id="map"></div>
+            
           </div>
           <div class="modal-footer">
           </div>

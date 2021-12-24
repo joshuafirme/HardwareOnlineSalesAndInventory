@@ -40,7 +40,7 @@ class CustomerOrderController extends Controller
                     $order->delivery_date = date('F d, Y', strtotime($order->delivery_date));
                     $button = '<a class="btn btn-sm btn-show-order" data-name="'. $order->name .'" data-order-no="'. $order->order_no .'" ';
                     $button .= 'data-user-id="'. $order->user_id .'" data-payment="'. $order->payment_method .'" data-delivery-date="'. $order->delivery_date .'" '; 
-                    $button .= 'data-phone="'. $order->phone .'" data-email="'. $order->email .'" style="color:#1970F1;">Show orders</a>';
+                    $button .= 'data-phone="'. $order->phone .'" data-email="'. $order->email .'" data-longlat="'. $order->map .'" style="color:#1970F1;">Show orders</a>';
                     return $button;
                 })
                 ->rawColumns(['action'])

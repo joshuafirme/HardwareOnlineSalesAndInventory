@@ -10,6 +10,7 @@ $page_title =  "Val Construction Supply | Cart";
 <!-- /.navbar -->
 
 <style>
+
     .fa {
         color: #06513D;
     }
@@ -70,6 +71,13 @@ $page_title =  "Val Construction Supply | Cart";
                                 <label class="col-form-label">Nearest landmark</label><br>
                                 <input name="notes" class="form-control" value="{{ isset($address->notes) ? $address->notes : "" }}">
                             </div>
+                            <div class="col-sm-12 col-md-6 mt-2">
+                              <label class="col-form-label">Latitude/Longitude</label><br>
+                              <input name="map" class="form-control" value="{{ isset($address->map) ? $address->map : "" }}" readonly>
+                          </div>
+                            <div class="col-sm-12 mt-2">
+                              <div id="map"></div>
+                            </div>
                               
                               <div class="col-12 mt-4">
                                 <button type="submit" class="btn btn-sm btn-success mr-2" id="btn-add-user">Save changes</button>
@@ -88,3 +96,5 @@ $page_title =  "Val Construction Supply | Cart";
 @include('footer')
 <script src="{{asset('js/user.js')}}"></script>
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8wVIr_ne8CDZ_NM_9RPkL5nBUa7TlVms&callback=initMap&v=weekly&channel=2" async></script>
+<script src="{{asset('js/gmap.js')}}"></script>

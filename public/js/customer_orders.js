@@ -161,6 +161,7 @@ async function on_Click() {
         let payment_method = $(this).attr('data-payment');
         let user_id = $(this).attr('data-user-id');
         let delivery_date = $(this).attr('data-delivery-date');
+        let latlong = $(this).attr('data-longlat');
         let btn = '<button class="btn btn-sm btn-outline-dark" id="btn-print" type="button">Print</button>';
         if (active_pill != 'completed' && active_pill != 'cancelled') {
             btn += '<button class="btn btn-sm btn-success" id="btn-change-status" data-active-pill="'+active_pill+'" data-status="'+status+'"  type="button">'+btn_text+'</button>';
@@ -187,7 +188,7 @@ async function on_Click() {
 
         await readOneOrder(order_no);
         await readShippingAddress(user_id);
-        
+        await initMap(latlong);
         
         
         $('#btn-change-status').attr('data-order-no', order_no);
@@ -279,6 +280,34 @@ function printElement(elem) {
     $printSection.innerHTML = "";
     $printSection.appendChild(domClone);
     window.print();
+}
+
+async function initMap(latlong) { 
+
+    $('#map').height(400);
+    //let latlong = document.getElementsByName('map')[0].value;
+
+    let myLatlng =  { lat: 13.9376, lng: 120.7005 };
+
+    latlong = latlong.replace(/[()\ \s-]+/g, '');
+    let d = latlong.split(",");
+
+    myLatlng =  { lat: parseFloat(d[0]), lng: parseFloat(d[1]) };
+
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 16,
+        center: myLatlng,
+    });
+
+
+    const image = "https://img.icons8.com/color/48/000000/place-marker--v2.png";
+    const beachMarker = new google.maps.Marker({
+        position: myLatlng,
+        map,
+        icon: image,
+    });
+
+    infoWindow.open(map);
 }
 
   async function render() {

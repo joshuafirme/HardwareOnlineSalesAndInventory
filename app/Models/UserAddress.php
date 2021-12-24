@@ -18,5 +18,7 @@ class UserAddress extends Model
         'street',
         'notes',
         'map',
+        'long',
+        'lat',
     ];
 }

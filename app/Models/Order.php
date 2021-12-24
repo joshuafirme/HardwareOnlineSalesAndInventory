@@ -42,9 +42,10 @@ class Order extends Model
     public function readOrdersByStatus($status)
     {
         $data = DB::table($this->table . ' as O')
-            ->select('O.*', 'O.created_at as date_order', 'users.*')
+            ->select('O.*', 'O.created_at as date_order', 'users.*', 'UA.map')
             ->leftJoin('order_shipping_fee as S', 'S.order_no', '=', 'O.order_no')
             ->leftJoin('users', 'users.id', '=', 'O.user_id')
+            ->leftJoin('user_address as UA', 'UA.user_id', '=', 'O.user_id')
             ->where('O.status', $status)
             ->orderBy('O.id', 'desc')
             ->get();
