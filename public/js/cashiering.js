@@ -79,6 +79,8 @@ function getItems (data) {
 
 
 async function readTray() {
+    
+    await readDiscount();
     $('.tbl-tray tbody').html('');
     $('#tray-loader').css('display', 'block');
     $.ajax({
@@ -98,6 +100,35 @@ async function readTray() {
             else {
                 document.getElementById("proccess").disabled = true;
             }
+
+            let discount_percentage = $('#discount-percentage').val();
+            let minimum_purchase = $('#minimum-purchase').val();
+            let discount_amount = 0;
+            let subtotal = total;
+            var force_discount = 0;
+            if ($('#force-discount').is(":checked")) {
+                force_discount = 1;
+            }
+            if (total >= minimum_purchase || force_discount == 1) {
+                discount_amount = parseFloat(discount_percentage) * parseFloat(total);
+                total = total - parseFloat(discount_amount);
+            }
+            html += '</tr>';
+            html += '<tr>';
+            html += '<td></td>';
+            html += '<td></td>';
+            html += '<td></td>';
+            html += '<td></td>';
+            html += '<td><b>Subtotal</b></td>';
+            html += '<td><b>₱'+ formatNumber(subtotal) +'</b></td>'
+            html += '</tr>';
+            html += '<tr>';
+            html += '<td></td>';
+            html += '<td></td>';
+            html += '<td></td>';
+            html += '<td></td>';
+            html += '<td><b>Discount</b></td>';
+            html += '<td><b id="discount-value"> - ₱'+ formatNumber(discount_amount) +'</b></td>'
             html += '</tr>';
             html += '<tr>';
             html += '<td></td>';
@@ -186,6 +217,17 @@ function formatNumber(total)
 {
   var decimal = (Math.round(total * 100) / 100).toFixed(2);
   return money_format = parseFloat(decimal).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+async function readDiscount() {
+    $.ajax({
+        url: '/read-discount',
+        type: 'GET',
+        success:async function(data){
+            $('#discount-percentage').val(data.discount_percentage);
+            $('#minimum-purchase').val(data.minimum_purchase);
+        }
+    });
 }
 
 async function getQtyInTray(product_code) {
@@ -325,9 +367,13 @@ function on_Click () {
                                     showHideTransition: 'plain',
                                     hideAfter: 4000, 
                                 });
+                                var force_discount = 0;
+                                if ($('#force-discount').is(":checked")) {
+                                    force_discount = 1;
+                                }
                                 setTimeout(async function()
                                 {
-                                    window.open("/preview-invoice");
+                                    window.open("/preview-invoice/"+force_discount);
                                     setTimeout(async function()
                                     {
                                         await readTray();
@@ -368,6 +414,10 @@ function on_Click () {
         else {
             $('.img-gcash-qr').css('display', 'none');
         }
+    });
+
+    $(document).on('click', '#force-discount',async function(){ 
+        await readTray();
     });
 
     

@@ -28,4 +28,9 @@ class DiscountController extends Controller
         return redirect()->back()
             ->with('success', 'Discount was updated successfully.');
     }
+
+    public function readDiscount()
+    {
+        return Discount::first();
+    }
 }

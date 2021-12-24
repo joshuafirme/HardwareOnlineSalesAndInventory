@@ -131,7 +131,7 @@ Route::middleware('auth')->group(function () {
       Route::get('read-tray', [CashieringController::class, 'readTray']);
       Route::get('cashiering/read-one-qty/{product_code}', [CashieringController::class, 'readOneQty']);
       Route::post('void/{id}', [CashieringController::class, 'void']);
-      Route::get('preview-invoice', [CashieringController::class, 'previewInvoice']);
+      Route::get('preview-invoice/{is_force_discount}', [CashieringController::class, 'previewInvoice']);
       Route::get('/pricing', [PricingController::class, 'index']);
       Route::post('/pricing/update', [PricingController::class, 'updatePricing']);
       Route::resource('supplier-delivery', SupplierDeliveryController::class);
@@ -188,5 +188,5 @@ Route::middleware('auth')->group(function () {
 
       Route::resource('discount', DiscountController::class);
     });
-    
+    Route::get('/read-discount', [DiscountController::class, 'readDiscount']);
 });

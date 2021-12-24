@@ -48,7 +48,8 @@
     }
 </style>
   <div class="row mt-1">
-        
+    <input type="hidden" id="discount-percentage">
+    <input type="hidden" id="minimum-purchase">
     <div class="col-md-12 col-lg-12 mt-3">
       <div class="card">
           <div class="card-body">
@@ -63,7 +64,7 @@
                                         <th>Unit</th>
                                         <th>Price</th>
                                         <th>Qty</th>
-                                        <th>Amount</th>
+                                        <th width='130px'>Amount</th>
                                         <th width="50px">Action</th>
                                     </thead>
                                     <tbody>
@@ -102,11 +103,17 @@
                                     </tr>    
                                 </table>
                             </div>
-                            <div class="col-sm-2 ml-1 mt-1">
+                            <div class="col-sm-12 ml-1 mt-1">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="force-discount">
+                                    <label class="form-check-label" for="exampleCheck1">Force Discount</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 ml-1 mt-1 mb-2">
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="gcash-payment">
                                     <label class="form-check-label" for="exampleCheck1">GCash Payment</label>
-                                  </div>
+                                </div>
                             </div>
                             <div class="col-sm-3">
                                 <button class="btn btn-sm btn-success" id="proccess">Proccess</button>
@@ -120,16 +127,18 @@
                     <div class="col-sm-12 col-md-5 border p-2">
                         <div class="row">
                             <div class="col-12">
-                                <div class="form-inline ml-0 mb-2 form-search-product float-right">
-                                    <div class="input-group input-group-sm">
-                                      <input class="form-control form-control-navbar" id="input-search-product" type="search" placeholder="Search product" aria-label="Search">
-                                      <div class="input-group-append">
-                                        <button class="btn btn-dark btn-search-product">
-                                          <i class="fas fa-search"></i>
-                                        </button>
-                                      </div>
+                                <form action="">
+                                    <div class="form-inline ml-0 mb-2 form-search-product float-right">
+                                        <div class="input-group input-group-sm">
+                                          <input class="form-control form-control-navbar" id="input-search-product" type="search" placeholder="Search product" aria-label="Search">
+                                          <div class="input-group-append">
+                                            <button class="btn btn-dark btn-search-product">
+                                              <i class="fas fa-search"></i>
+                                            </button>
+                                          </div>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                         <div class="loader-container">

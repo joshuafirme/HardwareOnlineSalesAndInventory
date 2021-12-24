@@ -9,6 +9,7 @@ use App\Models\Sales;
 use DB;
 use Input;
 use Hash;
+use App\Models\Discount;
 
 class CashieringController extends Controller
 {
@@ -147,11 +148,11 @@ class CashieringController extends Controller
 
     
 
-    public function previewInvoice(){
+    public function previewInvoice($is_force_discount){
 
         $cashiering = new Cashiering;
         $data = $cashiering->readCashieringTray();
-        $output = $this->generateSalesInvoice($data);
+        $output = $this->generateSalesInvoice($data, $is_force_discount);
 
         $this->removeAllTrayProducts();
 
@@ -162,7 +163,12 @@ class CashieringController extends Controller
         return $pdf->stream('Invoice-#');
     }
 
-    public function generateSalesInvoice($product){
+    public function readDiscount()
+    {
+        return Discount::first();
+    }
+
+    public function generateSalesInvoice($product, $is_force_discount){
 
         $output = '
         <style>
@@ -268,9 +274,6 @@ class CashieringController extends Controller
                     <td class="f-courier">'. number_format($data->selling_price,2,'.',',') .'</td>   
                     <td class="f-courier" style="width:110px;">'. number_format($data->amount,2,'.',',') .'</td>    
                 </tr>
-
-            
-
                 ';
                 
                 } 
@@ -278,7 +281,6 @@ class CashieringController extends Controller
             else{
                 echo "No data found";
             }
-            
             
         $output .='
             <tr>
@@ -296,13 +298,25 @@ class CashieringController extends Controller
                 <td ></td>
                 <td class="ar">Amount: Net of VAT</td>
                 <td class="align-text f-courier">PhP '. number_format($this->getNetOfVAT($total_amount),2,'.',',') .'</td>
-            </tr>
+            </tr>';
 
+
+            $discount_data = $this->readDiscount();
+            $discount_amount = 0;
+            $discount_percentage = 0;
+
+            if ($total_amount >= $discount_data->minimum_purchase || $is_force_discount == 1 ) {
+                $discount_percentage = $discount_data->discount_percentage;
+                $discount_amount = $discount_percentage * $total_amount;
+                $total_amount = $total_amount - $discount_amount;
+            }
+
+            $output .='
             <tr>
                 <td class="ar" colspan="2">VAT-Exempt Sales</td>
                 <td ></td>
-                <td class="ar">Less:SC/PWD Discount</td>
-                <td class="align-text f-courier"></td>
+                <td class="ar">Less:SC Discount</td>
+                <td class="align-text f-courier"> - PhP '. number_format($discount_amount,2,'.',',') .'</td>
             </tr>
 
             <tr>
