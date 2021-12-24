@@ -188,7 +188,9 @@ async function on_Click() {
 
         await readOneOrder(order_no);
         await readShippingAddress(user_id);
-        await initMap(latlong);
+        if (latlong.length > 0) {
+            await initMap(latlong);
+        }
         
         
         $('#btn-change-status').attr('data-order-no', order_no);
