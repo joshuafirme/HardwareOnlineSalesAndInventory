@@ -10,7 +10,9 @@ $page_title =  "Val Construction Supply | Cart";
 <!-- /.navbar -->
 
 <style>
-
+  #map {
+  height: 400px;
+}
     .fa {
         color: #06513D;
     }
