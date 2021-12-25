@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\AuditTrailController;
 use App\Http\Controllers\Admin\ArchiveController;
 use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\DiscountController;
+use App\Http\Controllers\Admin\BackupAndRestoreController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AccountController;
@@ -187,6 +188,9 @@ Route::middleware('auth')->group(function () {
       Route::get('/feedback', [FeedbackController::class, 'index']);
 
       Route::resource('discount', DiscountController::class);
+      Route::get('/backup-and-restore', [BackupAndRestoreController::class, 'index']);
+      Route::post('/backup-and-restore/backup', [BackupAndRestoreController::class, 'backup'])->name('backup');
+      Route::post('/backup-and-restore/restore', [BackupAndRestoreController::class, 'restore'])->name('restore');
     });
     Route::get('/read-discount', [DiscountController::class, 'readDiscount']);
 });

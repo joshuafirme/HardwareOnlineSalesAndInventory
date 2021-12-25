@@ -145,12 +145,6 @@
                   <p>Verify Customer</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Notification</p>
-                </a>
-              </li>
             </ul>
           </li>
           @endif
@@ -342,6 +336,12 @@
                 <a href="{{ url('/archive') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Archive</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/backup-and-restore') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Backup and Restore</p>
                 </a>
               </li>
             </ul>
