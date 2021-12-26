@@ -16,31 +16,37 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
    
+      @php
+          $orders_count = \DB::table('orders')->whereDate('created_at', date('Y-m-d'))->count('id');
+          $to_verify_count = \DB::table('users')->where('status', 0)->count('id');
+          
+          $notification_count = $orders_count + $to_verify_count;
+
+      @endphp
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
+          <span class="badge badge-warning navbar-badge">{{$notification_count}}</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <span class="dropdown-item dropdown-header">{{$notification_count}} Notification{{$notification_count > 1 ? 's' : ''}}</span>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
+          <a href="{{url('/customer-orders')}}" class="dropdown-item">
+            @if ($orders_count > 0)
+              {{$orders_count}} new order{{$orders_count > 1 ? 's' : ''}}
+            @else
+                No new order
+            @endif
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
+          <a href="{{url('/verify-customer')}}" class="dropdown-item">
+            @if ($to_verify_count > 0)
+            {{$to_verify_count}} customer{{$to_verify_count > 1 ? 's' : ''}} to verify
+          @else
+              No customer to verify
+          @endif
           </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
       <li class="nav-item dropdown">
