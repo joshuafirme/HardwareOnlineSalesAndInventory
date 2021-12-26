@@ -57,8 +57,9 @@
 
                             <div class="col-sm-12 col-md-6 mb-2">    
                               <label class="col-form-label">Status</label>
-                              <select class="form-control" name="status" id="status">
-                                  <option selected value="1">Active</option>
+                              <select class="form-control" name="status" id="status" required>
+                                  <option selected disabled>--Select status--</option>
+                                  <option value="1">Active</option>
                                   <option value="0">Inactive</option>
                               </select>
                             </div>
