@@ -91,15 +91,41 @@ function getComputation(total, id_type) {
         html += '<td></td><td></td><td></td><td></td>';
         html += '<td>Subtotal:</td>';
         html += '<td>₱'+formatNumber(total.toFixed(2))+'</td>';
-
     html += '</tr>';    
-        html += '<tr>';
+
+    html += '<tr>';
         html += '<td></td><td></td><td></td><td></td>';
         html += '<td>Delivery charge:</td>';
-    html += '<td>₱'+fee+'</td>';
+        html += '<td>₱'+fee+'</td>';
+    html += '</tr>';  
 
-    html += '</tr>';    
+    var _text = "PWD";
+    if (id_type == "Senior Citizen ID/Booklet") {
+        _text = "Senior Citizen";
+    }
+
+
+    html += '<tr>';
+        html += '<td></td><td></td><td></td><td></td>';
+        html += '<td>Wholesale discount:</td>';
+        html += '<td>₱'+fee+'</td>';
+    html += '</tr>';  
+    
+    if (id_type == "Senior Citizen ID/Booklet" || id_type == "PWD ID") {
         html += '<tr>';
+            html += '<td></td><td></td><td></td><td></td>';
+            html += '<td>'+_text+' discount:</td>';
+            html += '<td>₱'+fee+'</td>';
+        html += '</tr>';  
+    }
+
+    html += '<tr>';
+        html += '<td></td><td></td><td></td><td></td>';
+        html += '<td>Delivery charge:</td>';
+        html += '<td>₱'+fee+'</td>';
+    html += '</tr>';
+
+    html += '<tr>';
         html += '<td></td><td></td><td></td><td></td>';
         html += '<td>Total:</td>';
     html += '<td>₱'+formatNumber(total_amount.toFixed(2))+'</td>';

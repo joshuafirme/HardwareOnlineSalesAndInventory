@@ -135,7 +135,7 @@ class PayMongo extends Model
             $payment_info = json_decode($response->getBody());
             
             if ($payment_info->data->attributes->status == 'paid') {
-                return redirect('/order-info/'.$source->data->id.'/gcash')->with('success', 'Order recieved, your payment ₱'.number_format(($amount/100),2,".",",").' via GCash was successful!');
+                return redirect('/order-info/'.$source->data->id.'/gcash')->with('success', 'Order recieved, your payment ₱'.($amount/100).' via GCash was successful!');
             }
             else {
                 return response()->json([
@@ -145,7 +145,7 @@ class PayMongo extends Model
             }
         }
         else if ($source->data->attributes->type == 'paymaya' && $source->data->attributes->status == 'consumed'){
-          return redirect('/order-info/'.$source->data->id.'/'.$source->data->attributes->type)->with('success', 'Order recieved, your payment ₱'.number_format(($amount/100),2,".",",").' via PayMaya was successful!');
+          return redirect('/order-info/'.$source->data->id.'/'.$source->data->attributes->type)->with('success', 'Order recieved, your payment ₱'.($amount/100).' via PayMaya was successful!');
         }
         else {
           return response()->json([
