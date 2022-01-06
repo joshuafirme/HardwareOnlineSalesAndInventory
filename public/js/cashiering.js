@@ -101,18 +101,26 @@ async function readTray() {
                 document.getElementById("proccess").disabled = true;
             }
 
-            let discount_percentage = $('#discount-percentage').val();
+            let discount_percentage = 0;
             let minimum_purchase = $('#minimum-purchase').val();
-            let discount_amount = 0;
+            let wholesale_discount_amount = 0;
+            let senior_pwd_discount_amount = 0;
             let subtotal = total;
-            var force_discount = 0;
-            if ($('#force-discount').is(":checked")) {
-                force_discount = 1;
+            
+            if ($('input[name="rad_discount"]').is(":checked")) {
+                discount_percentage = $('input[name="rad_discount"]:checked').val();
+                senior_pwd_discount_amount = parseFloat(discount_percentage) * parseFloat(total);
+                total = total - parseFloat(senior_pwd_discount_amount);
             }
-            if (total >= minimum_purchase || force_discount == 1) {
-                discount_amount = parseFloat(discount_percentage) * parseFloat(total);
-                total = total - parseFloat(discount_amount);
+            if (total >= minimum_purchase || $('input[name="rad_discount"]:checked').attr('data-force') == '1') { 
+                wholesale_discount_amount = parseFloat($('#discount-percentage').val()) * parseFloat(total);
+                total = total - parseFloat(wholesale_discount_amount);
             }
+
+            // to get data for printing
+            localStorage.setItem('wholesale_discount_amount', wholesale_discount_amount);
+            localStorage.setItem('senior_pwd_discount_amount', senior_pwd_discount_amount);
+           
             html += '</tr>';
             html += '<tr>';
             html += '<td></td>';
@@ -127,8 +135,15 @@ async function readTray() {
             html += '<td></td>';
             html += '<td></td>';
             html += '<td></td>';
-            html += '<td><b>Discount</b></td>';
-            html += '<td><b id="discount-value"> - ₱'+ formatNumber(discount_amount) +'</b></td>'
+            html += '<td><b>Whole Sale Discount</b></td>';
+            html += '<td><b>₱'+ formatNumber(wholesale_discount_amount) +'</b></td>'
+            html += '</tr>';
+            html += '<td></td>';
+            html += '<td></td>';
+            html += '<td></td>';
+            html += '<td></td>';
+            html += '<td><b>Senior/PWD Discount</b></td>';
+            html += '<td><b>₱'+ formatNumber(senior_pwd_discount_amount) +'</b></td>'
             html += '</tr>';
             html += '<tr>';
             html += '<td></td>';
@@ -367,13 +382,11 @@ function on_Click () {
                                     showHideTransition: 'plain',
                                     hideAfter: 4000, 
                                 });
-                                var force_discount = 0;
-                                if ($('#force-discount').is(":checked")) {
-                                    force_discount = 1;
-                                }
+                                let wholesale_discount_amount = localStorage.getItem('wholesale_discount_amount');
+                                let senior_pwd_discount_amount = localStorage.getItem('senior_pwd_discount_amount');
                                 setTimeout(async function()
                                 {
-                                    window.open("/preview-invoice/"+force_discount);
+                                    window.open("/preview-invoice/"+wholesale_discount_amount +"/"+senior_pwd_discount_amount);
                                     setTimeout(async function()
                                     {
                                         await readTray();
@@ -416,7 +429,7 @@ function on_Click () {
         }
     });
 
-    $(document).on('click', '#force-discount',async function(){ 
+    $(document).on('click', '[name=rad_discount]',async function(){ 
         await readTray();
     });
 

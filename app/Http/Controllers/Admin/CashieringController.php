@@ -148,11 +148,11 @@ class CashieringController extends Controller
 
     
 
-    public function previewInvoice($is_force_discount){
+    public function previewInvoice($wholesale_discount_amount, $senior_pwd_discount_amount){
 
         $cashiering = new Cashiering;
         $data = $cashiering->readCashieringTray();
-        $output = $this->generateSalesInvoice($data, $is_force_discount);
+        $output = $this->generateSalesInvoice($data, $wholesale_discount_amount, $senior_pwd_discount_amount);
 
         $this->removeAllTrayProducts();
 
@@ -168,7 +168,7 @@ class CashieringController extends Controller
         return Discount::first();
     }
 
-    public function generateSalesInvoice($product, $is_force_discount){
+    public function generateSalesInvoice($product, $wholesale_discount_amount, $senior_pwd_discount_amount){
 
         $output = '
         <style>
@@ -301,29 +301,29 @@ class CashieringController extends Controller
             </tr>';
 
 
-            $discount_data = $this->readDiscount();
-            $discount_amount = 0;
-            $discount_percentage = 0;
-
-            if ($total_amount >= $discount_data->minimum_purchase || $is_force_discount == 1 ) {
-                $discount_percentage = $discount_data->discount_percentage;
-                $discount_amount = $discount_percentage * $total_amount;
-                $total_amount = $total_amount - $discount_amount;
-            }
+            $total_amount = $total_amount - $wholesale_discount_amount;
+            $total_amount = $total_amount - $senior_pwd_discount_amount;
 
             $output .='
+            
             <tr>
                 <td class="ar" colspan="2">VAT-Exempt Sales</td>
                 <td ></td>
-                <td class="ar">Less:SC Discount</td>
-                <td class="align-text f-courier"> - PhP '. number_format($discount_amount,2,'.',',') .'</td>
+                <td class="ar">Less:Wholesale Discount</td>
+                <td class="align-text f-courier"> PhP '. number_format($wholesale_discount_amount,2,'.',',') .'</td>
+            </tr>
+            <tr>
+                <td class="ar" colspan="2">VAT-Exempt Sales</td>
+                <td ></td>
+                <td class="ar">Less:Senior/PWD Discount</td>
+                <td class="align-text f-courier"> PhP '. number_format($senior_pwd_discount_amount,2,'.',',') .'</td>
             </tr>
 
             <tr>
                 <td class="ar" colspan="2">Zero Rated Sales</td>
                 <td ></td>
                 <td class="ar">Amount Due</td>
-                <td class="align-text f-courier">PhP '. number_format($this->getAmountDue($total_amount),2,'.',',') .'</td>
+                <td class="align-text f-courier"> PhP '. number_format($this->getAmountDue($total_amount),2,'.',',') .'</td>
             </tr>
 
             <tr>

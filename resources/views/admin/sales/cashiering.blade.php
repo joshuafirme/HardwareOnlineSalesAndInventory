@@ -48,15 +48,13 @@
     }
 </style>
   <div class="row mt-1">
-    <input type="hidden" id="discount-percentage">
-    <input type="hidden" id="minimum-purchase">
     <div class="col-md-12 col-lg-12 mt-3">
       <div class="card">
           <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12 col-md-7">
                         <div class="row mr-2">
-                            <div class="col-12 tray-container" style="overflow-y: auto; height:350px;">
+                            <div class="col-12 tray-container" style="overflow-y: auto; height:auto;">
                                 <table class="table responsive table-bordered table-hover tbl-tray" style="margin-bottom:20px;">
                                     <thead>
                                         <th width="150px">Product Code</th>
@@ -104,9 +102,24 @@
                                 </table>
                             </div>
                             <div class="col-sm-12 ml-1 mt-1">
+                             @php
+                                 $discount = \DB::table('discount')->first();
+                             @endphp 
+                             
+                                <input type="hidden" id="discount-percentage" value="{{$discount->discount_percentage}}">
+                                <input type="hidden" id="minimum-purchase" value="{{$discount->minimum_purchase}}">  
+
+                                <input type="radio" name="rad_discount" data-force="0" value="{{$discount->senior_discount}}">
+                                <label for="html">Senior Discount</label>
+                                <small class="mr-2"> {{ $discount->senior_discount * 100 }}%</small>
+                                <input type="radio" name="rad_discount" data-force="0" value="{{$discount->pwd_discount}}">
+                                <label for="css">PWD Discount</label>
+                                <small class="mr-2"> {{ $discount->pwd_discount * 100 }}%</small>
+                            </div>
+                            <div class="col-sm-12 ml-1 mt-1">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="force-discount">
-                                    <label class="form-check-label" for="exampleCheck1">Force Discount</label>
+                                    <input type="radio" class="form-check-input" name="rad_discount" data-force="1" value="{{$discount->discount_percentage}}">
+                                    <label class="form-check-label" for="exampleCheck1">Force Discount</label><small> {{$discount->discount_percentage*100}}%</small>
                                 </div>
                             </div>
                             <div class="col-sm-12 ml-1 mt-1 mb-2">
