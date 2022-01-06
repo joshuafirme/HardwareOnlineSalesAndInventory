@@ -156,6 +156,7 @@ async function on_Click() {
 
         let order_no = $(this).attr('data-order-no');
         let customer_name = $(this).attr('data-name');
+        let id_type = $(this).attr('data-id-type');
         let phone = $(this).attr('data-phone');
         let email = $(this).attr('data-email');
         let payment_method = $(this).attr('data-payment');
@@ -169,6 +170,14 @@ async function on_Click() {
 
                   
         let html = '<div class="col-sm-12 col-md-6">';
+        var verified_text = "Verified";
+            if (id_type == "Senior Citizen ID/Booklet") {
+                verified_text = "Verified Senior Citizen";
+            }
+            else if (id_type == "Senior Citizen ID/Booklet") {
+                verified_text = "Verified PWD";
+            }
+            html += '<div><span class="badge badge-success">'+verified_text+'</span></div>';
             html += '<div>Customer name: '+customer_name+'</div>';
             html += '<div>Contact #: '+phone+'</div>';
             html += '<div>Email: '+email+'</div>';

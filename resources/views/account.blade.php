@@ -20,6 +20,11 @@ $page_title =  "Val Construction Supply | Cart";
               <div class="card">
                 <div class="card-body">
                     <h3>My Account</h3>
+                    @if ($user->id_type == "Senior Citizen ID/Booklet")
+                        <span class="badge badge-success">Verified Senior Citizen</span>
+                    @elseif ($user->id_type == "PWD ID")
+                        <span class="badge badge-success">Verified PWD</span>
+                    @endif
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
                             <label class="col-form-label">Name</label><br>

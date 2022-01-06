@@ -75,6 +75,32 @@
 
                                   </div>
                             </div>
+
+                            <div class="col-sm-12"><hr></div>
+
+                            <div class="col-sm-12 col-md-6 mt-2">
+                              <label class="col-form-label">Senior citizen discount percentage</label>
+                              <div class="input-group">
+                                  <div class="input-group-append">
+                                      <div class="input-group-text">
+                                        <span class="fas fa-percent"></span>
+                                      </div>
+                                    </div>
+                                  <input name="senior_discount" type="number" step="0.01" class="form-control" value="{{ $discount->senior_discount }}">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6 mt-2">
+                              <label class="col-form-label">PWD discount percentage</label>
+                              <div class="input-group">
+                                  <div class="input-group-append">
+                                      <div class="input-group-text">
+                                        <span class="fas fa-percent"></span>
+                                      </div>
+                                    </div>
+                                  <input name="pwd_discount" type="number" step="0.01" class="form-control" value="{{ $discount->pwd_discount }}">
+                                </div>
+                            </div>
     
                               <div class="col-12 mt-4">
                                 <button type="submit" class="btn btn-sm btn-primary mr-2" id="btn-add-user">Save changes</button>

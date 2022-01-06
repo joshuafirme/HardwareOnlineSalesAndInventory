@@ -72,7 +72,7 @@ async function fetchVerifiedUsers(){
 
 
 async function onClick() {
-var user_id;
+    var user_id;
     $(document).on('click','.btn-full-view', async function(){
         $('#userInfoModal').modal('show');
         user_id         = $(this).attr('data-id');
@@ -85,7 +85,7 @@ var user_id;
         var email       = row.find("td:eq(2)").text();
         var phone       = row.find("td:eq(3)").text();
         var date_created= row.find("td:eq(5)").text();
-        console.log(identification_photo)
+       
         $('#name').val(name);
         $('#username').val(username);
         $('#email').val(email);

@@ -14,5 +14,7 @@ class Discount extends Model
     protected $fillable = [
         'discount_percentage',
         'minimum_purchase',
+        'pwd_discount',
+        'senior_discount'
     ];
 }
