@@ -26,7 +26,7 @@ class Order extends Model
     public function readOrders($user_id)
     {
         return DB::table($this->table . ' as O')
-            ->select("O.amount", 'O.qty', DB::raw('CONCAT(prefix, P.id) as product_code'), 'O.order_no', 'O.payment_method', 'O.created_at', 'O.delivery_date', 'O.type_id',
+            ->select("O.amount", 'O.qty', DB::raw('CONCAT(prefix, P.id) as product_code'), 'O.order_no', 'O.payment_method', 'O.created_at', 'O.delivery_date',
                 'P.image', 'P.description', 'selling_price', 'U.name as unit', 'S.shipping_fee', 'O.status'
                     )
             ->leftJoin('product as P', DB::raw('CONCAT(prefix, P.id)'), '=', 'O.product_code')
@@ -34,7 +34,7 @@ class Order extends Model
             ->leftJoin('order_shipping_fee as S', 'S.order_no', '=', 'O.order_no')
             ->where('O.user_id', $user_id)
             ->groupBy('O.order_no', 'O.amount', 'O.qty', 'P.prefix', 'P.id', 'P.description', 'P.image', 'O.delivery_date',
-            'O.payment_method', 'selling_price', 'U.name', 'O.created_at', 'S.shipping_fee', 'O.status'. 'O.type_id')
+            'O.payment_method', 'selling_price', 'U.name', 'O.created_at', 'S.shipping_fee', 'O.status')
             ->orderBy('O.id', 'desc')
             ->get();
     }
@@ -42,7 +42,7 @@ class Order extends Model
     public function readOrdersByStatus($status)
     {
         $data = DB::table($this->table . ' as O')
-            ->select('O.*', 'O.created_at as date_order', 'users.*', 'UA.map')
+            ->select('O.*', 'O.created_at as date_order', 'users.*', 'UA.map', 'users.id_type')
             ->leftJoin('order_shipping_fee as S', 'S.order_no', '=', 'O.order_no')
             ->leftJoin('users', 'users.id', '=', 'O.user_id')
             ->leftJoin('user_address as UA', 'UA.user_id', '=', 'O.user_id')

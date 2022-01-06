@@ -45,7 +45,7 @@ async function fetchOrder(object = 'pending'){
 }
 
 
-async function readOneOrder(order_no) {
+async function readOneOrder(order_no, id_type) {
 
     $('#orders-container').html('');
     getShippingFee(order_no);
@@ -60,7 +60,7 @@ async function readOneOrder(order_no) {
                     total = parseFloat(total) + parseFloat(data[i].selling_price);
                     html += getItems(data[i]);
                     if (data.length-1 == i) {
-                        html += getComputation(total);
+                        html += getComputation(total, id_type);
                     }
                     $('#orders-container').append(html);
                 },(i)*100)
@@ -83,7 +83,7 @@ function getItems (data) {
     return html;
 }
 
-function getComputation(total) {
+function getComputation(total, id_type) {
     let fee = $('#shipping-fee-value').attr('content');
     let total_amount = total + parseFloat(fee);
     var html = "";
@@ -174,7 +174,7 @@ async function on_Click() {
             if (id_type == "Senior Citizen ID/Booklet") {
                 verified_text = "Verified Senior Citizen";
             }
-            else if (id_type == "Senior Citizen ID/Booklet") {
+            else if (id_type == "PWD ID") {
                 verified_text = "Verified PWD";
             }
             html += '<div><span class="badge badge-success">'+verified_text+'</span></div>';
@@ -195,7 +195,7 @@ async function on_Click() {
         $('#show-orders-modal').find('#user-info').html(html);
         $('#show-orders-modal').find('.modal-footer').html(btn);
 
-        await readOneOrder(order_no);
+        await readOneOrder(order_no, id_type);
         await readShippingAddress(user_id);
         if (latlong.length > 0) {
             await initMap(latlong);
