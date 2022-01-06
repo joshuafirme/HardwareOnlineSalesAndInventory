@@ -60,7 +60,7 @@ class UserAuthController extends Controller
     }
 
     public function createAccount(Request $data) {
-
+       
         $alert = 'success';
         $message = 'You have successfully registered!';
 
@@ -79,6 +79,7 @@ class UserAuthController extends Controller
             $user->access_level = 5;
             $user->username = $data->input('username');
             $user->password = \Hash::make($data->input('password'));
+            $user->id_type = $data->input('id_type');
 
             if ($data->hasFile('identification_photo')) {
                 $user->identification_photo = $this->imageUpload($data, 'id_only');

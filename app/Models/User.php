@@ -27,7 +27,8 @@ class User extends Authenticatable
         'access_level',
         'phone',
         'identification_photo',
-        'selfie_with_identification_photo'
+        'selfie_with_identification_photo',
+        'id_type'
     ];
 
     /**

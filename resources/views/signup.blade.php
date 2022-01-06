@@ -227,6 +227,21 @@ select.form-control {
                               <label class="custom-file-label" for="selfie_with_identification_photo">Upload a selfie with your 1 valid ID</label>
                             </div>
                           </div>
+
+                          <div class=" col-lg-12 mb-4">    
+                            <label class="label-small">ID Type</label>
+                            <select class="form-control" name="id_type" required>
+                              <option value="Senior Citizen ID">Senior Citizen ID/Booklet</option>
+                              <option value="PWD ID">PWD ID</option>
+                              <option value="Passport">Passport</option>
+                              <option value="Driver's license">Driver's license</option>
+                              <option value="SSS UMID Card">SSS UMID Card</option>
+                              <option value="PhilHealth ID">PhilHealth ID</option>
+                              <option value="TIN">TIN</option>
+                              <option value="Postal ID">Postal ID</option>
+                              <option value="Voter's ID">Voter's ID</option>
+                            </select>
+                          </div>
                 
 
                     <!-- Submit Button -->
@@ -308,6 +323,11 @@ $('#passwordConfirmation').on('blur', function () { console.log('test')
         }
     
   });
+
+  $("[name=selfie_with_identification_photo], [name=identification_photo]").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
 });
 
 </script>

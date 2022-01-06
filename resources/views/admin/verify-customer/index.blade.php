@@ -159,6 +159,11 @@
                       <input type="text" class="form-control" name="date_created" id="date_created" readonly>
                     </div>
 
+                    <div class="col-sm-12 col-md-6 col-lg-4 mt-2">
+                      <label class="col-form-label">ID type</label>
+                      <input type="text" class="form-control" name="id_type" id="id_type" readonly>
+                    </div>
+
                     <div class="col-sm-12 mt-2">
                       <label class="col-form-label">Customer's ID</label>
                       <img type="text" class="img-thumbnail" width="100%" name="identification_photo" id="identification_photo">

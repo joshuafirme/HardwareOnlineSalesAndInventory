@@ -18,7 +18,8 @@ class VerifyCustomerController extends Controller
             return datatables()->of($data)
                 ->addColumn('action', function($data){
                     $button = '<a class="btn btn-sm btn-full-view" data-id='. $data->id .' 
-                    data-image="/images/'.$data->identification_photo.'" data-selfie-image="/images/'.$data->selfie_with_identification_photo.'">
+                    data-image="/images/'.$data->identification_photo.'" data-selfie-image="/images/'.$data->selfie_with_identification_photo.'"
+                    data-id-type="'.$data->id_type.'">
                     <i class="fa fa-eye"></i></a>';
                     return $button;
                 })
