@@ -49,13 +49,20 @@ $page_title =  "Val Construction Supply | Cart";
                         @else
                         <p>-</p>
                         @endif
-                          <div class="summary-item"><span class="text">Subtotal</span><span class="price">₱{{$subtotal}}</span></div>
-                          <div class="summary-item"><span class="text">Wholesale Discount</span><span class="price">₱{{$subtotal}}</span></div>
                         @php
                             $discount_amount = 0;
+                            $wholesale_discount = 0;
                             $user = \Auth::user();
                             $discount = \DB::table('discount')->first();
                         @endphp
+                          <div class="summary-item"><span class="text">Subtotal</span><span class="price">₱{{$subtotal}}</span></div>
+                          @if ($subtotal >= $discount->minimum_purchase) 
+                            @php
+                                $discount_percentage = $discount->discount_percentage * 100;
+                                $wholesale_discount = $discount->discount_percentage * $subtotal;
+                            @endphp
+                            <div class="summary-item"><span class="text">Wholesale Discount</span><span class="price">₱{{$wholesale_discount}}</span><small> - {{ $discount_percentage }}%</small></div>
+                          @endif
                         @if($user->id_type == "Senior Citizen ID/Booklet")
                           @php
                             $discount_percentage = $discount->senior_discount * 100;
@@ -72,7 +79,7 @@ $page_title =  "Val Construction Supply | Cart";
                         <div class="summary-item"><span class="text">Delivery fee</span><span class="price">₱{{$charge}}</span></div>
                         @php
                         
-                            $subtotal = $subtotal - $discount_amount;
+                            $subtotal = ($subtotal - $discount_amount) - $wholesale_discount;
                             $total = $subtotal+$charge;
                         @endphp
                         <div class="summary-item"><span class="text">Total</span><span class="price">₱{{ number_format($total,2,".",",") }}</span></div>

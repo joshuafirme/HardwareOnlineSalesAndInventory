@@ -87,10 +87,10 @@ $(document).on('change', '[name=optpayment-method]', async function(){
         $('#invalid-amount-message').addClass('d-none');
     }
     else if ($this.val() == 'gcash') {
-        $('#btn-place-order').attr("href", "create-source?payment_method=gcash&total="+total);
+        $('#btn-place-order').attr("href", "create-source?payment_method=gcash&total="+(Math.round(total * 100) / 100).toFixed(2));
     }
     else if ($this.val() == 'paymaya') {
-        $('#btn-place-order').attr("href", "create-payment-method?payment_method=paymaya&total="+total);
+        $('#btn-place-order').attr("href", "create-payment-method?payment_method=paymaya&total="+(Math.round(total * 100) / 100).toFixed(2));
     }
     console.log($('#btn-place-order').attr('href'))
     

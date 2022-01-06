@@ -33,6 +33,13 @@
         </div>
         @endif
 
+        @php
+          $discount = \DB::table('discount')->first();
+        @endphp 
+        <input type="hidden" id="senior_percentage" value="{{$discount->senior_discount}}">
+        <input type="hidden" id="pwd_percentage" value="{{$discount->pwd_discount}}">
+        <input type="hidden" id="whole_sale_percentage" value="{{$discount->discount_percentage}}">
+        <input type="hidden" id="minimum_purchase" value="{{$discount->minimum_purchase}}">  
 
         <div class="row">
 

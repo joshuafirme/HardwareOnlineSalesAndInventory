@@ -91,31 +91,46 @@ function getComputation(total, id_type) {
         html += '<td></td><td></td><td></td><td></td>';
         html += '<td>Subtotal:</td>';
         html += '<td>₱'+formatNumber(total.toFixed(2))+'</td>';
-    html += '</tr>';    
+    html += '</tr>';     
 
-    html += '<tr>';
-        html += '<td></td><td></td><td></td><td></td>';
-        html += '<td>Delivery charge:</td>';
-        html += '<td>₱'+fee+'</td>';
-    html += '</tr>';  
+    var _text = "";
 
-    var _text = "PWD";
+    let discount_percentage = 0;
+    let minimum_purchase = $('#minimum_purchase').val();
+    let wholesale_discount_amount = 0;
+    let senior_pwd_discount_amount = 0;
+    let subtotal = total;
+
     if (id_type == "Senior Citizen ID/Booklet") {
         _text = "Senior Citizen";
+        discount_percentage = $('#senior_percentage').val();
+        senior_pwd_discount_amount = parseFloat(discount_percentage) * parseFloat(total);
+        total_amount = total - parseFloat(senior_pwd_discount_amount);
     }
+    else if (id_type == "PWD ID") {
+        _text = "PWD";
+        discount_percentage = $('#pwd_percentage').val();
+        senior_pwd_discount_amount = parseFloat(discount_percentage) * parseFloat(total);
+        total_amount = total - parseFloat(senior_pwd_discount_amount);
+    }
+    if (total >= minimum_purchase) { 
+        wholesale_discount_amount = parseFloat($('#discount_percentage').val()) * parseFloat(total);
+        total_amount = total - parseFloat(wholesale_discount_amount);
+    }     
 
+    total_amount = total_amount + parseFloat(fee);
 
     html += '<tr>';
         html += '<td></td><td></td><td></td><td></td>';
         html += '<td>Wholesale discount:</td>';
-        html += '<td>₱'+fee+'</td>';
+        html += '<td>₱'+formatNumber(wholesale_discount_amount.toFixed(2))+'</td>';
     html += '</tr>';  
     
     if (id_type == "Senior Citizen ID/Booklet" || id_type == "PWD ID") {
         html += '<tr>';
             html += '<td></td><td></td><td></td><td></td>';
             html += '<td>'+_text+' discount:</td>';
-            html += '<td>₱'+fee+'</td>';
+            html += '<td>₱'+formatNumber(senior_pwd_discount_amount.toFixed(2))+'</td>';
         html += '</tr>';  
     }
 
