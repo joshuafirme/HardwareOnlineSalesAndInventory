@@ -57,7 +57,12 @@
 
   <script src="{{asset('js/reorder_report.js')}}"></script>
     
+  @elseif(strpos($page_title,"Fast") != "")
+
+  <script src="{{asset('js/fast_and_slow_report.js')}}"></script>
 @endif
+
+
 
 </body>
 </html>

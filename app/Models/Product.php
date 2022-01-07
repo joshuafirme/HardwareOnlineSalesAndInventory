@@ -48,6 +48,30 @@ class Product extends Model
             ->get();
     }
 
+    public function readFastAndSlow($date_from,$date_to)
+    {
+        $data = DB::table($this->table . ' as P')
+            ->select("P.*", DB::raw('CONCAT(P.prefix, P.id) as product_code'),
+                    'description',
+                    'reorder', 
+                    'orig_price', 
+                    'selling_price', 
+                    'P.qty', 
+                    'U.name as unit', 
+                    'S.supplier_name as supplier', 
+                    'C.name as category',
+                    'sales.qty as qty_purchased'
+                    )
+            ->leftJoin('supplier as S', 'S.id', '=', 'P.supplier_id')
+            ->leftJoin('category as C', 'C.id', '=', 'P.category_id')
+            ->leftJoin('unit as U', 'U.id', '=', 'P.unit_id')
+            ->leftJoin('sales', 'sales.product_code', '=', DB::raw('CONCAT(P.prefix, P.id)'))
+            ->whereBetween(DB::raw('DATE(sales.created_at)'), [$date_from, $date_to])
+            ->distinct('sales.product_code')
+            ->get();
+        return $data;
+    }
+
     public function readArchiveProduct($date_from, $date_to)
     {
         return DB::table($this->table . ' as P')

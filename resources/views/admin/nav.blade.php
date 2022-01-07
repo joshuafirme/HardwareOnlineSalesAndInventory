@@ -250,7 +250,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{url('/reports/stock-adjustment')}}" class="nav-link">
+                <a href="{{url('/reports/fast-and-slow')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Fast and Slow Moving Report</p>
                 </a>

@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\BackupAndRestoreController;
 use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\FastAndSlowMovingController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AccountController;
@@ -169,6 +170,8 @@ Route::middleware('auth')->group(function () {
       Route::get('/reports/reorder', [ReorderListController::class, 'index']);
       Route::get('/reorder/preview/{supplier_id}', [ReorderListController::class, 'previewReport']);
       Route::get('/reorder/download/{supplier_id}', [ReorderListController::class, 'downloadReport']);
+
+      Route::get('/reports/fast-and-slow', [FastAndSlowMovingController::class, 'index']);
   
       Route::get('/verify-customer', [VerifyCustomerController::class, 'index']);
       Route::get('/verified-customer', [VerifyCustomerController::class, 'readAllVerifiedCustomer']);
