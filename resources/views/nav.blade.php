@@ -95,10 +95,10 @@
             <a href="{{ url('/') }}" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Contact us</a>
+            <a href="{{ url('/contact-us') }}" class="nav-link">Contact us</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">About us</a>
+            <a href="{{ url('/about-us') }}" class="nav-link">About us</a>
           </li>
           @if (Auth::check())
           <li class="nav-item">

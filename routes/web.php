@@ -199,4 +199,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/read-discount', [DiscountController::class, 'readDiscount']);
 
     Route::get('/contact-us', [PagesController::class, 'contactUs']);
+    Route::get('/about-us', [PagesController::class, 'aboutUs']);
 });
