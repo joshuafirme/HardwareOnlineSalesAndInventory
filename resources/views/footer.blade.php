@@ -10,7 +10,7 @@
   <footer class="main-footer">
     <main class="d-flex align-items-center py-3 py-md-0">
       <div class="container">
-        <div class="row">
+        <div class="row text-center">
           
           <div class="col-sm-12 col-md-6">
             <small><a style="color: #FFF;" target="_blank" href="{{ url('/terms-and-condition') }}">Terms and condition</a></small>
