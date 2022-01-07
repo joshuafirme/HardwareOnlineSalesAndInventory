@@ -37,6 +37,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PayMongoController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserAddressController;
+use App\Http\Controllers\PagesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -196,4 +197,6 @@ Route::middleware('auth')->group(function () {
       Route::get('/notification', [NotificationController::class, 'index']);
     });
     Route::get('/read-discount', [DiscountController::class, 'readDiscount']);
+
+    Route::get('/contact-us', [PagesController::class, 'contactUs']);
 });
