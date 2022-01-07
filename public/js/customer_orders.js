@@ -114,10 +114,11 @@ function getComputation(total, id_type) {
         total_amount = total - parseFloat(senior_pwd_discount_amount);
     }
     if (total >= minimum_purchase) { 
-        wholesale_discount_amount = parseFloat($('#discount_percentage').val()) * parseFloat(total);
+        wholesale_discount_amount = parseFloat($('#whole_sale_percentage').val()) * parseFloat(total);
         total_amount = total - parseFloat(wholesale_discount_amount);
+        console.log(wholesale_discount_amount)
     }     
-
+    
     total_amount = total_amount + parseFloat(fee);
 
     html += '<tr>';
