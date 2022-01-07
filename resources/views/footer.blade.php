@@ -11,12 +11,23 @@
     <main class="d-flex align-items-center py-3 py-md-0">
       <div class="container">
         <div class="row">
+          
           <div class="col-sm-12 col-md-6">
             <small><a style="color: #FFF;" target="_blank" href="{{ url('/terms-and-condition') }}">Terms and condition</a></small>
           </div>
           <div class="col-sm-12 col-md-6">
+            <small><a style="color: #FFF;" target="_blank" href="{{ url('/privacy-policy') }}">Privacy Policy</a></small>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <small><a style="color: #FFF;" target="_blank" href="{{ url('/return-and-cancellation-policy') }}">Return and Cancellation Policy</a></small>
+          </div>
+          <div class="col-sm-12 col-md-6">
             <small><a style="color: #FFF;" target="_blank" href="{{ url('/terms-and-condition') }}">About us</a></small>
           </div>
+          <div class="col-sm-12 col-md-6">
+            <small><a style="color: #FFF;" target="_blank" href="{{ url('/we-deliver') }}">We deliver in your Area!</a></small>
+          </div>
+          
           <div class="col-sm-12 col-md-6">
             <small><a style="color: #FFF;" target="_blank" href="{{ url('/terms-and-condition') }}">Contact us</a></small>
           </div>

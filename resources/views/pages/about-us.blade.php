@@ -1,6 +1,6 @@
 
 @php
-$page_title =  "Val Construction Supply | Cart";
+$page_title =  "About Us | Val Construction Supply";
 @endphp
 
 @include('header')
