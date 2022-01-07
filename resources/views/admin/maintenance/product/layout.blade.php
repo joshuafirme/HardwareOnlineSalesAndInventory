@@ -31,6 +31,11 @@
 @include('admin.datatables-scripts')
 <script>var page_title = "<?php echo $page_title ?>";</script>
 <script src="{{asset('js/product.js')}}"></script>
-
+<script>
+    $(".custom-file-input").on("change", function() {
+      var fileName = $(this).val().split("\\").pop();
+      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
 </body>
 </html>
