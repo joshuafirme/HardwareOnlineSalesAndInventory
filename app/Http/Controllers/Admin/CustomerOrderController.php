@@ -91,7 +91,8 @@ class CustomerOrderController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'order changed status success'
+            'message' => 'order changed status success',
+            'order_no' => $order_no,
         ]);
     }
 

@@ -238,12 +238,13 @@ async function on_Click() {
 
         await readOneOrder(order_no, id_type);
         await readShippingAddress(user_id);
+
+        
+        $('#btn-change-status').attr('data-order-no', order_no);
+
         if (latlong.length > 0) {
             await initMap(latlong);
         }
-        
-        
-        $('#btn-change-status').attr('data-order-no', order_no);
         
     });
 
