@@ -39,6 +39,7 @@ async function fetchSales(date_from, date_to, order_from, payment_method){
             {data: 'payment_method', name: 'payment_method'},
             {data: 'order_from', name: 'order_from'},
             {data: 'date_time', name: 'date_time'},
+            {data: 'action', name: 'action'},
         ]
        });
 }
@@ -142,6 +143,42 @@ async function on_Change() {
         await fetchTotalSales(date_from, date_to, order_from, payment_method);
     });
 }
+
+var product_id;
+$(document).on('click', '.btn-archive', function(){ console.log('test')
+  product_id = $(this).attr('data-id');
+  var row = $(this).closest("tr"); console.log(product_id)
+  var name = row.find("td:eq(2)").text();
+  var invoice = row.find("td:eq(0)").text();
+  $('#confirmModal').modal('show');
+  $('.delete-success').hide();
+  $('.delete-message').html('Are you sure do you want to archive <b>'+ name +'</b> with invoice <b>#'+invoice+'</b>?');
+}); 
+
+$(document).on('click', '.btn-confirm-archive', function(){
+  $.ajax({
+      url: '/reports/archive/'+ product_id,
+      type: 'POST',
+    
+      beforeSend:function(){
+          $('.btn-confirm-archive').text('Please wait...');
+      },
+      
+      success:function(){
+          setTimeout(function(){
+
+              $('.btn-confirm-archive').text('Yes');
+              $('.tbl-sales').DataTable().ajax.reload();
+              $('#confirmModal').modal('hide');
+              $.toast({
+                  text: 'Data was successfully archived.',
+                  showHideTransition: 'plain'
+              })
+          }, 1000);
+      }
+  });
+
+});
 
 async function renderComponents() {
     

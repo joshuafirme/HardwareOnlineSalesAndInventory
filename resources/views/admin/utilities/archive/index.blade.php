@@ -48,6 +48,9 @@
                         <li class="nav-item">
                           <a class="nav-link" id="prepared-tab" data-toggle="tab" href="#prepared" role="tab" aria-controls="prepared" aria-selected="false">Users</a>
                         </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="sales-tab" data-toggle="tab" href="#sales" role="tab" aria-controls="sales" aria-selected="false">Sales</a>
+                        </li>
                       </ul>
                       <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
@@ -81,6 +84,26 @@
                                      <th>Access Level</th>
                                      <th>Date archive</th>
                                      <th>Action</th>
+                                 </tr>
+                                </thead>
+                             </table>
+                          </div>
+                        </div>
+                        <div class="tab-pane fade" id="sales" role="tabpanel" aria-labelledby="sales-tab">
+                          <div class="mt-4">
+                            <table class="table table-hover" id="sales-archive-table">
+                                <thead>
+                                 <tr>
+                                  <th>Invoice #</th>
+                                  <th>Product Code</th>
+                                  <th>Name</th>
+                                  <th>Unit</th>
+                                  <th>Price</th>
+                                  <th>Qty</th>
+                                  <th>Amount</th>
+                                  <th>Payment method</th>
+                                  <th>Order from</th>
+                                  <th>Date time archived</th>
                                  </tr>
                                 </thead>
                              </table>

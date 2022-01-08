@@ -4,6 +4,30 @@ $.ajaxSetup({
     }
 }); 
 
+async function fetchSales(){
+    $('#sales-archive-table').DataTable({
+       processing: true,
+       serverSide: true,
+       ajax:{
+        url: "/archive/sales",
+        type:"GET",
+        },
+       columns:[       
+        {data: 'invoice_no', name: 'invoice_no'},
+        {data: 'product_code', name: 'product_code'},
+        {data: 'description', name: 'description'},  
+        {data: 'unit', name: 'unit'}, 
+        {data: 'selling_price', name: 'selling_price'},
+        {data: 'qty', name: 'qty'},
+        {data: 'amount', name: 'amount'},
+        {data: 'payment_method', name: 'payment_method'},
+        {data: 'order_from', name: 'order_from'},
+        {data: 'updated_at', name: 'updated_at'},
+       ]
+      });
+}
+
+
 async function fetchProduct(date_from, date_to){
     $('#product-archive-table').DataTable({
        processing: true,
@@ -144,6 +168,8 @@ $(document).on('click','.nav-item', async function(){
         $('#user-archive-table').DataTable().destroy();
         await fetchUser(date_from, date_to);
     }
+    $('#sales-archive-table').DataTable().destroy();
+        await fetchSales();
 });
 
   async function render() {
@@ -153,9 +179,12 @@ $(document).on('click','.nav-item', async function(){
     if ($('.nav-item').find('.active').attr('aria-controls') == 'pending') {
         await fetchProduct(date_from, date_to);
     }
+    if ($('.nav-item').find('.active').attr('aria-controls') == 'sales') {
+       
+    }
     else {
         await fetchUser(date_from, date_to);
-    }
+    } await fetchSales();
   }
 
   render();

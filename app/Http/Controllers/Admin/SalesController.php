@@ -15,12 +15,29 @@ class SalesController extends Controller
         return view('admin.reports.sales-report');
     }
 
+    public function archive($id)
+    {
+        Sales::where('id', $id)
+        ->update([
+            'status' => -1,
+        ]);
+
+        return redirect()->back()
+            ->with('success', 'Product was archived.');
+    }
+
     public function readSales(Request $request) {
         $data = new Sales;
         $data = $data->readSales($request->date_from, $request->date_to, $request->order_from, $request->payment_method);
         if(request()->ajax())
         {       
             return datatables()->of($data)
+            ->addColumn('action', function($product)
+            {
+                $button = ' <a style="color:blue;" class="btn btn-sm btn-archive" data-id="'. $product->id .'">Archive</a>';
+                return $button;
+            })
+            ->rawColumns(['action'])
             ->make(true); 
         }
     }

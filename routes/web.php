@@ -151,6 +151,7 @@ Route::middleware('auth')->group(function () {
       Route::get('/archive/products', 'Admin\ArchiveController@readArchiveProduct');
       Route::get('/archive/users', 'Admin\ArchiveController@readArchiveUsers');
       Route::post('/archive/restore/{id}', 'Admin\ArchiveController@restore');
+      Route::get('/archive/sales', 'Admin\ArchiveController@readArchiveSales');
 
       Route::get('/feedback', 'Admin\FeedbackController@index');
 
@@ -160,6 +161,8 @@ Route::middleware('auth')->group(function () {
       Route::post('/backup-and-restore/restore', 'Admin\BackupAndRestoreController@restore')->name('restore');
 
       Route::get('/notification', 'Admin\NotificationController@index');
+
+      Route::post('/reports/archive/{id}', 'Admin\SalesController@archive');
     });
     Route::get('/read-discount', 'Admin\DiscountController@readDiscount');
 

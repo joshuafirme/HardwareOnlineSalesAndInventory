@@ -25,7 +25,7 @@ class Sales extends Model
 
     public function readSales($date_from, $date_to, $order_from, $payment_method){
         return DB::table('sales as S')
-        ->select('S.*', 'P.*', 'S.qty',
+        ->select('S.*', 'P.*', 'S.qty', 'S.id as id',
                 'U.name as unit', 
                 DB::raw('S.created_at as date_time'))
         ->leftJoin('product as P', DB::raw('CONCAT(P.prefix, P.id)'), '=', 'S.product_code')
