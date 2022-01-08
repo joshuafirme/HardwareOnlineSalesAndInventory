@@ -14,7 +14,7 @@ class AddStatusToOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->string('status')->default(1)->after('payment_method');
+            $table->string('status')->default(1)->change();
         });
     }
 
