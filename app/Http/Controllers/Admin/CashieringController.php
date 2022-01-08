@@ -211,7 +211,6 @@ class CashieringController extends Controller
         }
 
         .align-text td{
-            text-align:right;
         }
 
         .w td{
@@ -272,7 +271,7 @@ class CashieringController extends Controller
                     <td class="f-courier">'. $data->unit .'</td>  
                     <td class="f-courier">'. $data->description .'</td>
                     <td class="f-courier">'. number_format($data->selling_price,2,'.',',') .'</td>   
-                    <td class="f-courier" style="width:110px;">'. number_format($data->amount,2,'.',',') .'</td>    
+                    <td class="f-courier align-text" style="width:110px;">'. number_format($data->amount,2,'.',',') .'</td>    
                 </tr>
                 ';
                 
