@@ -10,6 +10,9 @@
     table,#product-container{
         font-size:19px;
     }
+    table td {
+        text-align: right !important;
+    }
 </style>
 
 <div class="content-header"></div>
