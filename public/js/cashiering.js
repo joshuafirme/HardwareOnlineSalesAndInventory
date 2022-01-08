@@ -360,7 +360,7 @@ function on_Click () {
                         payment_method = "GCash"
                     }
                     $.ajax({
-                        url: '/record-sale/',
+                        url: '/record-sale',
                         type: 'POST',
                         data: {
                             payment_method : payment_method,
@@ -510,8 +510,3 @@ async function render() {
 
 render();
 
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-}); 
