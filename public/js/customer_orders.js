@@ -77,7 +77,7 @@ function getItems (data) {
         html += '<td>'+data.unit+'</td>';
         html += '<td>'+data.selling_price+'</td>';
         html += '<td>'+data.qty+'</td>';
-        html += '<td>'+data.amount+'</td>';
+        html += '<td style="text-align:right;">'+data.amount+'</td>';
     html += '</tr>';
     
     return html;
@@ -90,7 +90,7 @@ function getComputation(total, id_type) {
     html += '<tr>';
         html += '<td></td><td></td><td></td><td></td>';
         html += '<td>Subtotal:</td>';
-        html += '<td>₱'+formatNumber(total.toFixed(2))+'</td>';
+        html += '<td style="text-align:right;">₱'+formatNumber(total.toFixed(2))+'</td>';
     html += '</tr>';     
 
     var _text = "";
@@ -124,27 +124,27 @@ function getComputation(total, id_type) {
     html += '<tr>';
         html += '<td></td><td></td><td></td><td></td>';
         html += '<td>Wholesale discount:</td>';
-        html += '<td>₱'+formatNumber(wholesale_discount_amount.toFixed(2))+'</td>';
+        html += '<td style="text-align:right;">₱'+formatNumber(wholesale_discount_amount.toFixed(2))+'</td>';
     html += '</tr>';  
     
     if (id_type == "Senior Citizen ID/Booklet" || id_type == "PWD ID") {
         html += '<tr>';
             html += '<td></td><td></td><td></td><td></td>';
             html += '<td>'+_text+' discount:</td>';
-            html += '<td>₱'+formatNumber(senior_pwd_discount_amount.toFixed(2))+'</td>';
+            html += '<td style="text-align:right;">₱'+formatNumber(senior_pwd_discount_amount.toFixed(2))+'</td>';
         html += '</tr>';  
     }
 
     html += '<tr>';
         html += '<td></td><td></td><td></td><td></td>';
         html += '<td>Delivery charge:</td>';
-        html += '<td>₱'+fee+'</td>';
+        html += '<td style="text-align:right;">₱'+fee+'</td>';
     html += '</tr>';
 
     html += '<tr>';
         html += '<td></td><td></td><td></td><td></td>';
         html += '<td>Total:</td>';
-    html += '<td>₱'+formatNumber(total_amount.toFixed(2))+'</td>';
+    html += '<td style="text-align:right;">₱'+formatNumber(total_amount.toFixed(2))+'</td>';
 html += '</tr>';    
     return html;                     
 }
