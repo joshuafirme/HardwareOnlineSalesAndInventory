@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 class Supplier extends Model
 {
-    use HasFactory;
+    
 
     protected $table = 'supplier';
 

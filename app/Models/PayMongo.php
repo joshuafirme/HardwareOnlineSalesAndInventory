@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PayMongo extends Model
 {
-    use HasFactory;
+    
     
     private $authorization = 'Basic cGtfdGVzdF9EblR5WHlLWmF1YkZyWFRKRVc1QWZwR3M6c2tfdGVzdF9KaFpNdWplMmV1a0toQ1VpN1Zka0RNRzY=';
 

@@ -1,44 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomePageController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\SupplierController;
-use App\Http\Controllers\Admin\UnitController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\DeliveryAreaController;
-use App\Http\Controllers\Admin\StockAdjustmentController;
-use App\Http\Controllers\Admin\PurchaseOrderController;
-use App\Http\Controllers\Admin\StockAdjustmentReportController;
-use App\Http\Controllers\Admin\CashieringController;
-use App\Http\Controllers\Admin\SalesController;
-use App\Http\Controllers\Admin\SupplierDeliveryController;
-use App\Http\Controllers\Admin\InventoryReportController;
-use App\Http\Controllers\Admin\PricingController;
-use App\Http\Controllers\Admin\PurchaseOrderReportController;
-use App\Http\Controllers\Admin\SupplierDeliveryReportController;
-use App\Http\Controllers\Admin\ProductReturnController;
-use App\Http\Controllers\Admin\ProductReturnReportController;
-use App\Http\Controllers\Admin\ReorderListController;
-use App\Http\Controllers\Admin\VerifyCustomerController;
-use App\Http\Controllers\Admin\CustomerOrderController;
-use App\Http\Controllers\Admin\AuditTrailController;
-use App\Http\Controllers\Admin\ArchiveController;
-use App\Http\Controllers\Admin\FeedbackController;
-use App\Http\Controllers\Admin\DiscountController;
-use App\Http\Controllers\Admin\BackupAndRestoreController;
-use App\Http\Controllers\Admin\NotificationController;
-use App\Http\Controllers\Admin\FastAndSlowMovingController;
-use App\Http\Controllers\UserAuthController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\AccountController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\PayMongoController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\UserAddressController;
-use App\Http\Controllers\PagesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,28 +15,28 @@ use App\Http\Controllers\PagesController;
 /**
  * Customer
  */
-Route::get('/', [HomePageController::class, 'index']);
-Route::get('/customer/product', [HomePageController::class, 'readAllProduct']);
-Route::get('/customer/product/search', [HomePageController::class, 'searchProduct']);
+Route::get('/', 'HomePageController@index');
+Route::get('/customer/product', 'HomePageController@readAllProduct');
+Route::get('/customer/product/search', 'HomePageController@searchProduct');
 
-Route::get('/home/category/{category_id}', [HomePageController::class, 'readProductByCategory']);
+Route::get('/home/category/{category_id}', 'HomePageController@readProductByCategory');
 
-Route::get('/login', [UserAuthController::class, 'customer_index']);
-Route::get('/signup', [UserAuthController::class, 'signup_view']);
-Route::post('/create-account', [UserAuthController::class, 'createAccount'])->name('createAccount');
-Route::post('/do-login', [UserAuthController::class, 'login'])->name('login');
+Route::get('/login', 'UserAuthController@customer_index');
+Route::get('/signup', 'UserAuthController@signup_view');
+Route::post('/create-account', 'UserAuthController@createAccount')->name('createAccount');
+Route::post('/do-login', 'UserAuthController@login')->name('login');
 /**
  * Admin
  */
-Route::get('/admin', [UserAuthController::class, 'index']);
-//Route::post('/admin/login', [UserAuthController::class, 'login'])->name('login');
-Route::get('/admin/logout', [UserAuthController::class, 'logout']);
+Route::get('/admin', 'UserAuthController@index');
+//Route::post('/admin/login', 'UserAuthController@login'])->name('login');
+Route::get('/admin/logout', 'UserAuthController@logout');
 
 
-Route::get('/cart', [CartController::class, 'index']);
-Route::get('/cart/read-items', [CartController::class, 'readCart']);
-Route::get('/cart-count', [CartController::class, 'cartCount']);
-Route::post('/add-to-cart', [CartController::class, 'addToCart']);
+Route::get('/cart', 'CartController@index');
+Route::get('/cart/read-items', 'CartController@readCart');
+Route::get('/cart-count', 'CartController@cartCount');
+Route::post('/add-to-cart', 'CartController@addToCart');
 
 /**
  * Pages
@@ -84,129 +46,129 @@ Route::get('/terms-and-condition', function(){
 });
 
 Route::middleware('auth')->group(function () {
-    Route::resource('/account', AccountController::class);
-    Route::get('/edit-account', [AccountController::class, 'editAccount']);
-    Route::resource('/address', UserAddressController::class);
-    Route::get('/cart-total', [CartController::class, 'cartTotal']);
-    Route::post('/cart/remove-item/{id}', [CartController::class, 'removeItem']);
-    Route::post('/cart/change-qty', [CartController::class, 'changeQuantity']);
-    Route::resource('/checkout', CheckoutController::class);
-    Route::post('/place-order', [CheckoutController::class,'placeOrder'])->name('placeOrder');
-    Route::get('/create-source', [CheckoutController::class, 'createSource'])->name('createSource');
-    Route::get('/create-payment', [CheckoutController::class, 'createPayment'])->name('createPayment');
-    Route::get('/create-payment-method', [CheckoutController::class,'createPaymayaPaymentMethod'])->name('createPaymayaPaymentMethod');
-    Route::get('/order-info/{source_id}/{payment_method}', [CheckoutController::class, 'orderInfo']);
+    Route::resource('/account', 'AccountController');
+    Route::get('/edit-account', 'AccountController@editAccount');
+    Route::resource('/address', 'UserAddressController');
+    Route::get('/cart-total', 'CartController@cartTotal');
+    Route::post('/cart/remove-item/{id}', 'CartController@removeItem');
+    Route::post('/cart/change-qty', 'CartController@changeQuantity');
+    Route::get('/checkout', 'CheckoutController@index');
+    Route::post('/place-order', 'CheckoutController@placeOrder')->name('placeOrder');
+    Route::get('/create-source', 'CheckoutController@createSource')->name('createSource');
+    Route::get('/create-payment', 'CheckoutController@createPayment')->name('createPayment');
+    Route::get('/create-payment-method', 'CheckoutController@createPaymayaPaymentMethod')->name('createPaymayaPaymentMethod');
+    Route::get('/order-info/{source_id}/{payment_method}', 'CheckoutController@orderInfo');
 
-    Route::get('/my-orders', [OrderController::class, 'index']);
-    Route::post('/cancel-order/{order_no}', [OrderController::class, 'cancelOrder']);
-    Route::get('/get-brgy/{municipality}', [UserAddressController::class, 'getBrgyByMunicipality']);
-    Route::post('/send-feedback', [OrderController::class, 'sendFeedback']);
-    Route::get('/read-feedback', [OrderController::class, 'readOneFeedback']);
+    Route::get('/my-orders', 'OrderController@index');
+    Route::post('/cancel-order/{order_no}', 'OrderController@cancelOrder');
+    Route::get('/get-brgy/{municipality}', 'UserAddressController@getBrgyByMunicipality');
+    Route::post('/send-feedback', 'OrderController@sendFeedback');
+    Route::get('/read-feedback', 'OrderController@readOneFeedback');
     
     Route::middleware('access_level:1:2:3:4')->group(function () {
-      Route::get('/dashboard', [DashboardController::class, 'index']);
-      Route::resource('users', UserController::class);
-      Route::resource('supplier', SupplierController::class);
-      Route::resource('unit', UnitController::class);
-      Route::post('user/archive/{id}', [UserController::class, 'archive']);
-      Route::resource('product', ProductController::class);
-      Route::get('/product-search', [ProductController::class, 'productSearch']);
-      Route::post('/product/archive/{id}', [ProductController::class, 'archive']);
-      Route::resource('category', CategoryController::class);
-      Route::resource('delivery_area', DeliveryAreaController::class);
-      Route::get('delivery_area/brgylist/{municipality}', [DeliveryAreaController::class,'getBrgyList']);
-      Route::resource('stock-adjustment', StockAdjustmentController::class);
-      Route::post('stock-adjustment/adjust/{id}', [StockAdjustmentController::class, 'adjust']);
-      Route::resource('purchase-order', PurchaseOrderController::class);
-      Route::get('display-reorders', [PurchaseOrderController::class, 'displayReorders']);
-      Route::post('purchase-order/add-order', [PurchaseOrderController::class, 'addOrder']);
-      Route::get('request-order', [PurchaseOrderController::class, 'readRequestOrderBySupplier']);
-      Route::post('request-order/remove', [PurchaseOrderController::class, 'removeRequest']);
-      Route::post('purchase-order', [PurchaseOrderController::class, 'purchaseOrder']);
-      Route::get('preview-request-order', [PurchaseOrderController::class, 'previewRequestPurchaseOrder']);
-      Route::get('download-request-order', [PurchaseOrderController::class, 'downloadRequestPurchaseOrder']);
-      Route::get('purchased-order', [PurchaseOrderController::class, 'readPurchasedOrder']);
-      Route::get('reports/stock-adjustment', [StockAdjustmentReportController::class, 'index']);
-      Route::get('reports/stock-adjustment/pdf/{date_from}/{date_to}', [StockAdjustmentReportController::class, 'pdf']);
-      Route::get('reports/stock-adjustment/download/{date_from}/{date_to}', [StockAdjustmentReportController::class, 'downloadPDF']);
-      Route::get('cashiering', [CashieringController::class, 'index']);
-      Route::post('record-sale', [CashieringController::class, 'recordSale']);
-      Route::post('add-to-tray', [CashieringController::class, 'addToTray']);
-      Route::get('read-tray', [CashieringController::class, 'readTray']);
-      Route::get('cashiering/read-one-qty/{product_code}', [CashieringController::class, 'readOneQty']);
-      Route::post('void/{id}', [CashieringController::class, 'void']);
-      Route::get('preview-invoice/{wholesale_discount_amount}/{senior_pwd_discount_amount}', [CashieringController::class, 'previewInvoice']);
-      Route::get('/pricing', [PricingController::class, 'index']);
-      Route::post('/pricing/update', [PricingController::class, 'updatePricing']);
-      Route::resource('supplier-delivery', SupplierDeliveryController::class);
-      Route::post('/create-delivery', [SupplierDeliveryController::class, 'createDelivery']);
-      Route::get('/read-supplier-delivery', [SupplierDeliveryController::class, 'readSupplierDelivery']);
+      Route::get('/dashboard', 'Admin\DashboardController@index');
+      Route::resource('users', 'Admin\UserController');
+      Route::resource('supplier', 'Admin\SupplierController');
+      Route::resource('unit', 'UnitController');
+      Route::post('user/archive/{id}', 'Admin\UserController@archive');
+      Route::resource('product', 'Admin\ProductController');
+      Route::get('/product-search', 'Admin\ProductController@productSearch');
+      Route::post('/product/archive/{id}', 'Admin\ProductController@archive');
+      Route::resource('category', 'CategoryController');
+      Route::resource('delivery_area', 'DeliveryAreaController');
+      Route::get('delivery_area/brgylist/{municipality}', 'Admin\DeliveryAreaController@getBrgyList');
+      Route::resource('stock-adjustment', 'StockAdjustmentController');
+      Route::post('stock-adjustment/adjust/{id}', 'Admin\StockAdjustmentController@adjust');
+      Route::resource('purchase-order', 'PurchaseOrderController');
+      Route::get('display-reorders', 'Admin\PurchaseOrderController@displayReorders');
+      Route::post('purchase-order/add-order', 'Admin\PurchaseOrderController@addOrder');
+      Route::get('request-order', 'Admin\PurchaseOrderController@readRequestOrderBySupplier');
+      Route::post('request-order/remove', 'Admin\PurchaseOrderController@removeRequest');
+      Route::post('purchase-order', 'Admin\PurchaseOrderController@purchaseOrder');
+      Route::get('preview-request-order', 'Admin\PurchaseOrderController@previewRequestPurchaseOrder');
+      Route::get('download-request-order', 'Admin\PurchaseOrderController@downloadRequestPurchaseOrder');
+      Route::get('purchased-order', 'Admin\PurchaseOrderController@readPurchasedOrder');
+      Route::get('reports/stock-adjustment', 'Admin\StockAdjustmentReportController@index');
+      Route::get('reports/stock-adjustment/pdf/{date_from}/{date_to}', 'Admin\StockAdjustmentReportController@pdf');
+      Route::get('reports/stock-adjustment/download/{date_from}/{date_to}', 'Admin\StockAdjustmentReportController@downloadPDF');
+      Route::get('cashiering', 'Admin\CashieringController@index');
+      Route::post('record-sale', 'Admin\CashieringController@recordSale');
+      Route::post('add-to-tray', 'Admin\CashieringController@addToTray');
+      Route::get('read-tray', 'Admin\CashieringController@readTray');
+      Route::get('cashiering/read-one-qty/{product_code}', 'Admin\CashieringController@readOneQty');
+      Route::post('void/{id}', 'Admin\CashieringController@void');
+      Route::get('preview-invoice/{wholesale_discount_amount}/{senior_pwd_discount_amount}', 'Admin\CashieringController@previewInvoice');
+      Route::get('/pricing', 'Admin\PricingController@index');
+      Route::post('/pricing/update', 'Admin\PricingController@updatePricing');
+      Route::resource('supplier-delivery', 'SupplierDeliveryController');
+      Route::post('/create-delivery', 'Admin\SupplierDeliveryController@createDelivery');
+      Route::get('/read-supplier-delivery', 'Admin\SupplierDeliveryController@readSupplierDelivery');
       
-      Route::resource('reports/sales', SalesController::class);
-      Route::get('read-sales', [SalesController::class, 'readSales']);
-      Route::get('compute-total-sales', [SalesController::class, 'computeTotalSales']);
-      Route::get('reports/preview-sales/{date_from}/{date_to}/{order_from}/{payment_method}', [SalesController::class, 'previewSalesReport']);
-      Route::get('reports/download-sales/{date_from}/{date_to}/{order_from}/{payment_method}', [SalesController::class, 'downloadSalesReport']);
-      Route::get('reports/inventory', [InventoryReportController::class, 'index']);
-      Route::get('reports/inventory/{category_id}', [InventoryReportController::class, 'readProductByCategory']);
-      Route::get('/reports/inventory/preview/{category_id}', [InventoryReportController::class, 'previewReport']);
-      Route::get('/reports/inventory/download/{category_id}', [InventoryReportController::class, 'downloadReport']);
+      Route::resource('reports/sales', 'Admin\SalesController');
+      Route::get('read-sales', 'Admin\SalesController@readSales');
+      Route::get('/compute-total-sales', 'Admin\SalesController@computeTotalSales');
+      Route::get('reports/preview-sales/{date_from}/{date_to}/{order_from}/{payment_method}', 'Admin\SalesController@previewSalesReport');
+      Route::get('reports/download-sales/{date_from}/{date_to}/{order_from}/{payment_method}', 'Admin\SalesController@downloadSalesReport');
+      Route::get('reports/inventory', 'Admin\InventoryReportController@index');
+      Route::get('reports/inventory/{category_id}', 'Admin\InventoryReportController@readProductByCategory');
+      Route::get('/reports/inventory/preview/{category_id}', 'Admin\InventoryReportController@previewReport');
+      Route::get('/reports/inventory/download/{category_id}', 'Admin\InventoryReportController@downloadReport');
   
-      Route::get('/reports/purchased-order', [PurchaseOrderReportController::class, 'index']);
-      Route::get('/purchased-order/preview/{supplier_id}/{date_from}/{date_to}', [PurchaseOrderReportController::class, 'previewReport']);
-      Route::get('/purchased-order/download/{supplier_id}/{date_from}/{date_to}', [PurchaseOrderReportController::class, 'downloadReport']);
+      Route::get('/reports/purchased-order', 'Admin\PurchaseOrderReportController@index');
+      Route::get('/purchased-order/preview/{supplier_id}/{date_from}/{date_to}', 'Admin\PurchaseOrderReportController@previewReport');
+      Route::get('/purchased-order/download/{supplier_id}/{date_from}/{date_to}', 'Admin\PurchaseOrderReportController@downloadReport');
   
-      Route::get('/reports/supplier-delivery', [SupplierDeliveryReportController::class, 'index']);
-      Route::get('/supplier-delivery/preview/{supplier_id}/{date_from}/{date_to}', [SupplierDeliveryReportController::class, 'previewReport']);
-      Route::get('/supplier-delivery/download/{supplier_id}/{date_from}/{date_to}', [SupplierDeliveryReportController::class, 'downloadReport']);
+      Route::get('/reports/supplier-delivery', 'Admin\SupplierDeliveryReportController@index');
+      Route::get('/supplier-delivery/preview/{supplier_id}/{date_from}/{date_to}', 'Admin\SupplierDeliveryReportController@previewReport');
+      Route::get('/supplier-delivery/download/{supplier_id}/{date_from}/{date_to}', 'Admin\SupplierDeliveryReportController@downloadReport');
   
-      Route::resource('product-return', ProductReturnController::class);
-      Route::get('/product-return-read-sales', [ProductReturnController::class, 'readSales']);
-      Route::post('/return', [ProductReturnController::class, 'return']);
-      Route::get('/reports/product-return', [ProductReturnReportController::class, 'index']);
-      Route::get('/product-return/preview/{date_from}/{date_to}', [ProductReturnReportController::class, 'previewReport']);
-      Route::get('/product-return/download/{date_from}/{date_to}', [ProductReturnReportController::class, 'downloadReport']);
+      Route::resource('product-return', 'ProductReturnController');
+      Route::get('/product-return-read-sales', 'Admin\ProductReturnController@readSales');
+      Route::post('/return', 'Admin\ProductReturnController@return');
+      Route::get('/reports/product-return', 'Admin\ProductReturnReportController@index');
+      Route::get('/product-return/preview/{date_from}/{date_to}', 'Admin\ProductReturnReportController@previewReport');
+      Route::get('/product-return/download/{date_from}/{date_to}', 'Admin\ProductReturnReportController@downloadReport');
   
-      Route::get('/reports/reorder', [ReorderListController::class, 'index']);
-      Route::get('/reorder/preview/{supplier_id}', [ReorderListController::class, 'previewReport']);
-      Route::get('/reorder/download/{supplier_id}', [ReorderListController::class, 'downloadReport']);
+      Route::get('/reports/reorder', 'Admin\ReorderListController@index');
+      Route::get('/reorder/preview/{supplier_id}', 'Admin\ReorderListController@previewReport');
+      Route::get('/reorder/download/{supplier_id}', 'Admin\ReorderListController@downloadReport');
 
-      Route::get('/reports/fast-and-slow', [FastAndSlowMovingController::class, 'index']);
+      Route::get('/reports/fast-and-slow', 'Admin\FastAndSlowMovingController@index');
   
-      Route::get('/verify-customer', [VerifyCustomerController::class, 'index']);
-      Route::get('/verified-customer', [VerifyCustomerController::class, 'readAllVerifiedCustomer']);
-      Route::post('/do-verify-customer/{user_id}', [VerifyCustomerController::class, 'verifyCustomer']);
+      Route::get('/verify-customer', 'Admin\VerifyCustomerController@index');
+      Route::get('/verified-customer', 'Admin\VerifyCustomerController@readAllVerifiedCustomer');
+      Route::post('/do-verify-customer/{user_id}', 'Admin\VerifyCustomerController@verifyCustomer');
 
-      Route::get('/customer-orders', [CustomerOrderController::class, 'index']);
-      Route::get('/read-orders', [CustomerOrderController::class, 'readOrders']);
-      Route::get('/read-one-order/{order_no}', [CustomerOrderController::class, 'readOneOrder']);
-      Route::post('/order-change-status/{order_no}', [CustomerOrderController::class, 'orderChangeStatus']);
-      Route::get('/get-shipping-fee/{order_no}', [CustomerOrderController::class, 'getShippingFee']);
-      Route::get('/read-shipping-address/{user_id}', [CustomerOrderController::class, 'readShippingAddress']);
+      Route::get('/customer-orders', 'Admin\CustomerOrderController@index');
+      Route::get('/read-orders', 'Admin\CustomerOrderController@readOrders');
+      Route::get('/read-one-order/{order_no}', 'Admin\CustomerOrderController@readOneOrder');
+      Route::post('/order-change-status/{order_no}', 'Admin\CustomerOrderController@orderChangeStatus');
+      Route::get('/get-shipping-fee/{order_no}', 'Admin\CustomerOrderController@getShippingFee');
+      Route::get('/read-shipping-address/{user_id}', 'Admin\CustomerOrderController@readShippingAddress');
 
-      Route::get('/audit-trail', [AuditTrailController::class, 'index']);
-      Route::get('/archive', [ArchiveController::class, 'index']);
-      Route::get('/archive/products', [ArchiveController::class, 'readArchiveProduct']);
-      Route::get('/archive/users', [ArchiveController::class, 'readArchiveUsers']);
-      Route::post('/archive/restore/{id}', [ArchiveController::class, 'restore']);
+      Route::get('/audit-trail', 'Admin\AuditTrailController@index');
+      Route::get('/archive', 'Admin\ArchiveController@index');
+      Route::get('/archive/products', 'Admin\ArchiveController@readArchiveProduct');
+      Route::get('/archive/users', 'Admin\ArchiveController@readArchiveUsers');
+      Route::post('/archive/restore/{id}', 'Admin\ArchiveController@restore');
 
-      Route::get('/feedback', [FeedbackController::class, 'index']);
+      Route::get('/feedback', 'Admin\FeedbackController@index');
 
-      Route::resource('discount', DiscountController::class);
-      Route::get('/backup-and-restore', [BackupAndRestoreController::class, 'index']);
-      Route::post('/backup-and-restore/backup', [BackupAndRestoreController::class, 'backup'])->name('backup');
-      Route::post('/backup-and-restore/restore', [BackupAndRestoreController::class, 'restore'])->name('restore');
+      Route::resource('discount', 'DiscountController');
+      Route::get('/backup-and-restore', 'Admin\BackupAndRestoreController@index');
+      Route::post('/backup-and-restore/backup', 'Admin\BackupAndRestoreController@backup')->name('backup');
+      Route::post('/backup-and-restore/restore', 'Admin\BackupAndRestoreController@restore')->name('restore');
 
-      Route::get('/notification', [NotificationController::class, 'index']);
+      Route::get('/notification', 'Admin\NotificationController@index');
     });
-    Route::get('/read-discount', [DiscountController::class, 'readDiscount']);
+    Route::get('/read-discount', 'Admin\DiscountController@readDiscount');
 
     
 });
 
 
-Route::get('/contact-us', [PagesController::class, 'contactUs']);
-Route::get('/about-us', [PagesController::class, 'aboutUs']);
-Route::get('/privacy-policy', [PagesController::class, 'privacyPolicy']);
-Route::get('/we-deliver', [PagesController::class, 'weDeliver']);
-Route::get('/return-and-cancellation-policy', [PagesController::class, 'returnAndCancellationPolicy']);
+Route::get('/contact-us', 'PagesController@contactUs');
+Route::get('/about-us', 'PagesController@aboutUs');
+Route::get('/privacy-policy', 'PagesController@privacyPolicy');
+Route::get('/we-deliver', 'PagesController@weDeliver');
+Route::get('/return-and-cancellation-policy', 'PagesController@returnAndCancellationPolicy');

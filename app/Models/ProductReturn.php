@@ -8,7 +8,7 @@ use DB;
 
 class ProductReturn extends Model
 {
-    use HasFactory;
+    
 
     protected $table = 'product_return';
 

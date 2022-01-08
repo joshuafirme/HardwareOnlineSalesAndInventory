@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BackupInfo extends Model
 {
-    use HasFactory;
+    
 
     protected $table = 'backup_info';
 

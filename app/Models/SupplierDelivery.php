@@ -8,7 +8,7 @@ use DB;
 
 class SupplierDelivery extends Model
 {
-    use HasFactory;
+    
 
     protected $table = 'supplier_delivery';
 

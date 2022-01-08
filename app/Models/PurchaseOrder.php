@@ -8,7 +8,7 @@ use DB;
 
 class PurchaseOrder extends Model
 {
-    use HasFactory;
+    
 
     protected $table = 'purchase_order';
 

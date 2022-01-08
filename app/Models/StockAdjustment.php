@@ -8,7 +8,7 @@ use DB;
 
 class StockAdjustment extends Model
 {
-    use HasFactory;
+    
 
     protected $table = 'stock_adjustment';
 

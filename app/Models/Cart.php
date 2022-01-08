@@ -9,7 +9,7 @@ use Auth;
 
 class Cart extends Model
 {
-    use HasFactory;
+    
 
     protected $table = 'cart';
 

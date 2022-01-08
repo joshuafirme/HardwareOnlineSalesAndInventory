@@ -8,7 +8,7 @@ use DB;
 
 class Cashiering extends Model
 {
-    use HasFactory;
+    
 
     protected $table = 'cashiering_tray';
 

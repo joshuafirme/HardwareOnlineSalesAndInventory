@@ -9,7 +9,7 @@ use Auth;
 
 class Order extends Model
 {
-    use HasFactory;
+    
 
     protected $table = 'orders';
 
