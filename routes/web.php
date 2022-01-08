@@ -92,7 +92,7 @@ Route::middleware('auth')->group(function () {
       Route::get('reports/stock-adjustment/pdf/{date_from}/{date_to}', 'Admin\StockAdjustmentReportController@pdf');
       Route::get('reports/stock-adjustment/download/{date_from}/{date_to}', 'Admin\StockAdjustmentReportController@downloadPDF');
       Route::get('cashiering', 'Admin\CashieringController@index');
-      Route::post('record-sale', 'Admin\CashieringController@recordSale');
+      Route::post('/record-sale', 'Admin\CashieringController@recordSale');
       Route::post('add-to-tray', 'Admin\CashieringController@addToTray');
       Route::get('read-tray', 'Admin\CashieringController@readTray');
       Route::get('cashiering/read-one-qty/{product_code}', 'Admin\CashieringController@readOneQty');
