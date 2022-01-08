@@ -154,7 +154,7 @@ Route::middleware('auth')->group(function () {
 
       Route::get('/feedback', 'Admin\FeedbackController@index');
 
-      Route::resource('discount', 'DiscountController');
+      Route::resource('discount', 'Admin\DiscountController');
       Route::get('/backup-and-restore', 'Admin\BackupAndRestoreController@index');
       Route::post('/backup-and-restore/backup', 'Admin\BackupAndRestoreController@backup')->name('backup');
       Route::post('/backup-and-restore/restore', 'Admin\BackupAndRestoreController@restore')->name('restore');
