@@ -173,18 +173,7 @@ $(document).on('click','.nav-item', async function(){
 });
 
   async function render() {
-    var date_to = $('#date_to').val();
-    var date_from = $('#date_from').val();
-
-    if ($('.nav-item').find('.active').attr('aria-controls') == 'pending') {
-        await fetchProduct(date_from, date_to);
-    }
-    if ($('.nav-item').find('.active').attr('aria-controls') == 'sales') {
-       
-    }
-    else {
-        await fetchUser(date_from, date_to);
-    } await fetchSales();
+    await fetchSales();
   }
 
   render();

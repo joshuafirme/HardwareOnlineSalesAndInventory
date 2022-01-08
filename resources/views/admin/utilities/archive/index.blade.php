@@ -41,75 +41,24 @@
             <div class="card">
                 <div class="card-body">
 
-                    <ul class="nav nav-pills" id="myTab" role="tablist">
-                        <li class="nav-item">
-                          <a class="nav-link active" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="true">Products</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" id="prepared-tab" data-toggle="tab" href="#prepared" role="tab" aria-controls="prepared" aria-selected="false">Users</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" id="sales-tab" data-toggle="tab" href="#sales" role="tab" aria-controls="sales" aria-selected="false">Sales</a>
-                        </li>
-                      </ul>
-                      <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
-                          <div class="mt-4">
-                            <table class="table table-hover" id="product-archive-table">
-                                <thead>
-                                    <tr>
-                                        <th>Product Code</th>
-                                        <th>Name</th>
-                                        <th>Qty</th>
-                                        <th>Reorder point</th>
-                                        <th>Unit</th>
-                                        <th>Category</th>
-                                        <th>Supplier</th>
-                                        <th>Original Price</th>
-                                        <th>Selling Price</th>
-                                        <th>Date time archived</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                          </div>
-                        </div>
-                        <div class="tab-pane fade" id="prepared" role="tabpanel" aria-labelledby="prepared-tab">
-                          <div class="mt-4">
-                            <table class="table table-hover" id="user-archive-table">
-                                <thead>
-                                 <tr>
-                                     <th>Name</th>
-                                     <th>Email</th>
-                                     <th>Access Level</th>
-                                     <th>Date archive</th>
-                                     <th>Action</th>
-                                 </tr>
-                                </thead>
-                             </table>
-                          </div>
-                        </div>
-                        <div class="tab-pane fade" id="sales" role="tabpanel" aria-labelledby="sales-tab">
-                          <div class="mt-4">
-                            <table class="table table-hover" id="sales-archive-table">
-                                <thead>
-                                 <tr>
-                                  <th>Invoice #</th>
-                                  <th>Product Code</th>
-                                  <th>Name</th>
-                                  <th>Unit</th>
-                                  <th>Price</th>
-                                  <th>Qty</th>
-                                  <th>Amount</th>
-                                  <th>Payment method</th>
-                                  <th>Order from</th>
-                                  <th>Date time archived</th>
-                                 </tr>
-                                </thead>
-                             </table>
-                          </div>
-                        </div>
-                      </div>
+                  <div class="mt-4">
+                    <table class="table table-hover" id="sales-archive-table">
+                        <thead>
+                         <tr>
+                          <th>Invoice #</th>
+                          <th>Product Code</th>
+                          <th>Name</th>
+                          <th>Unit</th>
+                          <th>Price</th>
+                          <th>Qty</th>
+                          <th>Amount</th>
+                          <th>Payment method</th>
+                          <th>Order from</th>
+                          <th>Date time archived</th>
+                         </tr>
+                        </thead>
+                     </table>
+                  </div>
                 </div>
             </div>
         </div>
