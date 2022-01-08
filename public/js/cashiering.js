@@ -259,7 +259,7 @@ async function getQtyInTray(product_code) {
 
 function on_Click () {
     
-    $(document).on('click', '#btn-add-to-tray', async function(){
+    $(document).on('click', '#btn-add-to-tray',  function(){
 
         var product_code = $(this).attr('data-product-code');
         var id           = $(this).attr('data-id');
@@ -267,17 +267,17 @@ function on_Click () {
         var price        = $('.price-'+id).text().slice(1).replace(",", ""); 
         var amount       = parseInt(qty) * parseFloat(price);
         var stock        = $('.stock-'+id).text();
-
-        await getQtyInTray(product_code);
+        console.log(qty)
+        getQtyInTray(product_code);
 
         var qty_in_tray = localStorage.getItem("qty_in_tray");
         var total_qty = parseInt(qty) + parseInt(qty_in_tray);
-        console.log(qty_in_tray)
+        console.log(qty)
         if (stock < total_qty) {
             alert("Not enough stock.")
         }
         else {
-           await $.ajax({
+            $.ajax({
                 url: '/add-to-tray',
                 type: 'POST',
                 data: {
@@ -286,8 +286,8 @@ function on_Click () {
                     amount : amount
                 },
                 
-                success:async function(){
-                    await readTray();
+                success: function(){
+                    readTray();
                     localStorage.removeItem("qty_in_tray");
                 }
             });
