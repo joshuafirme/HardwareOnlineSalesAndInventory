@@ -207,11 +207,11 @@ class CashieringController extends Controller
         }
 
         .align-text{
-            text-align:center;
+            text-align:right;
         }
 
         .align-text td{
-            text-align:center;
+            text-align:right;
         }
 
         .w td{
@@ -253,7 +253,7 @@ class CashieringController extends Controller
                 <tr>
                     <th>Qty</th>  
                     <th>Unit</th>    
-                    <th>Articles</th>   
+                    <th>Product Name</th>   
                     <th>Unit price</th>   
                     <th>Amount</th>   
             </thead>
