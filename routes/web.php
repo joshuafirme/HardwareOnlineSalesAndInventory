@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart-total', 'CartController@cartTotal');
     Route::post('/cart/remove-item/{id}', 'CartController@removeItem');
     Route::post('/cart/change-qty', 'CartController@changeQuantity');
-    Route::get('/checkout', 'CheckoutController@index');
+    Route::resource('/checkout', 'CheckoutController');
     Route::post('/place-order', 'CheckoutController@placeOrder')->name('placeOrder');
     Route::get('/create-source', 'CheckoutController@createSource')->name('createSource');
     Route::get('/create-payment', 'CheckoutController@createPayment')->name('createPayment');
