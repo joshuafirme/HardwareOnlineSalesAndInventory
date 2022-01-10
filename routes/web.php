@@ -79,7 +79,7 @@ Route::middleware('auth')->group(function () {
       Route::get('delivery_area/brgylist/{municipality}', 'Admin\DeliveryAreaController@getBrgyList');
       Route::resource('stock-adjustment', 'Admin\StockAdjustmentController');
       Route::post('stock-adjustment/adjust/{id}', 'Admin\StockAdjustmentController@adjust');
-      Route::resource('purchase-order', 'PurchaseOrderController');
+      Route::resource('purchase-order', 'Admin\PurchaseOrderController');
       Route::get('display-reorders', 'Admin\PurchaseOrderController@displayReorders');
       Route::post('purchase-order/add-order', 'Admin\PurchaseOrderController@addOrder');
       Route::get('request-order', 'Admin\PurchaseOrderController@readRequestOrderBySupplier');
@@ -100,7 +100,7 @@ Route::middleware('auth')->group(function () {
       Route::get('preview-invoice/{wholesale_discount_amount}/{senior_pwd_discount_amount}', 'Admin\CashieringController@previewInvoice');
       Route::get('/pricing', 'Admin\PricingController@index');
       Route::post('/pricing/update', 'Admin\PricingController@updatePricing');
-      Route::resource('supplier-delivery', 'SupplierDeliveryController');
+      Route::resource('supplier-delivery', 'Admin\SupplierDeliveryController');
       Route::post('/create-delivery', 'Admin\SupplierDeliveryController@createDelivery');
       Route::get('/read-supplier-delivery', 'Admin\SupplierDeliveryController@readSupplierDelivery');
       
@@ -122,7 +122,7 @@ Route::middleware('auth')->group(function () {
       Route::get('/supplier-delivery/preview/{supplier_id}/{date_from}/{date_to}', 'Admin\SupplierDeliveryReportController@previewReport');
       Route::get('/supplier-delivery/download/{supplier_id}/{date_from}/{date_to}', 'Admin\SupplierDeliveryReportController@downloadReport');
   
-      Route::resource('product-return', 'ProductReturnController');
+      Route::resource('product-return', 'Admin\ProductReturnController');
       Route::get('/product-return-read-sales', 'Admin\ProductReturnController@readSales');
       Route::post('/return', 'Admin\ProductReturnController@return');
       Route::get('/reports/product-return', 'Admin\ProductReturnReportController@index');
