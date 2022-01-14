@@ -227,7 +227,7 @@ class PurchaseOrderController extends Controller
                     $total = $total + $data->amount;
                 } 
                 $output.='<tr class="align-text"><td></td><td></td><td></td><td></td><td></td><td></td>  
-                        <td><span>&#8369;</span>'. number_format($total,2,'.',',') .'</td>   
+                        <td style="text-align:right;"><span>&#8369;</span>'. number_format($total,2,'.',',') .'</td>   
                     </tr>';
             }
             else{
