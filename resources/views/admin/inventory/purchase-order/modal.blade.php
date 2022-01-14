@@ -23,7 +23,7 @@
   
                       <div class="col-sm-12 col-md-6 mt-2">
                         <label class="col-form-label">Price</label>
-                        <input type="number" step=".01" class="form-control" name="price" id="price" readonly>
+                        <input class="form-control" id="selling-price" readonly>
                       </div>
   
                       <div class="col-sm-12 col-md-6 mt-2">

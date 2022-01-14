@@ -17,6 +17,13 @@ class ReorderListController extends Controller
         {       
             if($request->supplier_id){
                 return datatables()->of($data->readReorderBySupplier($request->supplier_id))
+                ->addColumn('orig_price', function($product)
+                {
+                    $button = ' <div class="text-right">'.$product->orig_price.'</div>';
+                   
+                    return $button;
+                })
+                ->rawColumns(['orig_price'])
                 ->make(true);   
             }
                     

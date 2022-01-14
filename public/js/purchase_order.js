@@ -15,8 +15,8 @@ $(document).on('click', '.btn-add-to-order', function(){
     var qty             = row.find("td:eq(6)").text();
     $('#product_id').val(product_id);
     $('#product_code').val(product_code);
-    $('#description').val(description);
-    $('#price').val(price);
+    $('#description').val(description); console.log(price)
+    $('#selling-price').val(price);
     $('#qty').val(qty);
     $('#qty_order').val('');
     $('#total').text('')
@@ -182,7 +182,7 @@ $(document).on('change','#ord_supplier', async function(){
 $(document).on('keyup','#qty_order',function(){
     var qty = $(this).val();
     
-    var price = $('#price').val();
+    var price = $('#selling-price').val();
     var amount = qty * price;
     $('#total').text('₱'+amount);
 });
@@ -297,7 +297,7 @@ async function fetchRequestOrderBySupplier(supplier_id) {
                     html += '<td></td>';
                     html += '<td></td>';
                     html += '<td>Total</td>';
-                    html += '<td>₱'+ formatNumber(total) +'</td>';
+                    html += '<td style="text-align:right;">₱'+ formatNumber(total) +'</td>';
                     html += '<td></td>';
                     html += '</tr>';
                     $('.lds-default').hide();
@@ -325,7 +325,7 @@ function getItems (data) {
     html += '<td>'+ data.category +'</td>';
     html += '<td>'+ data.supplier +'</td>';
     html += '<td>'+ data.qty_order +'</td>';
-    html += '<td>₱'+ formatNumber(data.amount) +'</td>';
+    html += '<td style="text-align:right;">₱'+ formatNumber(data.amount) +'</td>';
     html += '<td><a class="btn btn-sm btn-remove" data-id='+ data.id +'><i class="fa fa-trash"></i></a></td>'
     html += '</tr>';
     return html;
