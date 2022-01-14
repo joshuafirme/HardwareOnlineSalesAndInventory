@@ -18,6 +18,13 @@ class PurchaseOrderReportController extends Controller
         if(request()->ajax())
         {       
             return datatables()->of($data)
+            ->addColumn('amount', function($product)
+            {
+                $button = ' <div class="text-right">'.$product->amount.'</div>';
+               
+                return $button;
+            })
+            ->rawColumns(['amount'])
             ->make(true);            
         }
         return view('admin.reports.purchased-order-report', compact('supplier'));

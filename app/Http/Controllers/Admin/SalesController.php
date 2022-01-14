@@ -37,7 +37,19 @@ class SalesController extends Controller
                 $button = ' <a style="color:blue;" class="btn btn-sm btn-archive" data-id="'. $product->id .'">Archive</a>';
                 return $button;
             })
-            ->rawColumns(['action'])
+            ->addColumn('selling_price', function($product)
+            {
+                $button = ' <div class="text-right">'.$product->selling_price.'</div>';
+               
+                return $button;
+            })
+            ->addColumn('amount', function($product)
+            {
+                $button = ' <div class="text-right">'.$product->amount.'</div>';
+               
+                return $button;
+            })
+            ->rawColumns(['action', 'selling_price', 'amount'])
             ->make(true); 
         }
     }

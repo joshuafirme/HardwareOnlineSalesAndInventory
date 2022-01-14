@@ -36,7 +36,19 @@ class ProductController extends Controller
                     $button .= '<a class="btn btn-sm btn-archive-product" data-id="'. $product->id .'"><i  style="color:#DC3545;" class="fa fa-archive"></i></a>';
                     return $button;
                 })
-                ->rawColumns(['action'])
+                ->addColumn('selling_price', function($product)
+                {
+                    $button = ' <div class="text-right">'.$product->selling_price.'</div>';
+                   
+                    return $button;
+                })
+                ->addColumn('orig_price', function($product)
+                {
+                    $button = ' <div class="text-right">'.$product->selling_price.'</div>';
+                   
+                    return $button;
+                })
+                ->rawColumns(['action', 'selling_price', 'orig_price'])
                 ->make(true);
         }
 
@@ -51,6 +63,13 @@ class ProductController extends Controller
         if(request()->ajax())
         { 
             return datatables()->of($product)
+                ->addColumn('selling_price', function($product)
+                {
+                    $button = ' <div class="text-right">'.$product->selling_price.'asdsasdas</div>';
+                   
+                    return $button;
+                })
+                ->rawColumns(['selling_price'])
                 ->make(true);
         }
 

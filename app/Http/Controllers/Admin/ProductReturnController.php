@@ -27,7 +27,13 @@ class ProductReturnController extends Controller
                     $button = ' <a style="color:#1970F1;" class="btn btn-sm btn-return" data-id="'. $data->id .'">Return</a>';
                     return $button;
                 })
-                ->rawColumns(['action'])
+                ->addColumn('selling_price', function($product)
+            {
+                $button = ' <div class="text-right">'.$product->selling_price.'</div>';
+               
+                return $button;
+            })
+                ->rawColumns(['action', 'selling_price'])
             ->make(true); 
         }
     }

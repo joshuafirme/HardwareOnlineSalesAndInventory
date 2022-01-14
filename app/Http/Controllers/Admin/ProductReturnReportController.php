@@ -15,6 +15,13 @@ class ProductReturnReportController extends Controller
         if(request()->ajax())
         {       
             return datatables()->of($data)
+            ->addColumn('selling_price', function($product)
+            {
+                $button = ' <div class="text-right">'.$product->selling_price.'</div>';
+               
+                return $button;
+            })
+            ->rawColumns(['selling_price'])
             ->make(true); 
         }
         return view('admin.reports.product-return-report');

@@ -17,6 +17,19 @@ class InventoryReportController extends Controller
         if(request()->ajax())
         { 
             return datatables()->of($product)
+            ->addColumn('selling_price', function($product)
+                {
+                    $button = ' <div class="text-right">'.$product->selling_price.'</div>';
+                   
+                    return $button;
+                })
+                ->addColumn('orig_price', function($product)
+                {
+                    $button = ' <div class="text-right">'.$product->selling_price.'</div>';
+                   
+                    return $button;
+                })
+                ->rawColumns(['selling_price', 'orig_price'])
                 ->make(true);
         }
 

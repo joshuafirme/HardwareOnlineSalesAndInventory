@@ -30,7 +30,13 @@ class PurchaseOrderController extends Controller
                     <i class="fa fa-cart-plus"></i></a>';
                     return $button;
                 })
-                ->rawColumns(['action'])
+                ->addColumn('orig_price', function($product)
+                {
+                    $button = ' <div class="text-right">'.$product->orig_price.'</div>';
+                   
+                    return $button;
+                })
+                ->rawColumns(['action','orig_price'])
                 ->make(true);   
             }
                     
