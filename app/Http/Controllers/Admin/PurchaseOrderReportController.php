@@ -106,7 +106,7 @@ class PurchaseOrderReportController extends Controller
                     <td style="border: 1px solid; padding:10px;">'. $data->supplier .'</td>    
                     <td style="border: 1px solid; padding:10px;">'. $data->unit .'</td>     
                     <td style="border: 1px solid; padding:10px;">'. $data->qty_order .'</td>  
-                    <td style="border: 1px solid; padding:10px;">'. $data->amount .'</td>  
+                    <td style="border: 1px solid; padding:10px; text-align:right;">'. $data->amount .'</td>  
                     <td style="border: 1px solid; padding:10px;">'. $data->updated_at .'</td>  
                 </tr>
                 ';

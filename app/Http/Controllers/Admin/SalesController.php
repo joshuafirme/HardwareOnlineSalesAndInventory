@@ -145,7 +145,7 @@ class SalesController extends Controller
                         <td>'. $data->description .'</td>
                         <td>'. $data->unit .'</td>
                         <td>'. $data->qty .'</td>
-                        <td><span>&#8369;</span>'. number_format($data->amount,2,'.',',') .'</td>   
+                        <td style="text-align:right;"><span>&#8369;</span>'. number_format($data->amount,2,'.',',') .'</td>   
                         <td>'. $data->payment_method .'</td>  
                         <td>'. $data->order_from .'</td>
                         <td>'. $data->date_time .'</td>

@@ -221,7 +221,7 @@ class PurchaseOrderController extends Controller
                         <td>'. $data->category .'</td>
                         <td>'. $data->supplier .'</td>
                         <td>'. $data->qty_order .'</td>
-                        <td><span>&#8369;</span>'. number_format($data->amount,2,'.',',') .'</td>   
+                        <td style="text-align:right;"><span>&#8369;</span>'. number_format($data->amount,2,'.',',') .'</td>   
                     </tr>';
 
                     $total = $total + $data->amount;

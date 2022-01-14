@@ -16,7 +16,13 @@ class FastAndSlowMovingController extends Controller
         if(request()->ajax())
         { 
             return datatables()->of($product)
-                ->rawColumns(['action'])
+            ->addColumn('selling_price', function($product)
+            {
+                $button = ' <div class="text-right">'.$product->selling_price.'</div>';
+               
+                return $button;
+            })
+            ->rawColumns(['action', 'selling_price'])
                 ->make(true);
         }
 

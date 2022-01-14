@@ -93,7 +93,7 @@ class ProductReturnReportController extends Controller
                     <td style="border: 1px solid; padding:10px;">'. $data->product_code .'</td>
                     <td style="border: 1px solid; padding:10px;">'. $data->description .'</td>
                     <td style="border: 1px solid; padding:10px;">'. $data->unit .'</td>   
-                    <td style="border: 1px solid; padding:10px;">'. $data->selling_price .'</td>    
+                    <td style="border: 1px solid; padding:10px;text-align:right;">'. $data->selling_price .'</td>    
                     <td style="border: 1px solid; padding:10px;">'. $data->qty .'</td>  
                     <td style="border: 1px solid; padding:10px;">'. $data->reason .'</td>  
                     <td style="border: 1px solid; padding:10px;">'. $data->created_at .'</td>  
