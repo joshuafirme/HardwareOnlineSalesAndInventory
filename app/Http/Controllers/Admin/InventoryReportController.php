@@ -148,8 +148,8 @@ class InventoryReportController extends Controller
                     <td style="border: 1px solid; padding:10px;">'. $data->unit .'</td>  
                     <td style="border: 1px solid; padding:10px;">'. $data->category .'</td>  
                     <td style="border: 1px solid; padding:10px;">'. $data->supplier .'</td>  
-                    <td style="border: 1px solid; padding:10px;">'. $data->orig_price .'</td>  
-                    <td style="border: 1px solid; padding:10px;">'. $data->selling_price .'</td>  
+                    <td style="border: 1px solid; padding:10px; text-align:right;">'. $data->orig_price .'</td>  
+                    <td style="border: 1px solid; padding:10px; text-align:right;">'. $data->selling_price .'</td>  
                 </tr>
                 ';
                 
