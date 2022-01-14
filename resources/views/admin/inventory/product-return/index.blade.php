@@ -130,7 +130,7 @@
 
                     <div class="col-sm-12 col-md-6 mt-2">
                         <label class="col-form-label">Amount Purchased</label>
-                        <input type="number" step=".01" class="form-control" id="amount_purchased" readonly>
+                        <input class="form-control" id="amount_purchased" readonly>
                     </div>
 
                     <div class="col-sm-12 col-md-6 mt-2">
@@ -140,7 +140,7 @@
 
                     <div class="col-sm-12 col-md-6 mt-2">
                       <label class="col-form-label">Amount</label>
-                      <input type="number" step=".01" class="form-control" id="amount" readonly>
+                      <input class="form-control" id="amount" readonly>
                     </div>
 
                     <div class="col-sm-12 col-md-6 mt-2">
