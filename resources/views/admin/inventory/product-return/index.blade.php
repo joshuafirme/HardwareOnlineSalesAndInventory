@@ -120,7 +120,7 @@
 
                     <div class="col-sm-12 col-md-6 mt-2">
                       <label class="col-form-label">Selling price</label>
-                      <input type="number" step=".01" class="form-control" id="selling_price" readonly>
+                      <input class="form-control" id="selling_price" readonly>
                   </div>
 
                     <div class="col-sm-12 col-md-6 mt-2">
